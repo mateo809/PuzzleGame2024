@@ -1599,7 +1599,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84ec90b422545eb4d9f8ebd417cb2b0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 5
+  _speed: 7
   _targetCenter: {fileID: 1605225714}
   _waypoints: {fileID: 1805385904}
   offset: {x: 80, y: 0, z: 80}
