@@ -3,12 +3,14 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - Item
+  - Door
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Interactables
+  - 
   - Water
   - UI
   - 
