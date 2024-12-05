@@ -51,7 +51,7 @@ public class Sc_CameraMovement : MonoBehaviour
         Debug.Log(_target[_waypointindex]);
         _targetCenter.transform.localRotation = Quaternion.Lerp(_targetCenter.transform.localRotation, _target[_waypointindex],Time.deltaTime * _speed);
 
-        if (Quaternion.Angle(_targetCenter.transform.localRotation,_target[_waypointindex]) < 0.5f)
+        if (Quaternion.Angle(_targetCenter.transform.localRotation,_target[_waypointindex]) < 0.1f)
         {
             _isTurningR = false;
         }
@@ -71,7 +71,7 @@ public class Sc_CameraMovement : MonoBehaviour
         Debug.Log(_target[_waypointindex]);
         _targetCenter.transform.localRotation = Quaternion.Lerp(_targetCenter.transform.localRotation, _target[_waypointindex], Time.deltaTime * _speed);
 
-        if (Quaternion.Angle(_targetCenter.transform.localRotation, _target[_waypointindex]) < 0.5f)
+        if (Quaternion.Angle(_targetCenter.transform.localRotation, _target[_waypointindex]) < 0.1f)
         {
             _isTurningR = false;
         }
