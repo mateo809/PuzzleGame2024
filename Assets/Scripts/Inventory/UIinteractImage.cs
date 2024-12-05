@@ -4,25 +4,21 @@ using UnityEngine.UI;
 
 public class UIinteractImage : MonoBehaviour
 {
-    public InventoryManager inventoryManager;
-    public KeyDoorManager keyDoorManager;
+    public List<GameObject> itemsUI = new List<GameObject>();
 
-    [Header("Interactables Images")]
-    [SerializeField] private RawImage[] interactableImages;
-    [SerializeField] private string[] itemNames;
+    public GameObject ItemUIPrefab;
 
-    void Update()
+    public void AddItemUI(itemData data)
     {
-        for (int i = 0; i < interactableImages.Length; i++)
-        {
-            UpdateInventoryImage(interactableImages[i], i);
-        }
+        GameObject go = Instantiate(ItemUIPrefab, transform);
+        go.GetComponent<LinkToInventory>().Init(data);
+        itemsUI.Add(go);
     }
 
-    private void UpdateInventoryImage(RawImage InventoryImage, int itemID)
+    public void SelectItemUI(int itemID)
     {
-        bool hasItem = inventoryManager.HasItem(itemID);
-        InventoryImage.enabled = hasItem;
-        
+        InventoryManager.Instance.selectedItemID = itemID;
+        print($"selected ID : {InventoryManager.Instance.selectedItemID}");
     }
+
 }

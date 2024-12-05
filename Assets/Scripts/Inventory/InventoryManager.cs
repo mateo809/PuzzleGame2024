@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SearchService;
 
 
 
@@ -8,8 +9,12 @@ public class InventoryManager : MonoBehaviour
 {
 
     public static InventoryManager Instance;
+    public UIinteractImage itemUIManager;
     [SerializeField]
     public List<itemData> inventory = new List<itemData>();
+    [SerializeField]
+    private int maxInventorySize = 4;
+    public int selectedItemID = -1;
 
     private void Awake()
     {
@@ -34,27 +39,42 @@ public class InventoryManager : MonoBehaviour
         {
             if (hit.collider.gameObject.CompareTag("Item"))
             {
+/*                if(inventory.Count >= maxInventorySize)
+                {
+                    print("InventoryFULL");
+                    return;
+                }
                 InventoryItem item = hit.collider.gameObject.GetComponent<InventoryItem>();
                 if (item != null)
                 {
-                    //AddItem(item);
                     inventory.Add(item.data);
+                    itemUIManager.AddItemUI(item.data);
                     //Destroy(item.gameObject);
-                }
+                }*/
             }
         }
     }
-    public void AddItem(InventoryItem item)
+
+    public void SetSelectedItem(int itemID)
     {
-        InventoryItem newItem = new InventoryItem(item.data);
-        inventory.Add(newItem.data);
+        if(selectedItemID != -1)
+            itemUIManager.itemsUI.Find(go => go.GetComponent<LinkToInventory>().data.itemID == selectedItemID)
+                .transform.GetChild(0).gameObject.SetActive(false);
+        if(selectedItemID != itemID)
+        {
+            selectedItemID = itemID;
+        }
+        else
+        {
+            selectedItemID = -1;
+        }
+            
+
     }
 
     public bool HasItem(int itemID)
     {
         return inventory.Exists(data => data.itemID == itemID);
-            
-        //return data.itemID != -1;
             
     }
 

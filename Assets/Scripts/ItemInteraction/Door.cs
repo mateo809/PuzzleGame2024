@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Door : MonoBehaviour
+public class Door : InteractableObject
 {
     public int RequiredKeyID; 
     public bool IsFinalDoor = false; 
@@ -8,53 +8,37 @@ public class Door : MonoBehaviour
 
     private bool _isUnlocked = false;
 
-    private void Update()
-    {
-        if (!_isUnlocked && Input.GetMouseButtonDown(0))
-        {
-            DetectDoor();
-        }
-    }
+    [SerializeField]
+    private UIinteractImage uIinteractImage;
 
-    private void DetectDoor()
-    {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit))
+    public override void DoInteraction()
+    {
+        if (!_isUnlocked)
         {
-            if (hit.collider.gameObject.CompareTag("Door"))
+            if (IsFinalDoor)
             {
-                if (hit.collider.gameObject == gameObject)
+                if (CheckIfFinalDoorCanBeOpened())
                 {
-                    if (!_isUnlocked)
-                    {
-                        if (IsFinalDoor)
-                        {
-                            if (CheckIfFinalDoorCanBeOpened())
-                            {
-                                Debug.Log("Final Door Unlocked!");
-                                _isUnlocked = true;
-                            }
-                            else
-                            {
-                                Debug.Log("You need to complete the game to open this door.");
-                            }
-                        }
-                        else
-                        {
-                            //change condition
-                            if (InventoryManager.Instance.HasItem(RequiredKeyID))
-                            {
-                                Debug.Log("Open");
-                                _isUnlocked = true;
-                            }
-                            else
-                            {
-                                Debug.Log("Pas la bonne chef");
-                            }
-                        }
-                    }
+                    Debug.Log("Final Door Unlocked!");
+                    _isUnlocked = true;
+                }
+                else
+                {
+                    Debug.Log("You need to complete the game to open this door.");
+                }
+            }
+            else
+            {
+                //change condition
+                if (InventoryManager.Instance.selectedItemID == RequiredKeyID)
+                {
+                    Debug.Log("Open");
+                    _isUnlocked = true;
+                }
+                else
+                {
+                    Debug.Log("Pas la bonne chef");
                 }
             }
         }

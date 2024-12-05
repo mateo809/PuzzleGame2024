@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1301137541929903912}
   - component: {fileID: 6331789470469152667}
   - component: {fileID: 412863704681693090}
-  - component: {fileID: 3820007812180334177}
+  - component: {fileID: 3224700335110636091}
   m_Layer: 0
   m_Name: Door
   m_TagString: Door
@@ -109,7 +109,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3820007812180334177
+--- !u!114 &3224700335110636091
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -122,3 +122,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RequiredKeyID: 1
+  IsFinalDoor: 0
+  FinalKeyID: 0
+  uIinteractImage: {fileID: 0}
