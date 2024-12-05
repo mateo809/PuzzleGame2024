@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    public string RequiredKeyID; 
+    public int RequiredKeyID; 
     public bool IsFinalDoor = false; 
-    public string FinalKeyID; 
+    public int FinalKeyID; 
 
     private bool _isUnlocked = false;
 
@@ -43,7 +43,8 @@ public class Door : MonoBehaviour
                         }
                         else
                         {
-                            if (KeyDoorManager.Instance.HasKey(RequiredKeyID))
+                            //change condition
+                            if (InventoryManager.Instance.HasItem(RequiredKeyID))
                             {
                                 Debug.Log("Open");
                                 _isUnlocked = true;
@@ -60,7 +61,7 @@ public class Door : MonoBehaviour
     }
     private bool CheckIfFinalDoorCanBeOpened()
     {
-        if (KeyDoorManager.Instance.HasKey(FinalKeyID))
+        if (InventoryManager.Instance.HasItem(FinalKeyID))
         {
             return true;
         }

@@ -1,35 +1,61 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 
 
 public class InventoryManager : MonoBehaviour
 {
-    public HashSet<InventoryItem> inventory = new HashSet<InventoryItem>();
 
-  
-    public void AddItem(string itemName)
+    public static InventoryManager Instance;
+    [SerializeField]
+    public List<itemData> inventory = new List<itemData>();
+
+    private void Awake()
     {
-        InventoryItem existingItem = inventory.FirstOrDefault(item => item.itemID == item.itemID);
-
-        if (existingItem != null)
-        {
-            //existingItem.quantity++;
-        }
-        else
-        {
-            InventoryItem newItem = new InventoryItem { itemName = itemName, itemID = 1 };
-            inventory.Add(newItem);
+        if(Instance == null)
+        {          
+            Instance = this;
         }
     }
 
-    public bool HasItem(string itemName)
+    private void Update()
     {
-        InventoryItem existingItem = inventory.FirstOrDefault(item => item.itemName == itemName);
-        return existingItem != null && existingItem.itemID > 0;
+        if (Input.GetMouseButtonDown(0))
+        {
+            DetectItem();
+        }
     }
 
-   
+    private void DetectItem()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out RaycastHit hit))
+        {
+            if (hit.collider.gameObject.CompareTag("Item"))
+            {
+                InventoryItem item = hit.collider.gameObject.GetComponent<InventoryItem>();
+                if (item != null)
+                {
+                    //AddItem(item);
+                    inventory.Add(item.data);
+                    //Destroy(item.gameObject);
+                }
+            }
+        }
+    }
+    public void AddItem(InventoryItem item)
+    {
+        InventoryItem newItem = new InventoryItem(item.data);
+        inventory.Add(newItem.data);
+    }
+
+    public bool HasItem(int itemID)
+    {
+        return inventory.Exists(data => data.itemID == itemID);
+            
+        //return data.itemID != -1;
+            
+    }
+
 }

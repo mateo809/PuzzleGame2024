@@ -1,11 +1,12 @@
-using UnityEngine;
+//using Unity.VisualScripting;
+//using UnityEngine;
 
-public class Key : MonoBehaviour
-{
-    public string keyID; 
+//public class Key : InventoryItem
+//{
+//    public string keyID; 
 
-    private void Start()
-    {
-        KeyDoorManager.Instance.RegisterKey(keyID);
-    }
-}
+//    private void Start()
+//    {
+//        KeyDoorManager.Instance.RegisterKey(keyID);
+//    }
+//}

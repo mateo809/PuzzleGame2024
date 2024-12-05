@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public class KeyDoorManager : MonoBehaviour
 {
+    public InventoryManager inventoryManager;
     public static KeyDoorManager Instance;
     private Dictionary<string, bool> _keyStates = new Dictionary<string, bool>();
 
@@ -13,30 +14,7 @@ public class KeyDoorManager : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            DetectItem();
-        }
-    }
-
-    private void DetectItem()
-    {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit hit))
-        {
-            if (hit.collider.gameObject.CompareTag("Item"))
-            {
-                Key keyItem = hit.collider.gameObject.GetComponent<Key>();
-                if (keyItem != null)
-                {
-                    PickUpKey(keyItem.keyID);
-                    Destroy(hit.collider.gameObject);
-                }
-            }
-        }
-    }
+ 
 
     public void RegisterKey(string keyID) //initialization clé
     {
