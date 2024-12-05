@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,23 +7,20 @@ public class Sc_CameraMovement : MonoBehaviour
     [SerializeField] private float _speed;
     [SerializeField] private Transform _targetCenter;
     [SerializeField] private Sc_WayPoints _waypoints;
-    [SerializeField] private Vector3 offset;
+    [SerializeField] private Vector3 _offset;
+    [SerializeField] private GameObject _boomStick;
+    [SerializeField] private Camera _camera;
 
     private List<Quaternion> _target = new List<Quaternion>();
     [SerializeField]  private bool _isTurningL;
     [SerializeField]  private bool _isTurningR;
     private int _waypointindex = 0;
 
-    private void Update()
+    enum GameObjectSize
     {
-        if (_isTurningL)
-        {
-            GoRight();
-        }
-        if (_isTurningR)
-        {
-            GoLeft();
-        }
+        Far = 20,
+        Medium = 10,
+        Near = 5,
     }
 
     void Start()
@@ -31,6 +29,24 @@ public class Sc_CameraMovement : MonoBehaviour
         _target.Add(new Quaternion(0, 0.707106829f, 0, 0.707106829f));
         _target.Add(new Quaternion(0, -1, 0, 0));
         _target.Add(new Quaternion(0, -0.707106829f, 0, 0.707106829f));
+    }
+
+    private void Update()
+    {
+        if (_isTurningL)
+        {
+            GoRight();
+        }
+
+        if (_isTurningR)
+        {
+            GoLeft();
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            DetectWayPoint();
+        }
     }
 
     public void NextWaypoint()
@@ -74,6 +90,29 @@ public class Sc_CameraMovement : MonoBehaviour
         if (Quaternion.Angle(_targetCenter.transform.localRotation, _target[_waypointindex]) < 0.1f)
         {
             _isTurningR = false;
+        }
+    }
+
+    private void DetectWayPoint()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            if (hit.collider.gameObject.CompareTag("WaypointMedium"))
+            {
+                Vector3 targetPos = hit.transform.position;
+                _boomStick.transform.position = targetPos;
+                _camera.orthographicSize = 5;
+            }
+
+            if (hit.collider.gameObject.CompareTag("WaypointSmall"))
+            {
+                Vector3 targetPos = hit.transform.position;
+                _boomStick.transform.position = targetPos;
+                _camera.orthographicSize = 2;
+            }
         }
     }
 }
