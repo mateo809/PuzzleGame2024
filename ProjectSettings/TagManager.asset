@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 3
   tags:
   - Waypoint
+  - WaypointSmall
+  - WaypointMedium
+  - WaypointLarge
   layers:
   - Default
   - TransparentFX
