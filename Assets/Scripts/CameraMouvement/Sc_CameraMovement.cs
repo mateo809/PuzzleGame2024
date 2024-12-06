@@ -18,7 +18,7 @@ public class Sc_CameraMovement : MonoBehaviour
     [SerializeField]  private bool _isTurningR;
     private int _waypointindex = 0;
 
-    private List<Vector3> _steps = new List<Vector3>(3){ Vector3.zero, Vector3.zero, Vector3.zero };
+    [SerializeField] private List<GameObject> _steps = new List<GameObject>(3){ null, null, null };
 
     enum GameObjectSize
     {
@@ -102,20 +102,49 @@ public class Sc_CameraMovement : MonoBehaviour
         switch (_camera.orthographicSize)
         {
             case (int)GameObjectSize.Near:
+                if(_steps[1] == null)
+                {
+                    if (_steps[2]!= null)
+                    {
+                        _boomStick.transform.position = _steps[2].transform.position;
+                        _steps[2].GetComponent<BoxCollider>().enabled = false;
+                        _steps[2] = null;
+                        _camera.orthographicSize = (int)GameObjectSize.Far;
+                    }
+                    else
+                    {
+                        _boomStick.transform.position = Vector3.zero;
+                        _camera.orthographicSize = (int)GameObjectSize.Far;
+                    }
 
-                _boomStick.transform.position = _steps[1];
-                _camera.orthographicSize = (int)GameObjectSize.Medium;
+                }
+                else
+                {
+                    _boomStick.transform.position = _steps[1].transform.position;
+                    _steps[1].GetComponent<BoxCollider>().enabled = false;
+                    _steps[1] = null;
+                    _camera.orthographicSize = (int)GameObjectSize.Medium;
+                }
                 break;
 
             case (int)GameObjectSize.Medium:
-
-                _boomStick.transform.position = _steps[2];
+                if(_steps[2] == null)
+                {
+                    _boomStick.transform.position = Vector3.zero;
+                }
+                else
+                {
+                    _boomStick.transform.position = _steps[2].transform.position;
+                }
+                _steps[2].GetComponent<BoxCollider>().enabled = false;
+                _steps[2] = null;
                 _camera.orthographicSize = (int)GameObjectSize.Far;
                 break;
 
             case (int)GameObjectSize.Far:
 
-                _boomStick.transform.position = new Vector3(0,0,0);
+                _boomStick.transform.position = Vector3.zero;
+                _steps[2] = null;
                 _camera.orthographicSize = (int)GameObjectSize.Far;
                 break;
         }
@@ -138,14 +167,19 @@ public class Sc_CameraMovement : MonoBehaviour
                     _boomStick.transform.position = targetPos;
                     _camera.orthographicSize = (int)GameObjectSize.Near;
                     Debug.Log("Waypoint small reached");
-                    _steps[0] = hit.collider.gameObject.transform.position;
+                    _steps[0] = hit.collider.gameObject;
                     break; 
 
                 case "WaypointMedium":
                     targetPos = hit.transform.position;
                     _boomStick.transform.position = targetPos;
                     _camera.orthographicSize = (int) GameObjectSize.Medium;
-                    _steps[1] = hit.collider.gameObject.transform.position;
+                    _steps[1] = hit.collider.gameObject;
+                    if (_steps[0] != null)
+                    {
+                        _steps[0].GetComponent<BoxCollider>().enabled = false;
+                    }
+                    _steps[0] = null;
                     Debug.Log("Waypoint medium reached");
                     break;
 
@@ -154,7 +188,17 @@ public class Sc_CameraMovement : MonoBehaviour
                     targetPos = hit.transform.position;
                     _boomStick.transform.position = targetPos;
                     _camera.orthographicSize = (int)GameObjectSize.Far;
-                    _steps[2] = hit.collider.gameObject.transform.position;
+                    _steps[2] = hit.collider.gameObject;
+                    if (_steps[1] != null)
+                    {
+                        _steps[1].GetComponent<BoxCollider>().enabled = false;
+                    }
+                    _steps[1] = null;
+                    if (_steps[0] != null)
+                    {
+                        _steps[0].GetComponent<BoxCollider>().enabled = false;
+                    }
+                    _steps[0] = null;
                     Debug.Log("Waypoint large reached");
                     break;
             }
