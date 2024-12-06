@@ -4,16 +4,8 @@ using UnityEngine;
 
 public class Sc_BackgorundPanel : MonoBehaviour
 {
-    public List<GameObject> _panelsToDeactivate = new List<GameObject>() { };
+    public List<GameObject> _panelsToDeactivate;
     [SerializeField] private List<bool> _panelsToReactivate;
-
-    public void Awake()
-    {
-        for(int i = 0; i < _panelsToDeactivate.Count; i++)
-        {
-            _panelsToReactivate.Add(false);
-        }
-    }
 
     public void OnEnable()
     {
@@ -31,6 +23,22 @@ public class Sc_BackgorundPanel : MonoBehaviour
                 }
                 _panelsToDeactivate[i].active = false;
             }
+        }
+    }
+
+    public void OnDisable()
+    {
+        for (int i = 0; i < _panelsToReactivate.Count; i++)
+        {
+            if (_panelsToReactivate[i])
+            {
+                _panelsToDeactivate[i].active = true;
+            }
+            else
+            {
+                _panelsToDeactivate[i].active = false;
+            }
+            _panelsToReactivate[i] = false;
         }
     }
 
