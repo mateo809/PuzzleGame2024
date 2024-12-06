@@ -6,16 +6,23 @@ using UnityEngine.EventSystems;
 
 public class Sc_CameraMovement : MonoBehaviour
 {
+
+    //Camera 
     [SerializeField] private float _speed;
     [SerializeField] private Transform _targetCenter;
     [SerializeField] private Sc_WayPoints _waypoints;
     [SerializeField] private Vector3 _offset;
     [SerializeField] private GameObject _boomStick;
     [SerializeField] private Camera _camera;
-
+    //Rotation
     private List<Quaternion> _target = new List<Quaternion>();
-    [SerializeField]  private bool _isTurningL;
-    [SerializeField]  private bool _isTurningR;
+    [SerializeField] private bool _isTurningL;
+    [SerializeField] private bool _isTurningR;
+    //Zoom
+    [SerializeField] private bool _isZooming;
+    [SerializeField] private float _duration;
+
+    private float _zoomTarget;
     private int _waypointindex = 0;
 
     [SerializeField] private List<GameObject> _steps = new List<GameObject>(3){ null, null, null };
@@ -45,6 +52,11 @@ public class Sc_CameraMovement : MonoBehaviour
         if (_isTurningR)
         {
             GoLeft();
+        }
+
+        if (_isZooming)
+        {
+            CameraZoom(_zoomTarget);
         }
 
         if (Input.GetMouseButtonDown(0))
@@ -97,24 +109,40 @@ public class Sc_CameraMovement : MonoBehaviour
         }
     }
 
+    public void CameraZoom(float p_zoomAmnt)
+    {
+        _zoomTarget = p_zoomAmnt;
+        _camera.orthographicSize = Mathf.Lerp(_camera.orthographicSize, p_zoomAmnt, Time.deltaTime / _duration);
+
+        if (Math.Abs(p_zoomAmnt - _camera.orthographicSize) < 0.1f)
+        {
+            _isZooming = false;
+        }
+    }
+
     public void GoBack()
     {
         switch (_camera.orthographicSize)
         {
             case (int)GameObjectSize.Near:
-                if(_steps[1] == null)
+
+                _steps[0].GetComponent<BoxCollider>().enabled = true;
+                if (_steps[1] == null)
                 {
                     if (_steps[2]!= null)
                     {
                         _boomStick.transform.position = _steps[2].transform.position;
                         _steps[2].GetComponent<BoxCollider>().enabled = false;
                         _steps[2] = null;
-                        _camera.orthographicSize = (int)GameObjectSize.Far;
+                        _isZooming = true;
+                        CameraZoom((int)GameObjectSize.Far);
                     }
                     else
                     {
                         _boomStick.transform.position = Vector3.zero;
-                        _camera.orthographicSize = (int)GameObjectSize.Far;
+                        _steps[1].GetComponent<BoxCollider>().enabled = true;
+                        _isZooming = true;
+                        CameraZoom((int)GameObjectSize.Far);
                     }
 
                 }
@@ -123,29 +151,40 @@ public class Sc_CameraMovement : MonoBehaviour
                     _boomStick.transform.position = _steps[1].transform.position;
                     _steps[1].GetComponent<BoxCollider>().enabled = false;
                     _steps[1] = null;
-                    _camera.orthographicSize = (int)GameObjectSize.Medium;
+                    _isZooming = true;
+                    CameraZoom((int)GameObjectSize.Medium);
                 }
                 break;
 
             case (int)GameObjectSize.Medium:
-                if(_steps[2] == null)
+
+                _steps[1].GetComponent<BoxCollider>().enabled = true;
+                if (_steps[2] == null)
                 {
                     _boomStick.transform.position = Vector3.zero;
+                    _steps[2].GetComponent<BoxCollider>().enabled = true;
+                    _isZooming = true;
+                    CameraZoom((int)GameObjectSize.Far);
                 }
                 else
                 {
                     _boomStick.transform.position = _steps[2].transform.position;
+                    _isZooming = true;
+                    CameraZoom((int)GameObjectSize.Far);
                 }
                 _steps[2].GetComponent<BoxCollider>().enabled = false;
                 _steps[2] = null;
-                _camera.orthographicSize = (int)GameObjectSize.Far;
+                _isZooming = true;
+                CameraZoom((int)GameObjectSize.Far);
                 break;
 
             case (int)GameObjectSize.Far:
 
+                _steps[2].GetComponent<BoxCollider>().enabled = true;
                 _boomStick.transform.position = Vector3.zero;
                 _steps[2] = null;
-                _camera.orthographicSize = (int)GameObjectSize.Far;
+                _isZooming = true;
+                CameraZoom((int)GameObjectSize.Far);
                 break;
         }
     }
