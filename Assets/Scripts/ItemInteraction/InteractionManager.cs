@@ -25,15 +25,19 @@ public class InteractionManager : MonoBehaviour
             if (item != null)
             {
                 print("item");
-                InventoryManager.Instance.inventory.Add(item.data);
-                InventoryManager.Instance.itemUIManager.AddItemUI(item.data);
-                //Destroy(item.gameObject);
+                if(InventoryManager.Instance.TryAddToInventory(item.data))
+                {
+                         
+                }
+                
+                Destroy(item.gameObject);
             }
             else
             {
                 if (hit.collider.gameObject.CompareTag("Door"))
                 {
                     hit.collider.gameObject.GetComponent<Door>().DoInteraction();
+                    
                     print("object");
                 }
             }
