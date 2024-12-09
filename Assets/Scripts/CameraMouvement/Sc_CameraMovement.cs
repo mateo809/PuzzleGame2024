@@ -20,6 +20,8 @@ public class Sc_CameraMovement : MonoBehaviour
     [SerializeField] private bool _isTurningL;
     [SerializeField] private bool _isTurningR;
 
+    [SerializeField] private float _duration;
+    private bool _isZooming;
     private float _zoomTarget;
     private Vector3 _zoomTargetPos;
     private int _waypointindex = 0;
