@@ -12,10 +12,10 @@ public class Door : InteractableObject
 
     public override void DoInteraction()
     {
-        if (InventoryManager.Instance.selectedItemID == RequiredItemID)
+        if (InventoryManager.Instance.selectedItemID == _interactionID)
         {
             Debug.Log("Open");
-            InventoryManager.Instance.RemoveCurrItem(RequiredItemID);
+            InventoryManager.Instance.RemoveCurrItem(_interactionID);
             if(IsFinalDoor)
                 Debug.Log("Final Door Unlocked!");
             Destroy(this);

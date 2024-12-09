@@ -10,6 +10,7 @@ TagManager:
   - WaypointSmall
   - WaypointMedium
   - WaypointLarge
+  - Lever
   layers:
   - Default
   - TransparentFX
