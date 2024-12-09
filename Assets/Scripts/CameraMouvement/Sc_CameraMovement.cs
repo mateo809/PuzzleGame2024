@@ -201,7 +201,11 @@ public class Sc_CameraMovement : MonoBehaviour
 
     private void DetectWayPoint()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (_camera == null)
+        {
+            return;
+        }
+        Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit))
