@@ -122,6 +122,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
-    itemID: -1
+    itemID: -999
     itemName: Key
     sprite: {fileID: 0}

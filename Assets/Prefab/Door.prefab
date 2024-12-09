@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e409ea7ad3adc8d46ba2f91def4c0a2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RequiredKeyID: 1
+  RequiredItemID: -9999
   IsFinalDoor: 0
-  FinalKeyID: 0
+  _WinText: {fileID: 0}
   uIinteractImage: {fileID: 0}
