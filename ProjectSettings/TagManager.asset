@@ -8,6 +8,9 @@ TagManager:
   - Door
   - Waypoint
   - Wheel
+  - WaypointSmall
+  - WaypointMedium
+  - WaypointLarge
   layers:
   - Default
   - TransparentFX
