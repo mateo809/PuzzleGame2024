@@ -18,6 +18,8 @@ public class InteractionManager : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
+        Debug.DrawRay(ray.origin, ray.direction.normalized * 1000, Color.red,10);
+
         if (Physics.Raycast(ray, out hit, 1000, interactableMask))
         {
 
@@ -34,11 +36,18 @@ public class InteractionManager : MonoBehaviour
             }
             else
             {
-                if (hit.collider.gameObject.CompareTag("Door"))
+                string tag = hit.collider.gameObject.tag;
+
+                switch (tag)
                 {
-                    hit.collider.gameObject.GetComponent<Door>().DoInteraction();
-                    
-                    print("object");
+                    case "Door":
+                        hit.collider.gameObject.GetComponent<Door>().DoInteraction();
+                        break;
+                    case "Lever":
+                        hit.collider.gameObject.GetComponent<Lever>().DoInteraction();
+                        break;
+                    default: throw new System.Exception($"Tag {tag} was not recognized");
+
                 }
             }
         }
