@@ -4,8 +4,6 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - Item
-  - Door
   - Waypoint
   - WaypointSmall
   - WaypointMedium
@@ -17,7 +15,7 @@ TagManager:
   - 
   - Water
   - UI
-  - InteractableObject
+  - 
   - 
   - 
   - 

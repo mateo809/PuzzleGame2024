@@ -19,6 +19,9 @@ public class Sc_CameraMovement : MonoBehaviour
     private List<Quaternion> _target = new List<Quaternion>();
     [SerializeField] private bool _isTurningL;
     [SerializeField] private bool _isTurningR;
+    //Zoom
+    [SerializeField] private bool _isZooming;
+    [SerializeField] private float _duration;
 
     private float _zoomTarget;
     private Vector3 _zoomTargetPos;
