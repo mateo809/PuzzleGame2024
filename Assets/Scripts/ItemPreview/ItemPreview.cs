@@ -13,6 +13,7 @@ public class ItemPreview : MonoBehaviour
 
     private float _sensitivity = 30f;
     private bool _isRotating = false;
+    private bool _canRotateX = false;
     private bool _canRotateY = false;
     private float _startMousePosX;
     private float _startMousePosY;
@@ -83,10 +84,13 @@ public class ItemPreview : MonoBehaviour
 
     private void Rotate()
     {
-        float currentMousePosX = Input.mousePosition.x;
-        float mouseMovementX = currentMousePosX - _startMousePosX;
-        itemToCopy.transform.Rotate(Vector3.up, -mouseMovementX * _sensitivity * Time.deltaTime);
-        _startMousePosX = currentMousePosX;
+        if (_canRotateX)
+        {
+            float currentMousePosX = Input.mousePosition.x;
+            float mouseMovementX = currentMousePosX - _startMousePosX;
+            itemToCopy.transform.Rotate(Vector3.up, -mouseMovementX * _sensitivity * Time.deltaTime);
+            _startMousePosX = currentMousePosX;
+        }
 
         if (_canRotateY)
         {
