@@ -1,3 +1,6 @@
+using System.Data;
+using Unity.Hierarchy;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ItemPreview : MonoBehaviour
@@ -8,13 +11,18 @@ public class ItemPreview : MonoBehaviour
     [SerializeField] private Camera mainCam;
     [SerializeField] private Camera previewCam;
 
+    private float _sensitivity = 30f;
+    private bool _isRotating = false;
+    private bool _canRotateY = false;
+    private float _startMousePosX;
+    private float _startMousePosY;
+
     private void Update()
     {
         if (Input.GetMouseButtonDown(0) && !previewCam.gameObject.activeSelf)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-
 
             if (Physics.Raycast(ray, out hit, 1000))
             {
@@ -31,13 +39,33 @@ public class ItemPreview : MonoBehaviour
                 Debug.Log("this was hit : " + hit.collider.gameObject.name);
                 itemToCopy = hit.collider.gameObject;
                 PreviewUpdate(itemToCopy);
+                
             }
         }
+
+        else if (Input.GetMouseButtonDown(0))
+        {
+            _isRotating = true;
+            _startMousePosX = Input.mousePosition.x;
+            _startMousePosY= Input.mousePosition.y;
+        }
+
+        else if (Input.GetMouseButtonUp(0))
+        {
+            _isRotating = false;
+        }
+
         if (Input.GetMouseButtonDown(1))
         {
             mainCam.gameObject.SetActive(true);
             previewCam.gameObject.SetActive(false);
             Destroy(itemToCopy);
+        }
+
+        if (_isRotating)
+        {
+            Debug.Log("Test");
+            Rotate();
         }
     }
 
@@ -50,6 +78,22 @@ public class ItemPreview : MonoBehaviour
         else
         {
             itemToCopy = Instantiate(p_gm, previewItem.gameObject.transform.position + new Vector3(0, 0, itemToCopy.GetComponent<MeshFilter>().mesh.bounds.size.y * itemToCopy.transform.localScale.y), previewItem.gameObject.transform.rotation);
+        }
+    }
+
+    private void Rotate()
+    {
+        float currentMousePosX = Input.mousePosition.x;
+        float mouseMovementX = currentMousePosX - _startMousePosX;
+        itemToCopy.transform.Rotate(Vector3.up, -mouseMovementX * _sensitivity * Time.deltaTime);
+        _startMousePosX = currentMousePosX;
+
+        if (_canRotateY)
+        {
+            float currentMousePosY = Input.mousePosition.y;
+            float mouseMovementY = currentMousePosY - _startMousePosY;
+            itemToCopy.transform.Rotate(Vector3.left, -mouseMovementY * _sensitivity * Time.deltaTime);
+            _startMousePosY = currentMousePosY;
         }
     }
 }
