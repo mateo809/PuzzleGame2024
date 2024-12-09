@@ -7,6 +7,7 @@ public class Sc_Digicode : MonoBehaviour
     public string passwordDigicode = "6428";
     private string _userInput = "";
     private bool _canUserInputing = true;
+    [SerializeField] private GameObject _keyGameObject;
 
     public TextMeshPro userInputText;
 
@@ -45,6 +46,8 @@ public class Sc_Digicode : MonoBehaviour
                 userInputText.color = Color.green;
                 userInputText.fontSize = 2;
                 userInputText.text = "Correct code";
+                Destroy(gameObject);
+                _keyGameObject.gameObject.SetActive(true);
                 _canUserInputing = false;
                 StartCoroutine(RefreshDigicode());
             }

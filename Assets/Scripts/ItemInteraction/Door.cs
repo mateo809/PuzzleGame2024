@@ -1,13 +1,16 @@
+using TMPro;
 using UnityEngine;
 using static UnityEditor.Progress;
 
 public class Door : InteractableObject
 {
 
-    public bool IsFinalDoor = false; 
+    public bool IsFinalDoor = false;
+    [SerializeField] private TextMeshProUGUI _WinText;
 
     [SerializeField]
     private UIinteractImage uIinteractImage;
+
 
 
     public override void DoInteraction()
@@ -16,8 +19,11 @@ public class Door : InteractableObject
         {
             Debug.Log("Open");
             InventoryManager.Instance.RemoveCurrItem(RequiredItemID);
-            if(IsFinalDoor)
+            if (IsFinalDoor)
+            {
+                _WinText.gameObject.SetActive(true);
                 Debug.Log("Final Door Unlocked!");
+            }
             Destroy(this);
         }
         else
