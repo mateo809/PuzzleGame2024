@@ -15,11 +15,20 @@ public class ItemPreview : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
-            mainCam.gameObject.SetActive(false);
-            previewCam.gameObject.SetActive(true);
 
             if (Physics.Raycast(ray, out hit, 1000))
             {
+
+                mainCam.gameObject.SetActive(false);
+                previewCam.gameObject.SetActive(true);
+
+                if (hit.collider == null)
+                {
+                    Debug.Log("nothign was hit");
+                    return;
+                }
+
+                Debug.Log("this was hit : " + hit.collider.gameObject.name);
                 itemToCopy = hit.collider.gameObject;
                 PreviewUpdate(itemToCopy);
             }
@@ -28,11 +37,19 @@ public class ItemPreview : MonoBehaviour
         {
             mainCam.gameObject.SetActive(true);
             previewCam.gameObject.SetActive(false);
+            Destroy(itemToCopy);
         }
     }
 
     public void PreviewUpdate(GameObject p_gm)
     {
-        previewItem = Instantiate(p_gm,previewItem.gameObject.transform.position, previewItem.gameObject.transform.rotation);
+        if(itemToCopy.GetComponent<MeshFilter>().mesh.bounds.size.z * itemToCopy.transform.localScale.z >= itemToCopy.GetComponent<MeshFilter>().mesh.bounds.size.y * itemToCopy.transform.localScale.y)
+        {
+            itemToCopy = Instantiate(p_gm,previewItem.gameObject.transform.position + new Vector3(0,0,itemToCopy.GetComponent<MeshFilter>().mesh.bounds.size.z * itemToCopy.transform.localScale.z), previewItem.gameObject.transform.rotation);
+        }
+        else
+        {
+            itemToCopy = Instantiate(p_gm, previewItem.gameObject.transform.position + new Vector3(0, 0, itemToCopy.GetComponent<MeshFilter>().mesh.bounds.size.y * itemToCopy.transform.localScale.y), previewItem.gameObject.transform.rotation);
+        }
     }
 }
