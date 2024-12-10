@@ -11,6 +11,8 @@ TagManager:
   - WaypointSmall
   - WaypointMedium
   - WaypointLarge
+  - Lever
+  - Faucet
   layers:
   - Default
   - TransparentFX
