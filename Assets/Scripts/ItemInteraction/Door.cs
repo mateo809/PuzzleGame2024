@@ -15,7 +15,7 @@ public class Door : InteractableObject
         if (InventoryManager.Instance.selectedItemID == _interactionID)
         {
             Debug.Log("Open");
-            InventoryManager.Instance.RemoveCurrItem(_interactionID);
+            InventoryManager.Instance.RemoveItemFromID(_interactionID);
             if(IsFinalDoor)
                 Debug.Log("Final Door Unlocked!");
             Destroy(this);

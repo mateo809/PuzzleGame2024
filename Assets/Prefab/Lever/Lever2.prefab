@@ -121,5 +121,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1df0768a40fc354ea3c3d698275539e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interactionID: 2
+  _interactionID: 1000
   _door: {fileID: 0}
+  _leverID: 2
