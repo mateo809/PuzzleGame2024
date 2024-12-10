@@ -1,0 +1,56 @@
+{
+    "name": "InputCameraMovment",
+    "maps": [
+        {
+            "name": "InputCameraMovment",
+            "id": "c749bcaa-6743-46b0-8482-7089f87a79b5",
+            "actions": [
+                {
+                    "name": "CameraMovment",
+                    "type": "Value",
+                    "id": "25bf2c3e-c332-4862-b7ca-073911e4a696",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "2D Vector",
+                    "id": "42e55a25-c45e-4274-8906-5ab14403e524",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CameraMovment",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "left",
+                    "id": "7c5628ed-51cb-42da-bab3-6d31a55cb714",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CameraMovment",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "81f242e2-28ac-4f41-a9b9-fe6bd6cbbafe",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CameraMovment",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
