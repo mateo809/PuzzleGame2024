@@ -10,7 +10,7 @@ public class ItemPreview : MonoBehaviour
 
     [SerializeField] private Camera _mainCam;
     [SerializeField] private Camera _previewCam;
-    [SerializeField] private Canvas _canvasUI;
+    [SerializeField] private GameObject _parentUI;
     [SerializeField] private bool _canRotateX = false;
     [SerializeField] private bool _canRotateY = false;
 
@@ -18,6 +18,8 @@ public class ItemPreview : MonoBehaviour
     private bool _isRotating = false;
     private float _startMousePosX;
     private float _startMousePosY;
+    private Vector3 _itemCopyLastPos;
+    private Quaternion _itemCopyLastRot;
 
     private void Update()
     {
@@ -31,9 +33,10 @@ public class ItemPreview : MonoBehaviour
                 if (hit.collider.gameObject.GetComponent<ItemWaypoint>() == null || !hit.collider.gameObject.GetComponent<ItemWaypoint>().canBePreviewed)
                     return;
 
+
                 _mainCam.gameObject.SetActive(false);
                 _previewCam.gameObject.SetActive(true);
-                _canvasUI.gameObject.SetActive(false);
+                _parentUI.gameObject.SetActive(false);
 
                 if (hit.collider == null)
                 {
@@ -43,6 +46,10 @@ public class ItemPreview : MonoBehaviour
 
                 Debug.Log("this was hit : " + hit.collider.gameObject.name);
                 itemToCopy = hit.collider.gameObject;
+                if (itemToCopy.GetComponent<ItemWaypoint>()._colliderToDisable != null)
+                {
+                    itemToCopy.GetComponent<ItemWaypoint>()._colliderToDisable.enabled = false;
+                }
                 PreviewUpdate(itemToCopy);
 
                 
@@ -65,9 +72,13 @@ public class ItemPreview : MonoBehaviour
         {
             _mainCam.gameObject.SetActive(true);
             _previewCam.gameObject.SetActive(false);
-            _canvasUI.gameObject.SetActive(true);
-            Destroy(itemToCopy);
             _parentUI.gameObject.SetActive(true);
+            if (itemToCopy.GetComponent<ItemWaypoint>()._colliderToDisable != null)
+            {
+                itemToCopy.GetComponent<ItemWaypoint>()._colliderToDisable.enabled = true;
+            }
+            itemToCopy.transform.rotation = _itemCopyLastRot;
+            itemToCopy.transform.position = _itemCopyLastPos;
         }
 
         if (_isRotating)
@@ -79,14 +90,18 @@ public class ItemPreview : MonoBehaviour
 
     public void PreviewUpdate(GameObject p_gm)
     {
+        _itemCopyLastPos = itemToCopy.transform.position;
+        _itemCopyLastRot = itemToCopy.transform.rotation;
         _parentUI.gameObject.SetActive(false);
-        if(itemToCopy.GetComponent<MeshFilter>().mesh.bounds.size.z * itemToCopy.transform.localScale.z >= itemToCopy.GetComponent<MeshFilter>().mesh.bounds.size.y * itemToCopy.transform.localScale.y)
+        if(itemToCopy.GetComponent<Collider>().bounds.size.z * itemToCopy.transform.localScale.z >= itemToCopy.GetComponent<Collider>().bounds.size.y * itemToCopy.transform.localScale.y)
         {
-            itemToCopy = Instantiate(p_gm,previewItem.gameObject.transform.position + new Vector3(0,0,itemToCopy.GetComponent<MeshFilter>().mesh.bounds.size.z * itemToCopy.transform.localScale.z), previewItem.gameObject.transform.rotation);
+            itemToCopy.transform.position = previewItem.gameObject.transform.position + new Vector3(0, 0, itemToCopy.GetComponent<Collider>().bounds.size.z * itemToCopy.transform.localScale.z);
+            //itemToCopy = Instantiate(p_gm,previewItem.gameObject.transform.position + new Vector3(0,0,itemToCopy.GetComponent<MeshFilter>().mesh.bounds.size.z * itemToCopy.transform.localScale.z), previewItem.gameObject.transform.rotation);
         }
         else
         {
-            itemToCopy = Instantiate(p_gm, previewItem.gameObject.transform.position + new Vector3(0, 0, itemToCopy.GetComponent<MeshFilter>().mesh.bounds.size.y * itemToCopy.transform.localScale.y), previewItem.gameObject.transform.rotation);
+            itemToCopy.transform.position = previewItem.gameObject.transform.position + new Vector3(0, 0, itemToCopy.GetComponent<Collider>().bounds.size.y * itemToCopy.transform.localScale.y);
+            //itemToCopy = Instantiate(p_gm, previewItem.gameObject.transform.position + new Vector3(0, 0, itemToCopy.GetComponent<MeshFilter>().mesh.bounds.size.y * itemToCopy.transform.localScale.y), previewItem.gameObject.transform.rotation);
         }
     }
 

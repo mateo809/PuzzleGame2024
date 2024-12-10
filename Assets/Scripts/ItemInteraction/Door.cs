@@ -19,7 +19,7 @@ public class Door : InteractableObject
         {
             Debug.Log("Open");
             InventoryManager.Instance.RemoveItemFromID(_interactionID);
-            if(IsFinalDoor)
+            if (IsFinalDoor) {
                 Debug.Log("Final Door Unlocked!");
             }
             Destroy(this);
