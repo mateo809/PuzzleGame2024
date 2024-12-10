@@ -7,30 +7,32 @@ public class ItemPreview : MonoBehaviour
 {
     [SerializeField] private GameObject previewItem;
     public GameObject itemToCopy;
-
-    [SerializeField] private Camera mainCam;
-    [SerializeField] private Camera previewCam;
-    [SerializeField] private GameObject _parentUI;
+    [SerializeField] private Camera _mainCam;
+    [SerializeField] private Camera _previewCam;
+    [SerializeField] private Canvas _canvasUI;
+    [SerializeField] private bool _canRotateX = false;
+    [SerializeField] private bool _canRotateY = false;
 
     private float _sensitivity = 30f;
     private bool _isRotating = false;
-    private bool _canRotateX = true;
-    private bool _canRotateY = true;
     private float _startMousePosX;
     private float _startMousePosY;
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) && !previewCam.gameObject.activeSelf)
+        if (Input.GetMouseButtonDown(0) && !_previewCam.gameObject.activeSelf)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
             if (Physics.Raycast(ray, out hit, 1000))
             {
+                if (hit.collider.gameObject.GetComponent<ItemWaypoint>() == null || !hit.collider.gameObject.GetComponent<ItemWaypoint>().canBePreviewed)
+                    return;
 
-                mainCam.gameObject.SetActive(false);
-                previewCam.gameObject.SetActive(true);
+                _mainCam.gameObject.SetActive(false);
+                _previewCam.gameObject.SetActive(true);
+                _canvasUI.gameObject.SetActive(false);
 
                 if (hit.collider == null)
                 {
@@ -60,8 +62,9 @@ public class ItemPreview : MonoBehaviour
 
         if (Input.GetMouseButtonDown(1))
         {
-            mainCam.gameObject.SetActive(true);
-            previewCam.gameObject.SetActive(false);
+            _mainCam.gameObject.SetActive(true);
+            _previewCam.gameObject.SetActive(false);
+            _canvasUI.gameObject.SetActive(true);
             Destroy(itemToCopy);
             _parentUI.gameObject.SetActive(true);
         }
