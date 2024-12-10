@@ -504,6 +504,7 @@ GameObject:
   - component: {fileID: 247172068}
   - component: {fileID: 247172071}
   - component: {fileID: 247172070}
+  - component: {fileID: 247172073}
   - component: {fileID: 247172072}
   m_Layer: 0
   m_Name: Cube
@@ -602,6 +603,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &247172073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 247172067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e5694691361dab4eb43e76b81b5c487, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemSize: 3
 --- !u!1 &349711730
 GameObject:
   m_ObjectHideFlags: 0
@@ -853,6 +867,7 @@ GameObject:
   - component: {fileID: 550094262}
   - component: {fileID: 550094265}
   - component: {fileID: 550094264}
+  - component: {fileID: 550094266}
   - component: {fileID: 550094263}
   m_Layer: 0
   m_Name: Cube (2)
@@ -950,6 +965,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 550094261}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &550094266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 550094261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e5694691361dab4eb43e76b81b5c487, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemSize: 2
 --- !u!1 &779118557
 GameObject:
   m_ObjectHideFlags: 0
@@ -2151,6 +2179,7 @@ GameObject:
   - component: {fileID: 1966071652}
   - component: {fileID: 1966071655}
   - component: {fileID: 1966071654}
+  - component: {fileID: 1966071656}
   - component: {fileID: 1966071653}
   m_Layer: 0
   m_Name: Cube (1)
@@ -2248,6 +2277,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1966071651}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1966071656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1966071651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e5694691361dab4eb43e76b81b5c487, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemSize: 3
 --- !u!1 &2054195515
 GameObject:
   m_ObjectHideFlags: 0

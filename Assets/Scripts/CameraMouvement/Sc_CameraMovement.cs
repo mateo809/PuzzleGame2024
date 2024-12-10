@@ -201,67 +201,62 @@ public class Sc_CameraMovement : MonoBehaviour
 
     private void DetectWayPoint()
     {
+        if (!_camera.gameObject.activeSelf)
+            return;
+
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
+
 
         if (Physics.Raycast(ray, out hit))
         {
             Vector3 targetPos;
             Debug.Log("ray hit");
-            switch (hit.collider.gameObject.tag)
+
+            if (hit.collider.gameObject.GetComponent<ItemWaypoint>() != null && !hit.collider.gameObject.GetComponent<ItemWaypoint>().canBePreviewed)
             {
-                case "WaypointSmall":
+                switch (hit.collider.gameObject.GetComponent<ItemWaypoint>().itemSize)
+                {
+                    case 1:
                     Debug.Log("Waypoint small reached");
-                    targetPos = hit.transform.position;
-                    _steps[0] = hit.collider.gameObject;
-                    _isZooming = true;
-                    CameraZoom((int)GameObjectSize.Near, targetPos);
-                    break;
+                        targetPos = hit.transform.position;
+                        _steps[0] = hit.collider.gameObject;
+                        _isZooming = true;
+                        CameraZoom((int)GameObjectSize.Near, targetPos);
+                        break;
 
-                case "WaypointMedium":
-                    targetPos = hit.transform.position;
-                    _steps[1] = hit.collider.gameObject;
-                    _isZooming = true;
-                    CameraZoom((int)GameObjectSize.Medium, targetPos);
-                    if (_steps[0] != null)
-                    {
-                        _steps[0].GetComponent<Collider>().enabled = true;
-                    }
-                    _steps[0] = null;
-                    Debug.Log("Waypoint medium reached");
-                    break;
+                    case 2:
+                        targetPos = hit.transform.position;
+                        _steps[1] = hit.collider.gameObject;
+                        _isZooming = true;
+                        CameraZoom((int)GameObjectSize.Medium, targetPos);
+                        if (_steps[0] != null)
+                        {
+                            _steps[0].GetComponent<Collider>().enabled = true;
+                        }
+                        _steps[0] = null;
+                        Debug.Log("Waypoint medium reached");
+                        break;
 
-                case "WaypointLarge":
-                    targetPos = hit.transform.position;
-                    _steps[2] = hit.collider.gameObject;
-                    _isZooming = true;
-                    CameraZoom((int)GameObjectSize.Far, targetPos);
-                    if (_steps[1] != null)
-                    {
-                        _steps[1].GetComponent<Collider>().enabled = true;
-                    }
-                    _steps[1] = null;
-                    if (_steps[0] != null)
-                    {
-                        _steps[0].GetComponent<Collider>().enabled = true;
-                    }
-                    _steps[0] = null;
-                    Debug.Log("Waypoint large reached");
-                    break;
+                    case 3:
+                        targetPos = hit.transform.position;
+                        _steps[2] = hit.collider.gameObject;
+                        _isZooming = true;
+                        CameraZoom((int)GameObjectSize.Far, targetPos);
+                        if (_steps[1] != null)
+                        {
+                            _steps[1].GetComponent<Collider>().enabled = true;
+                        }
+                        _steps[1] = null;
+                        if (_steps[0] != null)
+                        {
+                            _steps[0].GetComponent<Collider>().enabled = true;
+                        }
+                        _steps[0] = null;
+                        Debug.Log("Waypoint large reached");
+                        break;
+                }
             }
-            //if (hit.collider.gameObject.CompareTag("WaypointMedium"))
-            //{
-            //    Vector3 targetPos = hit.transform.position;
-            //    _boomStick.transform.position = targetPos;
-            //    _camera.orthographicSize = (int)GameObjectSize.Medium;
-            //}
-
-            //if (hit.collider.gameObject.CompareTag("WaypointSmall"))
-            //{
-            //    Vector3 targetPos = hit.transform.position;
-            //    _boomStick.transform.position = targetPos;
-            //    _camera.orthographicSize = (int)GameObjectSize.Near;
-            //}
         }
     }
 }
