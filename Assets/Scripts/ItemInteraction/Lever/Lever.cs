@@ -14,9 +14,13 @@ public class Lever : InteractableObject
         if (InventoryManager.Instance.selectedItemID == _interactionID) //Check water bucket
         {
             Debug.Log("weighted");
-            InventoryManager.Instance.RemoveCurrItem(_interactionID);
+            InventoryManager.Instance.RemoveItemFromID(_interactionID);
             _door.ToggleLever(_leverID, true);
             Destroy(this);
+        }
+        else if (InventoryManager.Instance.selectedItemID == 3)
+        {
+            Debug.Log("The bucket is empty");
         }
         else if(InventoryManager.Instance.selectedItemID == -1)
         {

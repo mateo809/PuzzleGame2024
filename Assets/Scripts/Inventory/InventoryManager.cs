@@ -49,7 +49,7 @@ public class InventoryManager : MonoBehaviour
         selectedItemID = selectedItemID != itemID ? itemID : -1;
     }
 
-    public void RemoveCurrItem(int itemID)
+    public void RemoveItemFromID(int itemID)
     {
         if (!HasItem(itemID))
             return;
