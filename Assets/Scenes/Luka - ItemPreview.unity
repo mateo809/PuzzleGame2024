@@ -616,6 +616,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemSize: 3
+  canBePreviewed: 0
 --- !u!1 &349711730
 GameObject:
   m_ObjectHideFlags: 0
@@ -978,6 +979,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemSize: 2
+  canBePreviewed: 0
 --- !u!1 &779118557
 GameObject:
   m_ObjectHideFlags: 0
@@ -1365,8 +1367,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   previewItem: {fileID: 53999821}
   itemToCopy: {fileID: 0}
-  mainCam: {fileID: 142864255}
-  previewCam: {fileID: 779118561}
+  _mainCam: {fileID: 142864255}
+  _previewCam: {fileID: 779118561}
+  _canvasUI: {fileID: 1827281162}
+  _canRotateX: 0
+  _canRotateY: 0
 --- !u!1 &1339592818
 GameObject:
   m_ObjectHideFlags: 0
@@ -2289,7 +2294,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e5694691361dab4eb43e76b81b5c487, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemSize: 3
+  itemSize: 1
+  canBePreviewed: 0
 --- !u!1 &2054195515
 GameObject:
   m_ObjectHideFlags: 0
