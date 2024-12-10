@@ -7,7 +7,6 @@ public class ItemPreview : MonoBehaviour
 {
     [SerializeField] private GameObject previewItem;
     public GameObject itemToCopy;
-
     [SerializeField] private Camera _mainCam;
     [SerializeField] private Camera _previewCam;
     [SerializeField] private Canvas _canvasUI;
@@ -44,6 +43,7 @@ public class ItemPreview : MonoBehaviour
                 Debug.Log("this was hit : " + hit.collider.gameObject.name);
                 itemToCopy = hit.collider.gameObject;
                 PreviewUpdate(itemToCopy);
+
                 
             }
         }
@@ -66,6 +66,7 @@ public class ItemPreview : MonoBehaviour
             _previewCam.gameObject.SetActive(false);
             _canvasUI.gameObject.SetActive(true);
             Destroy(itemToCopy);
+            _parentUI.gameObject.SetActive(true);
         }
 
         if (_isRotating)
@@ -77,6 +78,7 @@ public class ItemPreview : MonoBehaviour
 
     public void PreviewUpdate(GameObject p_gm)
     {
+        _parentUI.gameObject.SetActive(false);
         if(itemToCopy.GetComponent<MeshFilter>().mesh.bounds.size.z * itemToCopy.transform.localScale.z >= itemToCopy.GetComponent<MeshFilter>().mesh.bounds.size.y * itemToCopy.transform.localScale.y)
         {
             itemToCopy = Instantiate(p_gm,previewItem.gameObject.transform.position + new Vector3(0,0,itemToCopy.GetComponent<MeshFilter>().mesh.bounds.size.z * itemToCopy.transform.localScale.z), previewItem.gameObject.transform.rotation);

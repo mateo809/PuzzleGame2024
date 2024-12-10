@@ -15,6 +15,10 @@ public class InteractionManager : MonoBehaviour
 
     private void Interact()
     {
+        if(Camera.main == null)
+        {
+            return;
+        }
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
