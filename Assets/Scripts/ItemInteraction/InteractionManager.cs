@@ -55,6 +55,12 @@ public class InteractionManager : MonoBehaviour
                         break;
                     case "MailBox":
                         hit.collider.gameObject.GetComponent<MailBox>().DoInteraction();
+                        break
+                    case "DiggingArea":
+                        hit.collider.gameObject.GetComponent<Diggingarea>().DoInteraction();
+                        break;
+                    case "Ladder":
+                        hit.collider.gameObject.GetComponent<Ladder>().DoInteraction();
                         break;
                     default: throw new System.Exception($"Tag {tag} was not recognized");
 
