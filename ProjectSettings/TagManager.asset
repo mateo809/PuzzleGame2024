@@ -13,6 +13,7 @@ TagManager:
   - WaypointLarge
   - Lever
   - Faucet
+  - Ladder
   layers:
   - Default
   - TransparentFX
