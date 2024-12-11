@@ -64,6 +64,8 @@ public class Sc_CameraMovement : MonoBehaviour
         {
             DetectWayPoint();
         }
+        if(Input.GetMouseButtonDown(1))
+            GoBack();
     }
 
     public void NextWaypoint()
