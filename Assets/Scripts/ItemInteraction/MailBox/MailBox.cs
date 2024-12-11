@@ -11,7 +11,6 @@ public class MailBox : InteractableObject
         {
             Debug.Log("Open");
             InventoryManager.Instance.RemoveItemFromID(_interactionID);
-            this.gameObject.SetActive(false);
         }
 
         else

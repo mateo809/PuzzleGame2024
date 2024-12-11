@@ -32,7 +32,6 @@ public class ItemPreview : MonoBehaviour
                 if (hit.collider.gameObject.GetComponent<ItemWaypoint>() == null || !hit.collider.gameObject.GetComponent<ItemWaypoint>().canBePreviewed)
                     return;
 
-
                 _mainCam.gameObject.SetActive(false);
                 _previewCam.gameObject.SetActive(true);
                 _parentUI.gameObject.SetActive(false);
@@ -45,13 +44,12 @@ public class ItemPreview : MonoBehaviour
                 }
 
                 itemToCopy = hit.collider.gameObject;
+
                 if (itemToCopy.GetComponent<ItemWaypoint>()._colliderToDisable != null)
                 {
                     itemToCopy.GetComponent<ItemWaypoint>()._colliderToDisable.enabled = false;
                 }
                 PreviewUpdate(itemToCopy);
-
-                
             }
         }
 
