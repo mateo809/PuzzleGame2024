@@ -370,6 +370,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: New_cable
       objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 76fbb89ee9d2419408f903253e28224d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5841,9 +5845,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   previewItem: {fileID: 826088751}
   itemToCopy: {fileID: 0}
-  mainCam: {fileID: 105954813}
-  previewCam: {fileID: 871933387}
+  _mainCam: {fileID: 0}
+  _previewCam: {fileID: 0}
   _parentUI: {fileID: 621753869}
+  _canRotateX: 0
+  _canRotateY: 0
 --- !u!4 &1415482343
 Transform:
   m_ObjectHideFlags: 0
@@ -7522,7 +7528,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e8f1e30ef83c6145bd14b0c427662f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RequiredItemID: -1
+  _interactionID: -16
 --- !u!4 &1752658017
 Transform:
   m_ObjectHideFlags: 0
@@ -9827,6 +9833,10 @@ PrefabInstance:
     - target: {fileID: 1239986258185262410, guid: 92c5af43ed8c93040b25a42bf55b8f3e, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1656598777213313811, guid: 92c5af43ed8c93040b25a42bf55b8f3e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -26.57
       objectReference: {fileID: 0}
     - target: {fileID: 5987778396485762414, guid: 92c5af43ed8c93040b25a42bf55b8f3e, type: 3}
       propertyPath: m_LocalPosition.x

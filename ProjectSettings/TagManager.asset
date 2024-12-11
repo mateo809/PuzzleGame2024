@@ -13,9 +13,14 @@ TagManager:
   - WaypointLarge
   - Lever
   - Faucet
+  - CircuitBreaker
+  - CableBox
+  - MailBox
+  - DiggingArea
   - Ladder
   - Charcoal
   - CharcoalMoved
+  - Shed
   layers:
   - Default
   - TransparentFX

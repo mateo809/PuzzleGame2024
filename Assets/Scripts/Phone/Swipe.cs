@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class swipe : MonoBehaviour
+public class Swipe : MonoBehaviour
 {
     public GameObject scrollbar, imageContent;
     private float _scroll_pos = 0;
@@ -68,8 +66,6 @@ public class swipe : MonoBehaviour
                 }
             }
         }
-
-
     }
 
     private void GecisiDuzenle(float distance, float[] pos, Button btn)
