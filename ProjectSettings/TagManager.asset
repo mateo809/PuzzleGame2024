@@ -15,6 +15,9 @@ TagManager:
   - Faucet
   - CircuitBreaker
   - CableBox
+  - MailBox
+  - DiggingArea
+  - Ladder
   layers:
   - Default
   - TransparentFX
