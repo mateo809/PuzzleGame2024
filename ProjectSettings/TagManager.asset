@@ -18,6 +18,8 @@ TagManager:
   - MailBox
   - DiggingArea
   - Ladder
+  - Charcoal
+  - CharcoalMoved
   - Shed
   layers:
   - Default
@@ -27,7 +29,7 @@ TagManager:
   - Water
   - UI
   - InteractableObject
-  - 
+  - CharcoalLayer
   - 
   - 
   - 
