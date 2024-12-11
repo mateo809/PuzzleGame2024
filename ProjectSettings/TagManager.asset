@@ -16,6 +16,7 @@ TagManager:
   - MailBox
   - DiggingArea
   - Ladder
+  - Shed
   layers:
   - Default
   - TransparentFX

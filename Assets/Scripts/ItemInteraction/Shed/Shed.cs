@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MailBox : InteractableObject
+public class Shed : InteractableObject
 {
     [SerializeField]
     private UIinteractImage uIinteractImage;
