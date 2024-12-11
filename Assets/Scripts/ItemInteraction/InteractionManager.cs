@@ -68,6 +68,9 @@ public class InteractionManager : MonoBehaviour
                     case "Ladder":
                         hit.collider.gameObject.GetComponent<Ladder>().DoInteraction();
                         break;
+                    case "Shed":
+                        hit.collider.gameObject.GetComponent<Shed>().DoInteraction();
+                        break;
                     default: throw new System.Exception($"Tag {tag} was not recognized");
 
                 }
