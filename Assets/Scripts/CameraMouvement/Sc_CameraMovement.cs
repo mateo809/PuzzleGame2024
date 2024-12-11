@@ -222,6 +222,7 @@ public class Sc_CameraMovement : MonoBehaviour
                     Debug.Log("Waypoint small reached");
                         targetPos = hit.transform.position;
                         _steps[0] = hit.collider.gameObject;
+                        hit.collider.enabled = false;
                         _isZooming = true;
                         CameraZoom((int)GameObjectSize.Near, targetPos);
                         break;
@@ -229,6 +230,7 @@ public class Sc_CameraMovement : MonoBehaviour
                     case 2:
                         targetPos = hit.transform.position;
                         _steps[1] = hit.collider.gameObject;
+                        hit.collider.enabled = false;
                         _isZooming = true;
                         CameraZoom((int)GameObjectSize.Medium, targetPos);
                         if (_steps[0] != null)
@@ -242,6 +244,7 @@ public class Sc_CameraMovement : MonoBehaviour
                     case 3:
                         targetPos = hit.transform.position;
                         _steps[2] = hit.collider.gameObject;
+                        hit.collider.enabled = false;
                         _isZooming = true;
                         CameraZoom((int)GameObjectSize.Far, targetPos);
                         if (_steps[1] != null)
