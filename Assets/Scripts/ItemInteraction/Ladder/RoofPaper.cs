@@ -15,6 +15,7 @@ public class RoofPaper : MonoBehaviour
         else
         {
             Debug.Log("Get it");
+            Destroy(gameObject);
         }
     }
 

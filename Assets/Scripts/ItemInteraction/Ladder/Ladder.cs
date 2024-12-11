@@ -2,8 +2,7 @@ using UnityEngine;
 
 public class Ladder : InteractableObject
 {
-    [SerializeField] private int _ladderID;
-    [SerializeField] private itemData ladderData;
+    [SerializeField] private int _ladderID;   
     [SerializeField] private MeshRenderer _ladderPlacedMesh;
 
     public override void DoInteraction()
