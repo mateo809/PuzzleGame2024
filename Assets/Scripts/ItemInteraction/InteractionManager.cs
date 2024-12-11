@@ -53,6 +53,9 @@ public class InteractionManager : MonoBehaviour
                     case "Faucet":
                         hit.collider.gameObject.GetComponent<Faucet>().DoInteraction();
                         break;
+                    case "DiggingArea":
+                        hit.collider.gameObject.GetComponent<Diggingarea>().DoInteraction();
+                        break;
                     case "Ladder":
                         hit.collider.gameObject.GetComponent<Ladder>().DoInteraction();
                         break;
