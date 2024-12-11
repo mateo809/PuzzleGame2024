@@ -13,6 +13,7 @@ TagManager:
   - WaypointLarge
   - Lever
   - Faucet
+  - MailBox
   layers:
   - Default
   - TransparentFX

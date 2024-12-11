@@ -36,14 +36,14 @@ public class ItemPreview : MonoBehaviour
                 _mainCam.gameObject.SetActive(false);
                 _previewCam.gameObject.SetActive(true);
                 _parentUI.gameObject.SetActive(false);
+                _canRotateX = hit.collider.gameObject.GetComponent<ItemWaypoint>().canRotateX;
+                _canRotateY = hit.collider.gameObject.GetComponent<ItemWaypoint>().canRotateY;
 
                 if (hit.collider == null)
                 {
-                    Debug.Log("nothign was hit");
                     return;
                 }
 
-                Debug.Log("this was hit : " + hit.collider.gameObject.name);
                 itemToCopy = hit.collider.gameObject;
                 if (itemToCopy.GetComponent<ItemWaypoint>()._colliderToDisable != null)
                 {
@@ -72,17 +72,21 @@ public class ItemPreview : MonoBehaviour
             _mainCam.gameObject.SetActive(true);
             _previewCam.gameObject.SetActive(false);
             _parentUI.gameObject.SetActive(true);
-            if (itemToCopy.GetComponent<ItemWaypoint>()._colliderToDisable != null)
+
+            if (!this.transform.GetChild(0).gameObject.activeSelf)
+                return;
+
+            else if (itemToCopy.GetComponent<ItemWaypoint>()._colliderToDisable != null)
             {
                 itemToCopy.GetComponent<ItemWaypoint>()._colliderToDisable.enabled = true;
             }
+
             itemToCopy.transform.rotation = _itemCopyLastRot;
             itemToCopy.transform.position = _itemCopyLastPos;
         }
 
         if (_isRotating)
         {
-            Debug.Log("Test");
             Rotate();
         }
     }
