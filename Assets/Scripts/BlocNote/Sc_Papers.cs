@@ -8,6 +8,6 @@ public class Sc_Papers : MonoBehaviour
     private void OnMouseDown()
     {
         _paperCarnet.gameObject.SetActive(true);
-        gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 }
