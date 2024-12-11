@@ -2230,6 +2230,9 @@ MonoBehaviour:
       m_Calls: []
   m_ControlsChangedEvent:
     m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2129964797}
         m_TargetAssemblyTypeName: Sc_InputCameraMovment, Assembly-CSharp
@@ -2243,9 +2246,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls: []
     m_ActionId: 25bf2c3e-c332-4862-b7ca-073911e4a696
     m_ActionName: 'InputCameraMovment/CameraMovment[/Keyboard/a,/Keyboard/d]'
   m_NeverAutoSwitchControlSchemes: 0
@@ -2265,6 +2265,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c9d9c83c8272c948b167ec58c822f6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _moveCamera: {fileID: -6900295313835312439, guid: 92b212b2ea561b040abda82696c72a77, type: 3}
   _scCameraMovement: {fileID: 2129964794}
 --- !u!1 &2134260363
 GameObject:

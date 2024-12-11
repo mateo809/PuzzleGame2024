@@ -18,7 +18,7 @@
             "bindings": [
                 {
                     "name": "2D Vector",
-                    "id": "42e55a25-c45e-4274-8906-5ab14403e524",
+                    "id": "bbba638c-fe7d-4fc0-a8b3-d1de9c800e06",
                     "path": "2DVector",
                     "interactions": "",
                     "processors": "",
@@ -29,7 +29,7 @@
                 },
                 {
                     "name": "left",
-                    "id": "7c5628ed-51cb-42da-bab3-6d31a55cb714",
+                    "id": "87a5202a-e1cf-4a94-8747-84fbd3e40a93",
                     "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
@@ -40,7 +40,7 @@
                 },
                 {
                     "name": "right",
-                    "id": "81f242e2-28ac-4f41-a9b9-fe6bd6cbbafe",
+                    "id": "c2074574-1b75-4b88-bd85-7310543be98a",
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
