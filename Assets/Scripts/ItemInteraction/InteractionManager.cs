@@ -55,7 +55,7 @@ public class InteractionManager : MonoBehaviour
                         break;
                     case "MailBox":
                         hit.collider.gameObject.GetComponent<MailBox>().DoInteraction();
-                        break
+                        break;
                     case "DiggingArea":
                         hit.collider.gameObject.GetComponent<Diggingarea>().DoInteraction();
                         break;
