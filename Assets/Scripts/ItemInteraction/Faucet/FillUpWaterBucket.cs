@@ -1,7 +1,6 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class Faucet : InteractableObject
+public class FillUpWaterBucket : InteractableObject
 {
     [SerializeField] private int _bucketID;
     [SerializeField] private itemData waterBucketData;

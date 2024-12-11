@@ -51,7 +51,13 @@ public class InteractionManager : MonoBehaviour
                         hit.collider.gameObject.GetComponent<Lever>().DoInteraction();
                         break;
                     case "Faucet":
-                        hit.collider.gameObject.GetComponent<Faucet>().DoInteraction();
+                        hit.collider.gameObject.GetComponent<FillUpWaterBucket>().DoInteraction();
+                        break;
+                    case "CircuitBreaker":
+                        hit.collider.gameObject.GetComponent<CircuitBreaker>().DoInteraction();
+                        break;
+                    case "CableBox":
+                        hit.collider.gameObject.GetComponent<CableBox>().DoInteraction();
                         break;
                     case "MailBox":
                         hit.collider.gameObject.GetComponent<MailBox>().DoInteraction();
