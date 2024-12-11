@@ -5,7 +5,9 @@ public class Sc_InputCameraMovment : MonoBehaviour
 {
     [SerializeField] private InputActionReference _moveCamera;
     [SerializeField] private Sc_CameraMovement _scCameraMovement;
-      
+
+    [Header("AnimatorSettings")]
+    [SerializeField] private Animator _animator;
     public void MoveCamera()
     {
         Vector2 direction = _moveCamera.action.ReadValue<Vector2>();        
@@ -13,10 +15,12 @@ public class Sc_InputCameraMovment : MonoBehaviour
         if (direction == Vector2.right)
         {
             _scCameraMovement.NextWaypoint();
+            _animator.SetTrigger("Right");
         }
         else if (direction == -Vector2.right)
         {
             _scCameraMovement.LastWaypoint();
+            _animator.SetTrigger("Left");
         }
     }
 }

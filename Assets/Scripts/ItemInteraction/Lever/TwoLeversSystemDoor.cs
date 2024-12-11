@@ -9,6 +9,8 @@ public class TwoLeversSystemDoor : MonoBehaviour
     public int _l1ID = -2;
     public int _l2ID = -2;
 
+    [SerializeField] private GameObject _mapGarden;
+    [SerializeField] private GameObject _mapCave;
 
     public void SetLeverID(int leverID)
     {
@@ -24,6 +26,9 @@ public class TwoLeversSystemDoor : MonoBehaviour
         if (_l1isActivated && _l2isActivated)
         {
             Debug.Log("OpenDoor");
+            _mapCave.gameObject.SetActive(true);
+            _mapGarden.gameObject.SetActive(false); 
+            //cave animator dans InpitCamera
         }
         else
         {
