@@ -53,6 +53,9 @@ public class InteractionManager : MonoBehaviour
                     case "Faucet":
                         hit.collider.gameObject.GetComponent<Faucet>().DoInteraction();
                         break;
+                    case "DiggingArea":
+                        hit.collider.gameObject.GetComponent<Diggingarea>().DoInteraction();
+                        break;
                     default: throw new System.Exception($"Tag {tag} was not recognized");
 
                 }

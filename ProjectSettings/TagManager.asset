@@ -13,6 +13,7 @@ TagManager:
   - WaypointLarge
   - Lever
   - Faucet
+  - DiggingArea
   layers:
   - Default
   - TransparentFX
