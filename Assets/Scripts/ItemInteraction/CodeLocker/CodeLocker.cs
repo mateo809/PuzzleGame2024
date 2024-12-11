@@ -37,7 +37,8 @@ public class CodeLocker : MonoBehaviour
 
     private void RotateWheel(Transform wheel, int index)
     {
-        wheel.Rotate(wheel.forward, -36);
+        wheel.Rotate(wheel.forward, 36,Space.World);
+
         _currentCode[index]++;
         if (_currentCode[index] == 10) _currentCode[index] = 0;
         CheckCode();

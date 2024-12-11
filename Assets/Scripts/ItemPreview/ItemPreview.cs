@@ -91,6 +91,7 @@ public class ItemPreview : MonoBehaviour
     {
         _itemCopyLastPos = itemToCopy.transform.position;
         _itemCopyLastRot = itemToCopy.transform.rotation;
+        itemToCopy.transform.rotation = new Quaternion(0, 0.707106829f, 0, 0.707106829f);
         _parentUI.gameObject.SetActive(false);
         if(itemToCopy.GetComponent<Collider>().bounds.size.z * itemToCopy.transform.localScale.z >= itemToCopy.GetComponent<Collider>().bounds.size.y * itemToCopy.transform.localScale.y)
         {
