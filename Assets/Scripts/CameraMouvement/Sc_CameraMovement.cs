@@ -17,8 +17,8 @@ public class Sc_CameraMovement : MonoBehaviour
 
     //Rotation
     private List<Quaternion> _target = new List<Quaternion>();
-    [SerializeField] private bool _isTurningL;
-    [SerializeField] private bool _isTurningR;
+    [SerializeField] public bool _isTurningL;
+    [SerializeField] public bool _isTurningR;
 
     [SerializeField] private float _duration;
     private bool _isZooming;
@@ -70,7 +70,7 @@ public class Sc_CameraMovement : MonoBehaviour
 
     public void NextWaypoint()
     {
-        if (_isTurningR) return;
+        if (_isTurningL) return;
         _waypointindex--;
         if (_waypointindex < 0)
         {
@@ -82,13 +82,13 @@ public class Sc_CameraMovement : MonoBehaviour
 
     public void GoRight()
     {
-        _isTurningR = true;
+        _isTurningL = true;
         Debug.Log(_target[_waypointindex]);
         _targetCenter.transform.localRotation = Quaternion.Lerp(_targetCenter.transform.localRotation, _target[_waypointindex], Time.deltaTime * _speed);
 
         if (Quaternion.Angle(_targetCenter.transform.localRotation, _target[_waypointindex]) < 0.1f)
         {
-            _isTurningR = false;
+            _isTurningL = false;
         }
     }
 

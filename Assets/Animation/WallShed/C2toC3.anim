@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: C3toC0
+  m_Name: C2toC3
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -605,10 +605,10 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0
+        time: 1
         value: 7.5
-        inSlope: 90.5
-        outSlope: 90.5
+        inSlope: -91.5
+        outSlope: -91.5
         tangentMode: 34
         weightedMode: 0
         inWeight: 0.33333334
@@ -877,8 +877,8 @@ AnimationClip:
       - serializedVersion: 3
         time: 0
         value: 99
-        inSlope: -90.5
-        outSlope: -90.5
+        inSlope: 18
+        outSlope: 18
         tangentMode: 34
         weightedMode: 0
         inWeight: 0.33333334
