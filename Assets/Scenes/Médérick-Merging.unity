@@ -4101,11 +4101,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 655518422}
   m_CullTransparentMesh: 1
---- !u!4 &661270808 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6829582692822183299, guid: 15d8468f2f1cb114189fcb4cfcc30e48, type: 3}
-  m_PrefabInstance: {fileID: 2088833691}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &671464452 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 76fbb89ee9d2419408f903253e28224d, type: 3}
@@ -7384,7 +7379,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1089436055
 Transform:
   m_ObjectHideFlags: 0
@@ -7393,7 +7388,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1089436054}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -7401,7 +7396,7 @@ Transform:
   - {fileID: 5987778397060373608}
   - {fileID: 7008273265668049333}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1092811985
 GameObject:
   m_ObjectHideFlags: 0
@@ -7482,7 +7477,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f5a6495a1447d346bd1cc7b14a951c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ladderPlaceMesh: {fileID: 0}
+  _ladderPlaceMesh: {fileID: 453511404}
   _ladderText: {fileID: 0}
 --- !u!65 &1104947404
 BoxCollider:
@@ -12001,7 +11996,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2007950523809680077, guid: 160f4498c482b3c43b4d484c2cfbb206, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4005497839005896189, guid: 160f4498c482b3c43b4d484c2cfbb206, type: 3}
       propertyPath: m_LocalScale.x
@@ -12111,9 +12106,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1392266877033041613, guid: 160f4498c482b3c43b4d484c2cfbb206, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1309188561}
-    - targetCorrespondingSourceObject: {fileID: 1392266877033041613, guid: 160f4498c482b3c43b4d484c2cfbb206, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 661270808}
     - targetCorrespondingSourceObject: {fileID: 8981457789184824695, guid: 160f4498c482b3c43b4d484c2cfbb206, type: 3}
       insertIndex: 0
       addedObject: {fileID: 1805677648}
