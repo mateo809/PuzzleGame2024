@@ -21,18 +21,20 @@ public class TwoLeversSystemDoor : MonoBehaviour
         }
     }
 
-    private void CheckLever()
+    private bool CheckLever()
     {
         if (_l1isActivated && _l2isActivated)
         {
             Debug.Log("OpenDoor");
             _mapCave.gameObject.SetActive(true);
-            _mapGarden.gameObject.SetActive(false); 
+            _mapGarden.gameObject.SetActive(false);
+            return true;
             //cave animator dans InpitCamera
         }
         else
         {
             Debug.Log("DoorIsClosed");
+            return false;
         }
     }
 
@@ -50,13 +52,13 @@ public class TwoLeversSystemDoor : MonoBehaviour
             print("L2activated");
         }
 
-        CheckLever();
-        if(!wheightedActivation)
+        if(!wheightedActivation && !CheckLever())
             StartCoroutine(RevertLeverTimer(leverIndex));
     }
 
     private IEnumerator RevertLeverTimer(int leverIndex)
     {
+
         yield return new WaitForSeconds(1);
 
         if (leverIndex == _l1ID)
