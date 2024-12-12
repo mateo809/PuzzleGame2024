@@ -30,7 +30,7 @@ public static class IDManager
     static public int MapDrawingID = 36;
            
     static public int BASEMENT_OPENING = 40;
-   readonly static public int Lever1ID = 41;
+    readonly static public int Lever1ID = 41;
     static public int Lever2ID = 42;
     static public int LeverManufacturerHintID = 43;
             

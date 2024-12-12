@@ -6,7 +6,7 @@ public class Door : InteractableObject
 {
     [SerializeField] private TextMeshProUGUI _WinText;
 
-    [SerializeField] private UIinteractImage uIinteractImage;
+    [SerializeField] private UIinteractImage _UIInteractImage;
 
     [SerializeField] private DoorID _id;
     public enum DoorID

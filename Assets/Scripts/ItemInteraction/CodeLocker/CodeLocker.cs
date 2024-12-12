@@ -48,14 +48,13 @@ public class CodeLocker : MonoBehaviour
         if (_currentCode.SequenceEqual(_correctCode)) //check if the two List are identical
         {
             Debug.Log("Open");
+            Destroy(gameObject);
         }
     }
 
-    private void Update()
+
+    private void OnMouseDown()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            DetectClickedWheel();
-        }
+        DetectClickedWheel();
     }
 }

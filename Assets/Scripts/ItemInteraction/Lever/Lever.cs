@@ -1,10 +1,12 @@
 using UnityEngine;
+using System.Collections;
 
 public class Lever : InteractableObject
 {
     [SerializeField] private TwoLeversSystemDoor _door;
-    [SerializeField] private int _leverID;
+    private int _leverID;
     [SerializeField] private LeverID _id;
+    [SerializeField] private float _AutoToggleTimer;
 
     public enum LeverID
     {
@@ -14,27 +16,31 @@ public class Lever : InteractableObject
 
     private void Start()
     {
-        _leverID = _id == LeverID.Lever1 ? IDManager.Lever1ID : IDManager.Paper2ID;
+        _leverID = _id == LeverID.Lever1 ? IDManager.Lever1ID : IDManager.Lever2ID;
         _door.SetLeverID(_leverID);
     }
     public override void DoInteraction()
     {
-        if (InventoryManager.Instance.selectedItemID == IDManager.WaterBucketID) //Check water bucket
+        _door.ToggleLever(_leverID);
+
+        if (InventoryManager.Instance.selectedItemID == IDManager.WaterBucketID)
         {
-            Debug.Log("weighted");
+            Debug.Log("Ajouter seau sur levier");
             InventoryManager.Instance.RemoveItemFromID(IDManager.WaterBucketID);
-            _door.ToggleLever(_leverID, true);
-            Destroy(this);
+            return;
         }
-        else if (InventoryManager.Instance.selectedItemID == IDManager.EmptyBucketID)
+        else if(InventoryManager.Instance.selectedItemID == IDManager.EmptyBucketID)
         {
-            Debug.Log("The bucket is empty");
+            Debug.Log("Dialogue : C'est pas assez lourd pour faire pression sur le levier");
         }
-        else if(InventoryManager.Instance.selectedItemID == IDManager.NoneItem)
-        {
-            Debug.Log("NOweighted");
-            _door.ToggleLever(_leverID, false);
-        }
+        StopAllCoroutines();
+        StartCoroutine(RevertLeverTimer());
+    }
+    private IEnumerator RevertLeverTimer()
+    {
+        yield return new WaitForSeconds(_AutoToggleTimer);
+
+        _door.ToggleLever(_leverID);
     }
 
 }

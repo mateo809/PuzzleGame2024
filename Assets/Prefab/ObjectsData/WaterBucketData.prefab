@@ -45,6 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
-    itemID: 1000
+    itemID: 32
     itemName: WaterBucket
     sprite: {fileID: 21300000, guid: b1c2e0fcb1e185840aa3deaaf0d140f5, type: 3}

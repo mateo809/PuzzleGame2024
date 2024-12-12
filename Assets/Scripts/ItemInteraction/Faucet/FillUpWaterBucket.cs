@@ -7,9 +7,9 @@ public class FillUpWaterBucket : InteractableObject
 
     public override void DoInteraction()
     {
-        if (InventoryManager.Instance.selectedItemID == IDManager.WaterBucketID) //Check water bucket
+        if (InventoryManager.Instance.selectedItemID == IDManager.EmptyBucketID) //Check for EmptyWaterBucket
         {
-            InventoryManager.Instance.RemoveItemFromID(IDManager.WaterBucketID);
+            InventoryManager.Instance.RemoveItemFromID(IDManager.EmptyBucketID);
             InventoryManager.Instance.TryAddToInventory(waterBucketData);
         }
     }
