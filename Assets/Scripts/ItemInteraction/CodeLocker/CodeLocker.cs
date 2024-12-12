@@ -6,8 +6,10 @@ public class CodeLocker : MonoBehaviour
 {
     [SerializeField] private List<Transform> _wheelList = new List<Transform>(); 
     [SerializeField] private List<int> _correctCode = new List<int>(); 
-    private List<int> _currentCode = new List<int>(); 
+    private List<int> _currentCode = new List<int>();
 
+    [SerializeField] private GameObject _mapGarden;
+    [SerializeField] private GameObject _mapShed;
     private void Start()
     {
         for (int i = 0; i < _wheelList.Count; i++)
@@ -37,7 +39,8 @@ public class CodeLocker : MonoBehaviour
 
     private void RotateWheel(Transform wheel, int index)
     {
-        wheel.Rotate(wheel.forward, -36);
+        wheel.Rotate(wheel.forward, 36,Space.World);
+
         _currentCode[index]++;
         if (_currentCode[index] == 10) _currentCode[index] = 0;
         CheckCode();
@@ -48,7 +51,8 @@ public class CodeLocker : MonoBehaviour
         if (_currentCode.SequenceEqual(_correctCode)) //check if the two List are identical
         {
             Debug.Log("Open");
-            Destroy(gameObject);
+            _mapShed.gameObject.SetActive(true);
+            _mapGarden.gameObject.SetActive(false);
         }
     }
 

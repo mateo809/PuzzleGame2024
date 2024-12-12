@@ -73,6 +73,9 @@ public class InteractionManager : MonoBehaviour
                     case "Shed":
                         hit.collider.gameObject.GetComponent<Shed>().DoInteraction();
                         break;
+                    case "ExitRoom":
+                        hit.collider.gameObject.GetComponent<ExitRoom>().DoInteraction();
+                        break;
                     default: throw new System.Exception($"Tag {tag} was not recognized");
 
                 }

@@ -21,6 +21,7 @@ TagManager:
   - Charcoal
   - CharcoalMoved
   - Shed
+  - ExitRoom
   layers:
   - Default
   - TransparentFX
