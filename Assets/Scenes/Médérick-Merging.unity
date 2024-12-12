@@ -7486,7 +7486,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f5a6495a1447d346bd1cc7b14a951c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ladderPlaceMesh: {fileID: 0}
+  _ladderPlaceMesh: {fileID: 453511404}
   _ladderText: {fileID: 0}
 --- !u!65 &1104947404
 BoxCollider:
