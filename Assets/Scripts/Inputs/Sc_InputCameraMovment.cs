@@ -14,7 +14,7 @@ public class Sc_InputCameraMovment : MonoBehaviour
     {
         Vector2 direction = _moveCamera.action.ReadValue<Vector2>();        
 
-        if (direction == Vector2.right && !_scCameraMovement._isTurningL)
+        if (direction == Vector2.right && !_scCameraMovement._isTurningL && !_scCameraMovement._isTurningR)
         {
             _scCameraMovement.NextWaypoint();
             for (int i = 0; i < Walls.Count; ++i)
@@ -22,7 +22,7 @@ public class Sc_InputCameraMovment : MonoBehaviour
                 Walls[i].SetTrigger("Right");
             }
         }
-        else if (direction == -Vector2.right && !_scCameraMovement._isTurningR)
+        else if (direction == -Vector2.right && !_scCameraMovement._isTurningR && !_scCameraMovement._isTurningL)
         {
             _scCameraMovement.LastWaypoint();
             for (int i = 0; i < Walls.Count; ++i)
