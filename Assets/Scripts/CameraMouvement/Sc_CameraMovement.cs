@@ -17,14 +17,14 @@ public class Sc_CameraMovement : MonoBehaviour
 
     //Rotation
     private List<Quaternion> _target = new List<Quaternion>();
-    [SerializeField] public bool _isTurningL;
-    [SerializeField] public bool _isTurningR;
+    [SerializeField] private bool _isTurningL;
+    [SerializeField] private bool _isTurningR;
 
     [SerializeField] private float _duration;
     private bool _isZooming;
     private float _zoomTarget;
     private Vector3 _zoomTargetPos;
-    public int _waypointindex = 0;
+    private int _waypointindex = 0;
 
     [SerializeField] private List<GameObject> _steps = new List<GameObject>(3) { null, null, null };
 
@@ -70,7 +70,7 @@ public class Sc_CameraMovement : MonoBehaviour
 
     public void NextWaypoint()
     {
-        if (_isTurningL) return;
+        if (_isTurningR) return;
         _waypointindex--;
         if (_waypointindex < 0)
         {
@@ -82,13 +82,13 @@ public class Sc_CameraMovement : MonoBehaviour
 
     public void GoRight()
     {
-        _isTurningL = true;
+        _isTurningR = true;
         Debug.Log(_target[_waypointindex]);
         _targetCenter.transform.localRotation = Quaternion.Lerp(_targetCenter.transform.localRotation, _target[_waypointindex], Time.deltaTime * _speed);
 
         if (Quaternion.Angle(_targetCenter.transform.localRotation, _target[_waypointindex]) < 0.1f)
         {
-            _isTurningL = false;
+            _isTurningR = false;
         }
     }
 
@@ -103,6 +103,7 @@ public class Sc_CameraMovement : MonoBehaviour
     public void GoLeft()
     {
         _isTurningR = true;
+        Debug.Log(_target[_waypointindex]);
         _targetCenter.transform.localRotation = Quaternion.Lerp(_targetCenter.transform.localRotation, _target[_waypointindex], Time.deltaTime * _speed);
 
         if (Quaternion.Angle(_targetCenter.transform.localRotation, _target[_waypointindex]) < 0.1f)
