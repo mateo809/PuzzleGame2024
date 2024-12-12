@@ -20,6 +20,23 @@ public class ItemPreview : MonoBehaviour
     private Vector3 _itemCopyLastPos;
     private Quaternion _itemCopyLastRot;
 
+
+    public GameObject ItemCopy
+    {
+        get { 
+            return itemToCopy; 
+        }
+        set
+        {
+            Debug.Log(value);
+            itemToCopy = value;
+            if (itemToCopy == null)
+            {
+                ChangeView();
+            }
+        }
+    }
+
     private void Update()
     {
         if (Input.GetMouseButtonDown(0) && !_previewCam.gameObject.activeSelf)
@@ -65,22 +82,9 @@ public class ItemPreview : MonoBehaviour
             _isRotating = false;
         }
 
-        if (Input.GetMouseButtonDown(1))
+        if ((Input.GetMouseButtonDown(1) && _previewCam.enabled) || itemToCopy==null)
         {
-            _mainCam.gameObject.SetActive(true);
-            _previewCam.gameObject.SetActive(false);
-            _parentUI.gameObject.SetActive(true);
-
-            if (!this.transform.GetChild(0).gameObject.activeSelf)
-                return;
-
-            else if (itemToCopy.GetComponent<ItemWaypoint>()._colliderToDisable != null)
-            {
-                itemToCopy.GetComponent<ItemWaypoint>()._colliderToDisable.enabled = true;
-            }
-
-            itemToCopy.transform.rotation = _itemCopyLastRot;
-            itemToCopy.transform.position = _itemCopyLastPos;
+            ChangeView();
         }
 
         if (_isRotating)
@@ -89,11 +93,36 @@ public class ItemPreview : MonoBehaviour
         }
     }
 
+    public void ChangeView()
+    {
+
+
+        _mainCam.gameObject.SetActive(true);
+        _previewCam.gameObject.SetActive(false);
+        _parentUI.gameObject.SetActive(true);
+        _isRotating = false;
+
+        if (itemToCopy == null)
+            return;
+
+        itemToCopy.transform.rotation = _itemCopyLastRot;
+        itemToCopy.transform.position = _itemCopyLastPos;
+
+        if (!itemToCopy.transform.GetChild(0).gameObject.activeSelf) return;
+
+        else if (itemToCopy.GetComponent<ItemWaypoint>()._colliderToDisable != null)
+        {
+            itemToCopy.GetComponent<ItemWaypoint>()._colliderToDisable.enabled = true;
+        }
+
+
+    }
+
     public void PreviewUpdate(GameObject p_gm)
     {
         _itemCopyLastPos = itemToCopy.transform.position;
         _itemCopyLastRot = itemToCopy.transform.rotation;
-        itemToCopy.transform.rotation = new Quaternion(0, 0.707106829f, 0, 0.707106829f);
+
         _parentUI.gameObject.SetActive(false);
         if(itemToCopy.GetComponent<Collider>().bounds.size.z * itemToCopy.transform.localScale.z >= itemToCopy.GetComponent<Collider>().bounds.size.y * itemToCopy.transform.localScale.y)
         {
@@ -105,10 +134,16 @@ public class ItemPreview : MonoBehaviour
             itemToCopy.transform.position = previewItem.gameObject.transform.position + new Vector3(0, 0, itemToCopy.GetComponent<Collider>().bounds.size.y * itemToCopy.transform.localScale.y);
             //itemToCopy = Instantiate(p_gm, previewItem.gameObject.transform.position + new Vector3(0, 0, itemToCopy.GetComponent<MeshFilter>().mesh.bounds.size.y * itemToCopy.transform.localScale.y), previewItem.gameObject.transform.rotation);
         }
+
+        itemToCopy.transform.LookAt(new Vector3(_previewCam.gameObject.transform.position.x, _previewCam.gameObject.transform.position.y,2*_previewCam.gameObject.transform.position.x));
+
+
+        Debug.Log(itemToCopy.transform.position);
     }
 
     private void Rotate()
     {
+        Debug.Log(itemToCopy.gameObject.transform.rotation);
         if (_canRotateX)
         {
             float currentMousePosX = Input.mousePosition.x;
