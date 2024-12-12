@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class InteractableObject : MonoBehaviour
 {
-    [SerializeField] protected int _interactionID = -16;
+    protected int _interactionID = IDManager.NoneInteractableObj;
 
     public virtual void DoInteraction()
     {

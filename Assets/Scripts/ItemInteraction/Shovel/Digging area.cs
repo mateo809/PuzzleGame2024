@@ -1,15 +1,14 @@
 using System.Collections;
 using UnityEngine;
 
-public class Diggingarea : InteractableObject
+public class DiggingArea : InteractableObject
 {
-    [SerializeField] private int _bucketID;
-    [SerializeField] private itemData _Paper;
+    [SerializeField] private itemData _Paper3Data;
     [SerializeField] private Animator _Animator;
 
     public override void DoInteraction()
     {
-        if (InventoryManager.Instance.selectedItemID == _bucketID) 
+        if (InventoryManager.Instance.selectedItemID == IDManager.ShovelID) 
         {
             StartCoroutine(AnimShovel());
         }
@@ -20,8 +19,8 @@ public class Diggingarea : InteractableObject
         _Animator.SetBool("Dig", true);
         yield return new WaitForSeconds(2f);
         _Animator.SetBool("Dig", false);
-        InventoryManager.Instance.RemoveItemFromID(_bucketID);
-        InventoryManager.Instance.TryAddToInventory(_Paper);
+        InventoryManager.Instance.RemoveItemFromID(IDManager.ShovelID);
+        InventoryManager.Instance.TryAddToInventory(_Paper3Data);
         Destroy(gameObject);
     }
 }

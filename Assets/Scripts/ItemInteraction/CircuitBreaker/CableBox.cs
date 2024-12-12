@@ -5,7 +5,7 @@ public class CableBox : InteractableObject
     public CircuitBreaker circuitBreaker;
 
     [SerializeField] private GameObject _yellowFuse;
-    [SerializeField] private int _electrickCableID;
+
 
     private void Start()
     {
@@ -16,11 +16,11 @@ public class CableBox : InteractableObject
     {
         if (circuitBreaker.electricityIsCut)
         {
-            if (InventoryManager.Instance.selectedItemID == _electrickCableID) 
+            if (InventoryManager.Instance.selectedItemID == IDManager.ElectrickCableID) 
             {
                 circuitBreaker.powerIsRepare = true;
                 _yellowFuse.SetActive(true);
-                InventoryManager.Instance.RemoveItemFromID(_electrickCableID);
+                InventoryManager.Instance.RemoveItemFromID(IDManager.ElectrickCableID);
                 Debug.Log("The cable is repare !");
                 Destroy(this);
 

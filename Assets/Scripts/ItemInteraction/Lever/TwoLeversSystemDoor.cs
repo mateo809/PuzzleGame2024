@@ -1,13 +1,13 @@
 using UnityEngine;
-using System.Collections;
+
 
 public class TwoLeversSystemDoor : MonoBehaviour
 {
-    public bool _l1isActivated = false;
-    public bool _l2isActivated = false;
+    private bool _l1isActivated = false;
+    private bool _l2isActivated = false;
     //-2 for ID before init to avoid complications with the conditions using selectedItemID
-    public int _l1ID = -2;
-    public int _l2ID = -2;
+    private int _l1ID = -2;
+    private int _l2ID = -2;
 
 
     public void SetLeverID(int leverID)
@@ -23,45 +23,28 @@ public class TwoLeversSystemDoor : MonoBehaviour
     {
         if (_l1isActivated && _l2isActivated)
         {
-            Debug.Log("OpenDoor");
+            Debug.Log("Door is open");
         }
         else
         {
-            Debug.Log("DoorIsClosed");
+            Debug.Log("Door is closed");
         }
     }
 
-    public void ToggleLever(int leverIndex, bool wheightedActivation)
+    public void ToggleLever(int leverID)
     {
-        if(leverIndex == _l1ID)
+        if(leverID == _l1ID)
         {
-            _l1isActivated = true;
+            _l1isActivated = !_l1isActivated;
             print("L1activated");
 
         }
-        else if (leverIndex == _l2ID)
+        else if (leverID == _l2ID)
         {
-            _l2isActivated = true;
+            _l2isActivated = !_l2isActivated;
             print("L2activated");
         }
 
-        CheckLever();
-        if(!wheightedActivation)
-            StartCoroutine(RevertLeverTimer(leverIndex));
-    }
-
-    private IEnumerator RevertLeverTimer(int leverIndex)
-    {
-        yield return new WaitForSeconds(1);
-
-        if (leverIndex == _l1ID)
-        {
-            _l1isActivated = false;
-        }
-        else if (leverIndex == _l2ID)
-        {
-            _l2isActivated = false;
-        }
-        CheckLever();
+        CheckLever();          
     }
 }

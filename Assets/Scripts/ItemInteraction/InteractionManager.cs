@@ -19,6 +19,8 @@ public class InteractionManager : MonoBehaviour
         {
             return;
         }
+
+
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
@@ -63,7 +65,7 @@ public class InteractionManager : MonoBehaviour
                         hit.collider.gameObject.GetComponent<MailBox>().DoInteraction();
                         break;
                     case "DiggingArea":
-                        hit.collider.gameObject.GetComponent<Diggingarea>().DoInteraction();
+                        hit.collider.gameObject.GetComponent<DiggingArea>().DoInteraction();
                         break;
                     case "Ladder":
                         hit.collider.gameObject.GetComponent<Ladder>().DoInteraction();
