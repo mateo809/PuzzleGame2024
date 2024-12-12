@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using JetBrains.Annotations;
 
 public class TwoLeversSystemDoor : MonoBehaviour
 {
@@ -9,8 +10,34 @@ public class TwoLeversSystemDoor : MonoBehaviour
     public int _l1ID = -2;
     public int _l2ID = -2;
 
+    [SerializeField] private Collider _cellarDoor;
+
     [SerializeField] private GameObject _mapGarden;
     [SerializeField] private GameObject _mapCave;
+
+    public void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit, 1000))
+            {
+                if (hit.collider == _cellarDoor && _l1isActivated && _l2isActivated)
+                {
+                    CheckLever();
+                }
+            }
+        }
+    }
+
+    public void GoToCellar()
+    {
+        _mapCave.gameObject.SetActive(true);
+        _mapGarden.gameObject.SetActive(false);
+        _cellarDoor.gameObject.SetActive(true);
+    }
 
     public void SetLeverID(int leverID)
     {
@@ -26,14 +53,14 @@ public class TwoLeversSystemDoor : MonoBehaviour
         if (_l1isActivated && _l2isActivated)
         {
             Debug.Log("OpenDoor");
-            _mapCave.gameObject.SetActive(true);
-            _mapGarden.gameObject.SetActive(false);
+            GoToCellar();
             return true;
             //cave animator dans InpitCamera
         }
         else
         {
             Debug.Log("DoorIsClosed");
+            _cellarDoor.gameObject.SetActive(false);
             return false;
         }
     }
@@ -59,7 +86,7 @@ public class TwoLeversSystemDoor : MonoBehaviour
     private IEnumerator RevertLeverTimer(int leverIndex)
     {
 
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.1f);
 
         if (leverIndex == _l1ID)
         {
