@@ -6,7 +6,7 @@ public class Sc_InputCameraMovment : MonoBehaviour
 {
     [SerializeField] private InputActionReference _moveCamera;
     [SerializeField] private Sc_CameraMovement _scCameraMovement;
-
+    
     [Header("AnimatorSettings")]
     [SerializeField] private List<Animator> Walls = new List<Animator>();
        
@@ -17,7 +17,7 @@ public class Sc_InputCameraMovment : MonoBehaviour
         if (direction == Vector2.right && !_scCameraMovement._isTurningL && !_scCameraMovement._isTurningR)
         {
             _scCameraMovement.NextWaypoint();
-            for (int i = 0; i < Walls.Count; ++i)
+            for (int i = 0; i < Walls.Count; i++)
             {
                 Walls[i].SetTrigger("Right");
             }
@@ -25,7 +25,7 @@ public class Sc_InputCameraMovment : MonoBehaviour
         else if (direction == -Vector2.right && !_scCameraMovement._isTurningR && !_scCameraMovement._isTurningL)
         {
             _scCameraMovement.LastWaypoint();
-            for (int i = 0; i < Walls.Count; ++i)
+            for (int i = 0; i < Walls.Count; i++)
             {
                 Walls[i].SetTrigger("Left");
             }

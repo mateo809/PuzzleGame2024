@@ -24,7 +24,7 @@ public class Sc_CameraMovement : MonoBehaviour
     private bool _isZooming;
     private float _zoomTarget;
     private Vector3 _zoomTargetPos;
-    private int _waypointindex = 0;
+    public int _waypointindex = 0;
 
     [SerializeField] private List<GameObject> _steps = new List<GameObject>(3) { null, null, null };
 
