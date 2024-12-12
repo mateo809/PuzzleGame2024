@@ -7,10 +7,10 @@ public class MailBox : InteractableObject
 
     public override void DoInteraction()
     {
-        if (InventoryManager.Instance.selectedItemID == _interactionID)
+        if (InventoryManager.Instance.selectedItemID == IDManager.MailboxKeyID)
         {
             Debug.Log("Open");
-            InventoryManager.Instance.RemoveItemFromID(_interactionID);
+            InventoryManager.Instance.RemoveItemFromID(IDManager.MailboxKeyID);
         }
 
         else

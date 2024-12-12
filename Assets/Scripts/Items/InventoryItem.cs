@@ -8,7 +8,7 @@ public class InventoryItem : MonoBehaviour
 
     public InventoryItem()
     {
-        data.itemID = -1;
+        data.itemID = IDManager.NoneItem;
         data.itemName = "Empty";
         data.sprite = null;
     }
