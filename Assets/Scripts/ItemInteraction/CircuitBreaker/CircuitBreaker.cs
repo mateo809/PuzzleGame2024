@@ -1,21 +1,13 @@
 using UnityEngine;
-using UnityEngine.Events;
 
 public class CircuitBreaker : InteractableObject
 {
     public bool electricityIsCut = false;
     public bool powerIsRepare = false;
 
-    public UnityEvent resetElectricity;
+    public ElectricityManager electricityManager;
 
-    [SerializeField]private Animator _animator;
-    void Start()
-    {
-        if (resetElectricity == null)
-            resetElectricity = new UnityEvent();
-
-        resetElectricity.AddListener(ActiveAllEnergy);
-    }
+    [SerializeField] private Animator _animator;
 
     public override void DoInteraction()
     {
@@ -25,31 +17,27 @@ public class CircuitBreaker : InteractableObject
 
     private void ToggleButtonCircuitBreaker()
     {
-        if(electricityIsCut)
+        if (electricityIsCut)
         {
-            //Button up
+            // Button up
             Debug.Log("OFF");
             _animator.SetBool("Activate", false);
-            
         }
         else
         {
-            //Button down
+            // Button down
             Debug.Log("ON");
             _animator.SetBool("Activate", true);
             if (powerIsRepare)
             {
-                Debug.Log("The electricity is back !");
-                resetElectricity.Invoke();
+                Debug.Log("The electricity is back!");
+                electricityManager.OnElectricityRestored();  
             }
         }
     }
-
     public void ActiveAllEnergy()
     {
         Debug.Log("Duck is out");
-
-        Destroy(this);
-
+        Destroy(this); 
     }
 }
