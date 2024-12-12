@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5741390497005459875}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.99994385, z: -0, w: 0.0106000295}
+  m_LocalRotation: {x: 0, y: 0.9999438, z: 0, w: 0.010602751}
   m_LocalPosition: {x: 20.08, y: 1.52, z: -20.76}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -122,6 +122,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
-    itemID: 3
-    itemName: Bucket
-    sprite: {fileID: 21300000, guid: 24637f561a43fd7469cc8ad32084670e, type: 3}
+    itemID: 31
+    itemName: EmptyBucket
+    sprite: {fileID: 10915, guid: 0000000000000000f000000000000000, type: 0}

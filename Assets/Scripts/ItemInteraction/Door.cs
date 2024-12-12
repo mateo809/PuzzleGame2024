@@ -1,16 +1,23 @@
 using TMPro;
 using UnityEngine;
+using static Lever;
 
 public class Door : InteractableObject
 {
-
-    public bool IsFinalDoor = false;
     [SerializeField] private TextMeshProUGUI _WinText;
 
-    [SerializeField]
-    private UIinteractImage uIinteractImage;
+    [SerializeField] private UIinteractImage _UIInteractImage;
 
-
+    [SerializeField] private DoorID _id;
+    public enum DoorID
+    {
+        HouseDoor,
+        ShedDoor
+    }
+    private void Start()
+    {
+        _interactionID = _id == DoorID.HouseDoor ? IDManager.FinalDoorKeyID : IDManager.ShedDoorKeyID;
+    }
 
     public override void DoInteraction()
     {
@@ -18,7 +25,8 @@ public class Door : InteractableObject
         {
             Debug.Log("Open");
             InventoryManager.Instance.RemoveItemFromID(_interactionID);
-            if (IsFinalDoor) {
+            if (_id == DoorID.HouseDoor) 
+            {
                 Debug.Log("Final Door Unlocked!");
             }
             Destroy(this);

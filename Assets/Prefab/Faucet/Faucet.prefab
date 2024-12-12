@@ -121,9 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9cd28d22817e564d95d0b85ba766d95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interactionID: -16
-  _bucketID: 3
   waterBucketData:
-    itemID: 1000
+    itemID: 32
     itemName: WaterBucket
     sprite: {fileID: 21300000, guid: c25b9db8be1acce40a7bb4075c2efbda, type: 3}

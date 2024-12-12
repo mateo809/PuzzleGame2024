@@ -118,7 +118,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data:
     itemID: 33
-    itemName: BreakCable
+    itemName: ElectrickCable
     sprite: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
 --- !u!65 &1670489215061309811
 BoxCollider:

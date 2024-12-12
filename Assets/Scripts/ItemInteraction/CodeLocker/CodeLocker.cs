@@ -56,11 +56,9 @@ public class CodeLocker : MonoBehaviour
         }
     }
 
-    private void Update()
+
+    private void OnMouseDown()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            DetectClickedWheel();
-        }
+        DetectClickedWheel();
     }
 }
