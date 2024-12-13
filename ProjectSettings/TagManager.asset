@@ -19,8 +19,11 @@ TagManager:
   - DiggingArea
   - Ladder
   - Charcoal
-  - CharcoalMoved
   - Shed
+  - MovementXPlus
+  - MovementXMinus
+  - MovementZMinus
+  - MovementZPlus
   layers:
   - Default
   - TransparentFX

@@ -6,7 +6,8 @@ public class CodeLocker : MonoBehaviour
 {
     [SerializeField] private List<Transform> _wheelList = new List<Transform>(); 
     [SerializeField] private List<int> _correctCode = new List<int>(); 
-    private List<int> _currentCode = new List<int>(); 
+    private List<int> _currentCode = new List<int>();
+    [SerializeField] private Animator _animator;
 
     private void Start()
     {
@@ -49,6 +50,7 @@ public class CodeLocker : MonoBehaviour
         {
             Debug.Log("Open");
             Destroy(gameObject);
+            _animator.SetBool("Open" , true);
         }
     }
 
