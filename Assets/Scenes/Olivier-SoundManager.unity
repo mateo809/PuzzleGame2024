@@ -1284,6 +1284,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 796278515}
     - target: {fileID: 1225611735878781541, guid: fc42bd6fa5548c44f964a733e7381083, type: 3}
+      propertyPath: Sc_AudioSelection
+      value: 
+      objectReference: {fileID: 1892394887}
+    - target: {fileID: 1225611735878781541, guid: fc42bd6fa5548c44f964a733e7381083, type: 3}
       propertyPath: sc_AudioSelection
       value: 
       objectReference: {fileID: 1892394887}
