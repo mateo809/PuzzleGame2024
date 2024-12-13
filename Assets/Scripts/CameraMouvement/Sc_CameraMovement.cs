@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 public class Sc_CameraMovement : MonoBehaviour
 {
@@ -17,14 +16,14 @@ public class Sc_CameraMovement : MonoBehaviour
 
     //Rotation
     private List<Quaternion> _target = new List<Quaternion>();
-    [SerializeField] private bool _isTurningL;
-    [SerializeField] private bool _isTurningR;
+    [SerializeField] public bool _isTurningL;
+    [SerializeField] public bool _isTurningR;
 
     [SerializeField] private float _duration;
     private bool _isZooming;
     private float _zoomTarget;
     private Vector3 _zoomTargetPos;
-    private int _waypointindex = 0;
+    public int _waypointindex = 0;
 
     [SerializeField] private List<GameObject> _steps = new List<GameObject>(3) { null, null, null };
 
@@ -64,13 +63,13 @@ public class Sc_CameraMovement : MonoBehaviour
         {
             DetectWayPoint();
         }
-        if(Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1))
             GoBack();
     }
 
     public void NextWaypoint()
     {
-        if (_isTurningR) return;
+        if (_isTurningL) return;
         _waypointindex--;
         if (_waypointindex < 0)
         {
@@ -92,24 +91,38 @@ public class Sc_CameraMovement : MonoBehaviour
         }
     }
 
+
+    public void GoLeft()
+    {
+        _isTurningL = true;
+        Debug.Log(_target[_waypointindex]);
+        _targetCenter.transform.localRotation = Quaternion.Lerp(_targetCenter.transform.localRotation, _target[_waypointindex], Time.deltaTime * _speed);
+
+        if (Quaternion.Angle(_targetCenter.transform.localRotation, _target[_waypointindex]) < 0.1f)
+        {
+            _isTurningL = false;
+        }
+    }
+
+
+    public void Move(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            Debug.Log("x =" + context.ReadValue<Vector2>().x);
+            if (context.ReadValue<Vector2>().x < 0.0f) GoLeft();
+            else GoRight();
+        }
+    }
+
+
+
     public void LastWaypoint()
     {
         if (_isTurningR) return;
         _waypointindex++;
         _waypointindex %= _target.Count;
         GoLeft();
-    }
-
-    public void GoLeft()
-    {
-        _isTurningR = true;
-        Debug.Log(_target[_waypointindex]);
-        _targetCenter.transform.localRotation = Quaternion.Lerp(_targetCenter.transform.localRotation, _target[_waypointindex], Time.deltaTime * _speed);
-
-        if (Quaternion.Angle(_targetCenter.transform.localRotation, _target[_waypointindex]) < 0.1f)
-        {
-            _isTurningR = false;
-        }
     }
 
     public void CameraZoom(float p_zoomAmnt, Vector3 p_zoomPos)
@@ -119,7 +132,7 @@ public class Sc_CameraMovement : MonoBehaviour
         _camera.orthographicSize = Mathf.Lerp(_camera.orthographicSize, p_zoomAmnt, Time.deltaTime / _duration);
         _boomStick.transform.position = Vector3.Lerp(_boomStick.transform.position, p_zoomPos, Time.deltaTime / _duration);
 
-        if (Math.Abs(p_zoomAmnt - _camera.orthographicSize) < 0.01f && Vector3.Distance(_boomStick.transform.position, p_zoomPos) < 0.01f )
+        if (Math.Abs(p_zoomAmnt - _camera.orthographicSize) < 0.01f && Vector3.Distance(_boomStick.transform.position, p_zoomPos) < 0.01f)
         {
             _isZooming = false;
         }
@@ -194,7 +207,7 @@ public class Sc_CameraMovement : MonoBehaviour
 
                 _steps[2].GetComponent<Collider>().enabled = true;
                 _isZooming = true;
-                CameraZoom((int)GameObjectSize.Far,Vector3.zero);
+                CameraZoom((int)GameObjectSize.Far, Vector3.zero);
 
                 _steps[2] = null;
                 break;
@@ -220,7 +233,7 @@ public class Sc_CameraMovement : MonoBehaviour
                 switch (hit.collider.gameObject.GetComponent<ItemWaypoint>().itemSize)
                 {
                     case 1:
-                    Debug.Log("Waypoint small reached");
+                        Debug.Log("Waypoint small reached");
                         targetPos = hit.transform.position;
                         _steps[0] = hit.collider.gameObject;
                         hit.collider.enabled = false;
