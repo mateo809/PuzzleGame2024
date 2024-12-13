@@ -3,6 +3,8 @@ using UnityEngine.SceneManagement;
 
 public class Sc_MenusManager : MonoBehaviour
 {
+    public Sc_AudioSelection Sc_AudioSelection;
+
     //Main Menu
     public void ButtonPlay()
     {
@@ -11,7 +13,8 @@ public class Sc_MenusManager : MonoBehaviour
 
     public void LeaveButton()
     {
-        Application.Quit();        
+        Application.Quit();
+        Sc_AudioSelection.PlaySound(Sc_IDSFXManager.ClosingDoorID);
     }
 
     //Settings Menu
