@@ -1,13 +1,13 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Sc_Button : MonoBehaviour
+public class Sc_Button : InteractableObject
 {
     public string digicodeNumber = "";
 
     public UnityEvent DigicodeClicked;
 
-    private void OnMouseDown()
+    public override void DoInteraction()
     {        
         DigicodeClicked.Invoke();
     }

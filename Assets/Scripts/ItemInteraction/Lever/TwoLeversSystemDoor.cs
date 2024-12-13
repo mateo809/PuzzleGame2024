@@ -9,6 +9,8 @@ public class TwoLeversSystemDoor : MonoBehaviour
     private int _l1ID = -2;
     private int _l2ID = -2;
 
+    [SerializeField] private Animator _anim;
+
 
     public void SetLeverID(int leverID)
     {
@@ -24,6 +26,7 @@ public class TwoLeversSystemDoor : MonoBehaviour
         if (_l1isActivated && _l2isActivated)
         {
             Debug.Log("Door is open");
+            _anim.SetBool("Open" , true);
         }
         else
         {
