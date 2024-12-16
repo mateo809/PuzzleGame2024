@@ -19,6 +19,10 @@ public class PhoneManager : MonoBehaviour
     [SerializeField] private int _startMinute = 0;
     [SerializeField] private int _startSecond = 0;
 
+    [SerializeField] private Sprite _image;
+    [SerializeField] private Sprite _screenSprite;
+    [SerializeField] private GameObject _screen;
+
     private int _currentHour;
     private int _currentMinute;
     private int _currentSecond;
@@ -122,5 +126,15 @@ public class PhoneManager : MonoBehaviour
         }
         string formattedTime = string.Format("{0:D2}:{1:D2}", _currentHour, _currentMinute);
         _clockText.text = formattedTime;
+    }
+
+    public void ChangeScreenUi()
+    {
+        _screen.GetComponent<Image>().sprite = _image;
+    }
+
+    public void RevertScreenUi()
+    {
+        _screen.GetComponent<Image>().sprite = _screenSprite;
     }
 }

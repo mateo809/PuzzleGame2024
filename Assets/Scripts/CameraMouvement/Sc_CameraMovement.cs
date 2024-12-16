@@ -1,280 +1,118 @@
-using System;
-using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Sc_CameraMovement : MonoBehaviour
 {
+    [Header("   General Parameters")]
+    [SerializeField] private Transform _cameraPivotTrans;
+    private bool _isInAction = false;
 
-    //Camera 
-    [SerializeField] private float _speed;
-    [SerializeField] private Transform _targetCenter;
-    [SerializeField] private Sc_WayPoints _waypoints;
-    [SerializeField] private Vector3 _offset;
-    [SerializeField] private GameObject _boomStick;
-    [SerializeField] private Camera _camera;
 
-    //Rotation
-    private List<Quaternion> _target = new List<Quaternion>();
-    [SerializeField] public bool _isTurningL;
-    [SerializeField] public bool _isTurningR;
+    #region Camera Rotation
+    [Header("   Camera Rotation")]
+    [SerializeField] private float _cameraSpeed = 5;
+    private float _speedMultiplier = 20;
+    private float _currCameraStickRot = 0.0f;
+    private float _nextCameraStickRot = 0.0f;
 
-    [SerializeField] private float _duration;
-    private bool _isZooming;
-    private float _zoomTarget;
-    private Vector3 _zoomTargetPos;
-    public int _waypointindex = 0;
+    private bool _isRotLeft = false;
 
-    [SerializeField] private List<GameObject> _steps = new List<GameObject>(3) { null, null, null };
-
-    enum GameObjectSize
+    private IEnumerator RotateCameraPivot()
     {
-        Far = 20,
-        Medium = 10,
-        Near = 5,
+        while (Mathf.Abs(_currCameraStickRot - ((360 + _nextCameraStickRot) % 360)) > 1f)
+        {
+            float rotationStep = _speedMultiplier * _cameraSpeed * Time.deltaTime * (_isRotLeft ? -1 : 1);
+
+            _cameraPivotTrans.Rotate(Vector3.up, rotationStep);
+
+            _currCameraStickRot = _cameraPivotTrans.eulerAngles.y;
+            yield return null;
+        }
+        _currCameraStickRot = _nextCameraStickRot;
+        _isRotLeft = false;
+
+        if (Mathf.Abs(_currCameraStickRot) >= 360.0f)
+            _currCameraStickRot %= 360.0f;
+
+        _isInAction = false;
+        yield return null;
     }
-
-    void Start()
-    {
-        _target.Add(new Quaternion(0, 0, 0, 1));
-        _target.Add(new Quaternion(0, 0.707106829f, 0, 0.707106829f));
-        _target.Add(new Quaternion(0, -1, 0, 0));
-        _target.Add(new Quaternion(0, -0.707106829f, 0, 0.707106829f));
-    }
-
-    private void Update()
-    {
-        if (_isTurningL)
-        {
-            GoRight();
-        }
-
-        if (_isTurningR)
-        {
-            GoLeft();
-        }
-
-        if (_isZooming)
-        {
-            CameraZoom(_zoomTarget, _zoomTargetPos);
-        }
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            DetectWayPoint();
-        }
-        if (Input.GetMouseButtonDown(1))
-            GoBack();
-    }
-
-    public void NextWaypoint()
-    {
-        if (_isTurningL) return;
-        _waypointindex--;
-        if (_waypointindex < 0)
-        {
-            _waypointindex = _target.Count - 1;
-        }
-        _waypointindex %= _target.Count;
-        GoRight();
-    }
-
-    public void GoRight()
-    {
-        _isTurningR = true;
-        Debug.Log(_target[_waypointindex]);
-        _targetCenter.transform.localRotation = Quaternion.Lerp(_targetCenter.transform.localRotation, _target[_waypointindex], Time.deltaTime * _speed);
-
-        if (Quaternion.Angle(_targetCenter.transform.localRotation, _target[_waypointindex]) < 0.1f)
-        {
-            _isTurningR = false;
-        }
-    }
-
-
-    public void GoLeft()
-    {
-        _isTurningL = true;
-        Debug.Log(_target[_waypointindex]);
-        _targetCenter.transform.localRotation = Quaternion.Lerp(_targetCenter.transform.localRotation, _target[_waypointindex], Time.deltaTime * _speed);
-
-        if (Quaternion.Angle(_targetCenter.transform.localRotation, _target[_waypointindex]) < 0.1f)
-        {
-            _isTurningL = false;
-        }
-    }
-
 
     public void Move(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (!_isInAction && context.performed)
         {
-            Debug.Log("x =" + context.ReadValue<Vector2>().x);
-            if (context.ReadValue<Vector2>().x < 0.0f) GoLeft();
-            else GoRight();
+            if (context.ReadValue<Vector2>().x == 0) return;
+
+            _isInAction = true;
+            _isRotLeft = context.ReadValue<Vector2>().x > 0;
+            _nextCameraStickRot = (_nextCameraStickRot + (_isRotLeft ? -1 : 1) * 90.0f) % 360;
+            StartCoroutine(RotateCameraPivot());
         }
     }
+    #endregion
+    #region Camera Focus
 
+    [Header("   Camera Focus")]
+    [SerializeField] private float _zoomAnimTimer = 2.0f;
+    [HideInInspector] public bool IsCameraFocused = false;
+    private float _normalCameraSize;
+    [SerializeField] private float _zoomedCameraSize;
+    [SerializeField] private GameObject _backButton;
 
-
-    public void LastWaypoint()
+    void Start()
     {
-        if (_isTurningR) return;
-        _waypointindex++;
-        _waypointindex %= _target.Count;
-        GoLeft();
+        _normalCameraSize = Camera.main.orthographicSize;
     }
 
-    public void CameraZoom(float p_zoomAmnt, Vector3 p_zoomPos)
+    private IEnumerator FocusOnTarget(Vector3 focusTarget, float targetCameraZoom)
     {
-        _zoomTarget = p_zoomAmnt;
-        _zoomTargetPos = p_zoomPos;
-        _camera.orthographicSize = Mathf.Lerp(_camera.orthographicSize, p_zoomAmnt, Time.deltaTime / _duration);
-        _boomStick.transform.position = Vector3.Lerp(_boomStick.transform.position, p_zoomPos, Time.deltaTime / _duration);
+        float startingCameraSize = Camera.main.orthographicSize;
+        Vector3 startingCameraPos = _cameraPivotTrans.position;
+        float elapsedTime = 0.0f;
 
-        if (Math.Abs(p_zoomAmnt - _camera.orthographicSize) < 0.01f && Vector3.Distance(_boomStick.transform.position, p_zoomPos) < 0.01f)
+        while (elapsedTime < _zoomAnimTimer)
         {
-            _isZooming = false;
+            float zoomProgress = Mathf.SmoothStep(0.0f, 1.0f, elapsedTime / _zoomAnimTimer);
+
+            Camera.main.orthographicSize = Mathf.Lerp(startingCameraSize, targetCameraZoom, zoomProgress);
+
+            _cameraPivotTrans.position = Vector3.Lerp(startingCameraPos, focusTarget, zoomProgress);
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
         }
+        Camera.main.orthographicSize = targetCameraZoom;
+        _cameraPivotTrans.position = focusTarget;
+
+        Debug.Log("Zoom Complete");
+
+        _isInAction = false;
+        yield return null;
     }
 
-    public void GoBack()
+    public void Focus(Vector3 focusTarget)
     {
-        Debug.Log("Go back start");
-        switch (Mathf.RoundToInt(_camera.orthographicSize))
-        {
-            case (int)GameObjectSize.Near:
-                if (_steps[0] == null) break;
+        if (_isInAction) return;
 
-                Debug.Log("near");
+        _isInAction = true;
 
-                _steps[0].GetComponent<Collider>().enabled = true;
-
-                if (_steps[1] == null)
-                {
-                    if (_steps[2] == null)
-                    {
-                        _isZooming = true;
-                        CameraZoom((int)GameObjectSize.Far, Vector3.zero);
-
-                    }
-                    else
-                    {
-                        _steps[2].GetComponent<Collider>().enabled = false;
-                        _isZooming = true;
-                        CameraZoom((int)GameObjectSize.Far, _steps[2].transform.position);
-                    }
-
-                }
-                else
-                {
-                    _steps[1].GetComponent<Collider>().enabled = false;
-                    _isZooming = true;
-                    CameraZoom((int)GameObjectSize.Medium, _steps[1].transform.position);
-                }
-                _steps[0] = null;
-                break;
-
-            case (int)GameObjectSize.Medium:
-
-                Debug.Log("medium");
-
-                if (_steps[1] == null)
-                {
-                    break;
-                }
-                _steps[1].GetComponent<Collider>().enabled = true;
-
-                if (_steps[2] == null)
-                {
-                    _isZooming = true;
-                    CameraZoom((int)GameObjectSize.Far, Vector3.zero);
-                }
-                else
-                {
-                    _steps[2].GetComponent<Collider>().enabled = true;
-                    _isZooming = true;
-                    CameraZoom((int)GameObjectSize.Far, _steps[2].transform.position);
-                }
-                _steps[1] = null;
-                break;
-
-            case (int)GameObjectSize.Far:
-
-                Debug.Log("far");
-
-                if (_steps[2] == null) break;
-
-                _steps[2].GetComponent<Collider>().enabled = true;
-                _isZooming = true;
-                CameraZoom((int)GameObjectSize.Far, Vector3.zero);
-
-                _steps[2] = null;
-                break;
-        }
+        IsCameraFocused = true;
+        _backButton.SetActive(true);
+        StartCoroutine(FocusOnTarget(focusTarget, _zoomedCameraSize));
     }
 
-    private void DetectWayPoint()
+    public void LoseFocus()
     {
-        if (!_camera.gameObject.activeSelf)
-            return;
+        if (_isInAction) return;
 
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
+        _isInAction = true;
 
-
-        if (Physics.Raycast(ray, out hit))
-        {
-            Vector3 targetPos;
-            Debug.Log("ray hit");
-
-            if (hit.collider.gameObject.GetComponent<ItemWaypoint>() != null && !hit.collider.gameObject.GetComponent<ItemWaypoint>().canBePreviewed)
-            {
-                switch (hit.collider.gameObject.GetComponent<ItemWaypoint>().itemSize)
-                {
-                    case 1:
-                        Debug.Log("Waypoint small reached");
-                        targetPos = hit.transform.position;
-                        _steps[0] = hit.collider.gameObject;
-                        hit.collider.enabled = false;
-                        _isZooming = true;
-                        CameraZoom((int)GameObjectSize.Near, targetPos);
-                        break;
-
-                    case 2:
-                        targetPos = hit.transform.position;
-                        _steps[1] = hit.collider.gameObject;
-                        hit.collider.enabled = false;
-                        _isZooming = true;
-                        CameraZoom((int)GameObjectSize.Medium, targetPos);
-                        if (_steps[0] != null)
-                        {
-                            _steps[0].GetComponent<Collider>().enabled = true;
-                        }
-                        _steps[0] = null;
-                        Debug.Log("Waypoint medium reached");
-                        break;
-
-                    case 3:
-                        targetPos = hit.transform.position;
-                        _steps[2] = hit.collider.gameObject;
-                        hit.collider.enabled = false;
-                        _isZooming = true;
-                        CameraZoom((int)GameObjectSize.Far, targetPos);
-                        if (_steps[1] != null)
-                        {
-                            _steps[1].GetComponent<Collider>().enabled = true;
-                        }
-                        _steps[1] = null;
-                        if (_steps[0] != null)
-                        {
-                            _steps[0].GetComponent<Collider>().enabled = true;
-                        }
-                        _steps[0] = null;
-                        Debug.Log("Waypoint large reached");
-                        break;
-                }
-            }
-        }
+        IsCameraFocused = false;
+        _backButton.SetActive(false);
+        StartCoroutine(FocusOnTarget(Vector3.zero, _normalCameraSize));
     }
+
+    #endregion
 }

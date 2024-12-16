@@ -8,6 +8,7 @@ public class CodeLocker : MonoBehaviour
     [SerializeField] private List<int> _correctCode = new List<int>(); 
     private List<int> _currentCode = new List<int>();
     [SerializeField] private Animator _animator;
+    [SerializeField] private Camera _camera;
 
     private void Start()
     {
@@ -17,16 +18,25 @@ public class CodeLocker : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0)) { DetectClickedWheel(); }
+    }
+
     private void DetectClickedWheel()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Camera cam = Camera.main == _camera ? _camera : Camera.main;
+            
+        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         Debug.DrawRay(ray.origin, ray.direction.normalized * 1000, Color.red, 1);
 
         if (Physics.Raycast(ray, out hit, 1000))
         {
-            if (!hit.collider.gameObject.CompareTag("Wheel"))
-                return;
+            Debug.Log(hit.collider.gameObject.name);
+            _camera.gameObject.SetActive(true);
+            _camera = Camera.main;
+            
             int wheelIndex = _wheelList.FindIndex(wheel => wheel == hit.transform); // find index hit 
 
             if (wheelIndex != -1)
@@ -38,7 +48,7 @@ public class CodeLocker : MonoBehaviour
 
     private void RotateWheel(Transform wheel, int index)
     {
-        wheel.Rotate(wheel.forward, -36);
+        wheel.Rotate(wheel.forward, 36,Space.World);
         _currentCode[index]++;
         if (_currentCode[index] == 10) _currentCode[index] = 0;
         CheckCode();
@@ -52,11 +62,5 @@ public class CodeLocker : MonoBehaviour
             Destroy(gameObject);
             _animator.SetBool("Open" , true);
         }
-    }
-
-
-    private void OnMouseDown()
-    {
-        DetectClickedWheel();
     }
 }

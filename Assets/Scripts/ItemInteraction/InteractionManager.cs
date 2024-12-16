@@ -4,6 +4,7 @@ public class InteractionManager : MonoBehaviour
 {
     [SerializeField]
     private LayerMask interactableMask;
+    [SerializeField] Sc_CameraMovement cameraMovement;
 
     [SerializeField, Tooltip("Speed multiplier for movement interactions.")]
     private float movementSpeed = 0.25f; 
@@ -45,7 +46,10 @@ public class InteractionManager : MonoBehaviour
             {
                 string tag = hitObject.tag;
 
-                if (hitObject.GetComponent<InteractableObject>() != null)
+                if (!cameraMovement.IsCameraFocused && tag == "ZoomTarget")
+                    cameraMovement.Focus(hit.collider.gameObject.transform.localToWorldMatrix.GetPosition());
+
+                else if (hitObject.GetComponent<InteractableObject>() != null)
                 {
                     hitObject.GetComponent<InteractableObject>().DoInteraction();
                 }
@@ -58,6 +62,8 @@ public class InteractionManager : MonoBehaviour
                         case "MovementZPlus":
                         case "MovementZMinus":
                             HandleMovement(hitObject, tag);
+                            break;
+                        case "ZoomTarget": 
                             break;
                         default:
                             throw new System.Exception($"Tag {tag} was not recognized");
