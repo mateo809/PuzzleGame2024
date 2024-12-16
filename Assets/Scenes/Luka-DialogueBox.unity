@@ -6907,6 +6907,7 @@ MonoBehaviour:
   - I need a way to get back in and fast.
   - that's all i have left before being late.
   _textSpeed: 0.05
+  _phoneManager: {fileID: 331012163}
 --- !u!4 &1304656768
 Transform:
   m_ObjectHideFlags: 0
