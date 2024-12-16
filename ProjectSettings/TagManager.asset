@@ -21,6 +21,7 @@ TagManager:
   - Charcoal
   - CharcoalMoved
   - Shed
+  - ZoomTarget
   layers:
   - Default
   - TransparentFX

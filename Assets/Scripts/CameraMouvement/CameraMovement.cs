@@ -1,21 +1,21 @@
-using System;
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class CameraMovement : MonoBehaviour
 {
+    [Header("   General Parameters")]
+    [SerializeField] private Transform _cameraPivotTrans;
+    private bool _isInAction = false;
+
+
     #region Camera Rotation
     [Header("   Camera Rotation")]
     [SerializeField] private float _cameraSpeed = 5;
     private float _speedMultiplier = 20;
-    [SerializeField] private Transform _cameraPivotTrans;
     private float _currCameraStickRot = 0.0f;
     private float _nextCameraStickRot = 0.0f;
 
-    private bool _isRotRight = false;
     private bool _isRotLeft = false;
 
     private IEnumerator RotateCameraPivot()
@@ -31,22 +31,22 @@ public class CameraMovement : MonoBehaviour
         }
         _currCameraStickRot = _nextCameraStickRot;
         _isRotLeft = false;
-        _isRotRight = false;
 
         if (Mathf.Abs(_currCameraStickRot) >= 360.0f)
             _currCameraStickRot %= 360.0f;
 
+        _isInAction = false;
         yield return null;
     }
 
     public void Move(InputAction.CallbackContext context)
     {
-        if (context.performed && !(_isRotLeft || _isRotRight))
+        if (!_isInAction && context.performed)
         {
             if (context.ReadValue<Vector2>().x == 0) return;
 
+            _isInAction = true;
             _isRotLeft = context.ReadValue<Vector2>().x > 0;
-            _isRotRight = !_isRotLeft;
             _nextCameraStickRot = (_nextCameraStickRot + (_isRotLeft ? -1 : 1) * 90.0f) % 360;
             StartCoroutine(RotateCameraPivot());
         }
@@ -55,57 +55,62 @@ public class CameraMovement : MonoBehaviour
     #region Camera Focus
 
     [Header("   Camera Focus")]
-    [SerializeField] private float _focusSpeed = 5.0f;
+    [SerializeField] private float _zoomAnimTimer = 2.0f;
     [HideInInspector] public bool IsCameraFocused = false;
     private float _normalCameraSize;
     [SerializeField] private float _zoomedCameraSize;
-    private float _currCameraZoom;
+    [SerializeField] private GameObject _backButton;
 
     void Start()
     {
         _normalCameraSize = Camera.main.orthographicSize;
-        _currCameraZoom = _normalCameraSize;
     }
 
     private IEnumerator FocusOnTarget(Vector3 focusTarget, float targetCameraZoom)
     {
-        _currCameraZoom = Camera.main.orthographicSize;
-
-        float startingCameraSize = _currCameraZoom;
+        float startingCameraSize = Camera.main.orthographicSize;
         Vector3 startingCameraPos = _cameraPivotTrans.position;
         float elapsedTime = 0.0f;
-        while (Mathf.Abs(_currCameraZoom - targetCameraZoom) > 1f)
+
+        while (elapsedTime < _zoomAnimTimer)
         {
-            Debug.Log("Camera Ok");
+            float zoomProgress = Mathf.SmoothStep(0.0f, 1.0f, elapsedTime / _zoomAnimTimer);
 
-            _currCameraZoom = Mathf.Lerp(startingCameraSize, targetCameraZoom, elapsedTime);
-            Camera.main.orthographicSize = _currCameraZoom;
+            Camera.main.orthographicSize = Mathf.Lerp(startingCameraSize, targetCameraZoom, zoomProgress);
 
-            _cameraPivotTrans.position = Vector3.Lerp(startingCameraPos, focusTarget, elapsedTime);
+            _cameraPivotTrans.position = Vector3.Lerp(startingCameraPos, focusTarget, zoomProgress);
 
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-        _currCameraZoom = targetCameraZoom;
+        Camera.main.orthographicSize = targetCameraZoom;
+        _cameraPivotTrans.position = focusTarget;
 
         Debug.Log("Zoom Complete");
 
+        _isInAction = false;
         yield return null;
     }
 
     public void Focus(Vector3 focusTarget)
     {
+        if (_isInAction) return;
+
+        _isInAction = true;
+
+        IsCameraFocused = true;
+        _backButton.SetActive(true);
         StartCoroutine(FocusOnTarget(focusTarget, _zoomedCameraSize));
     }
-    [ContextMenu("Debug/Focus")]
-    public void Test()
-    {
-        Focus(Vector3.zero);
-    }
 
-    [ContextMenu("Debug/ResetFocus")]
     public void LoseFocus()
     {
+        if (_isInAction) return;
+
+        _isInAction = true;
+
+        IsCameraFocused = false;
+        _backButton.SetActive(false);
         StartCoroutine(FocusOnTarget(Vector3.zero, _normalCameraSize));
     }
 
