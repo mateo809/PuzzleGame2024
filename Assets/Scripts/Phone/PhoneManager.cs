@@ -15,13 +15,13 @@ public class PhoneManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _clockText;
     private float _timeElapsed = 0f;
 
-    [SerializeField] private int _startHour = 12;
-    [SerializeField] private int _startMinute = 0;
-    [SerializeField] private int _startSecond = 0;
+    public int _startHour = 9;
+    public int _startMinute = 10;
+    public int _startSecond = 0;
 
-    private int _currentHour;
-    private int _currentMinute;
-    private int _currentSecond;
+    public int _currentHour;
+    public int _currentMinute;
+    public int _currentSecond;
 
     private void Start()
     {
