@@ -6905,7 +6905,7 @@ MonoBehaviour:
   - 'It''s way too high... I need to find a way to get on the roof. '
   - It is too dangerous... I need should turn off the electricity first.
   - I need a way to get back in and fast.
-  - that's all i have left before being late.
+  - 'I should hurry i only have '
   _textSpeed: 0.05
   _phoneManager: {fileID: 331012163}
 --- !u!4 &1304656768

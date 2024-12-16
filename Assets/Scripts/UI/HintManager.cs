@@ -23,41 +23,20 @@ public class HintManager : MonoBehaviour
     public void ActivateHint(int index)
     {
         hintBox.SetActive(true);
-        if (index == IDHints.HintCarTimer)
-        {
-            StopAllCoroutines();
-            StartCoroutine(CloseHintCarTimer(index));
-        }
-
-        else
-        {
-            StopAllCoroutines();
-            StartCoroutine(CloseHint(index));
-        }
+        StopAllCoroutines();
+        StartCoroutine(CloseHint(index));
     }
 
     private IEnumerator CloseHint(int index)
     {
         string text = hintString[index];
 
-        for (int i = 1; i < text.Length; i++)
+        if (index == IDHints.HintCarTimer)
         {
-            hintText.text = text.Substring(0, i);
-            yield return new WaitForSeconds(_textSpeed);
+            float timeRemaining = 30 - _phoneManager._currentMinute;
+            string textTimerCar = timeRemaining.ToString();
+            text = hintString[index] + textTimerCar + " minutes left. ";
         }
-
-        yield return new WaitForSeconds(3f);
-        hintBox.SetActive(false);
-    }
-
-    private IEnumerator CloseHintCarTimer(int index)
-    {
-        float timeRemaining = 30 - _phoneManager._currentMinute;
-        string textTimerCar = timeRemaining.ToString();
-        string text = hintString[index];
-
-        hintText.text = textTimerCar + " minutes";
-        yield return new WaitForSeconds(2f);
 
         for (int i = 1; i < text.Length; i++)
         {
