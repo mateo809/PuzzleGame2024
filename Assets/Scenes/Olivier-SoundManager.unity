@@ -3938,7 +3938,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 819474538305000896, guid: fc42bd6fa5548c44f964a733e7381083, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 888381379218255814, guid: fc42bd6fa5548c44f964a733e7381083, type: 3}
       propertyPath: m_Type
@@ -3963,6 +3963,10 @@ PrefabInstance:
     - target: {fileID: 888381379218255814, guid: fc42bd6fa5548c44f964a733e7381083, type: 3}
       propertyPath: m_Color.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 888381379218255814, guid: fc42bd6fa5548c44f964a733e7381083, type: 3}
+      propertyPath: m_Material
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 948050659270365589, guid: fc42bd6fa5548c44f964a733e7381083, type: 3}
       propertyPath: m_SizeDelta.x
@@ -4191,6 +4195,10 @@ PrefabInstance:
     - target: {fileID: 7195792055783224371, guid: fc42bd6fa5548c44f964a733e7381083, type: 3}
       propertyPath: m_Colors.m_PressedColor.r
       value: 0.6981132
+      objectReference: {fileID: 0}
+    - target: {fileID: 7401952283647841836, guid: fc42bd6fa5548c44f964a733e7381083, type: 3}
+      propertyPath: m_CullTransparentMesh
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7731472304356802558, guid: fc42bd6fa5548c44f964a733e7381083, type: 3}
       propertyPath: m_Sprite
