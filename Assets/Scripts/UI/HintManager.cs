@@ -10,6 +10,7 @@ public class HintManager : MonoBehaviour
     public TextMeshProUGUI hintText;
     public List<string> hintString;
     [SerializeField] private float _textSpeed = 0.05f;
+    [SerializeField] private float _endMinutes = 30;
     [SerializeField] private PhoneManager _phoneManager;
 
     public void Awake()
@@ -24,16 +25,16 @@ public class HintManager : MonoBehaviour
     {
         hintBox.SetActive(true);
         StopAllCoroutines();
-        StartCoroutine(CloseHint(index));
+        StartCoroutine(PlayHint(index));
     }
 
-    private IEnumerator CloseHint(int index)
+    private IEnumerator PlayHint(int index)
     {
         string text = hintString[index];
 
         if (index == IDHints.HintCarTimer)
         {
-            float timeRemaining = 30 - _phoneManager._currentMinute;
+            float timeRemaining = _endMinutes - _phoneManager._currentMinute;
             string textTimerCar = timeRemaining.ToString();
             text = hintString[index] + textTimerCar + " minutes left. ";
         }

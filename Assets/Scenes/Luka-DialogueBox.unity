@@ -6907,6 +6907,7 @@ MonoBehaviour:
   - I need a way to get back in and fast.
   - 'I should hurry i only have '
   _textSpeed: 0.05
+  _EndMinute: 20
   _phoneManager: {fileID: 331012163}
 --- !u!4 &1304656768
 Transform:
