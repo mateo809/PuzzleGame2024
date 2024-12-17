@@ -6445,8 +6445,6 @@ MonoBehaviour:
   - {fileID: 451001002878962077}
   - {fileID: 451001001790004141}
   _cameraSpeed: 5
-  _currCameraStickRot: 0
-  _nextCameraStickRot: 0
   _zoomAnimTimer: 1
   IsCameraFocused: 0
   _zoomedCameraSize: 3
@@ -15168,6 +15166,10 @@ PrefabInstance:
     - target: {fileID: 2401007838645536051, guid: 4fb761dfd6c27774c911c5c0b1f0df9f, type: 3}
       propertyPath: m_Name
       value: MainMap
+      objectReference: {fileID: 0}
+    - target: {fileID: 2401007838645536051, guid: 4fb761dfd6c27774c911c5c0b1f0df9f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2458599753846789415, guid: 4fb761dfd6c27774c911c5c0b1f0df9f, type: 3}
       propertyPath: _UIInteractImage
