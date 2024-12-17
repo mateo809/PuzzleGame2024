@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,7 +6,7 @@ public class Sc_CameraMovement : MonoBehaviour
 {
     [Header("   General Parameters")]
     [SerializeField] private Transform _cameraPivotTrans;
-    private bool _isInAction = false;
+    public bool IsInAction = false;
 
 
     #region Camera Rotation
@@ -36,17 +35,17 @@ public class Sc_CameraMovement : MonoBehaviour
         if (Mathf.Abs(_currCameraStickRot) >= 360.0f)
             _currCameraStickRot %= 360.0f;
 
-        _isInAction = false;
+        IsInAction = false;
         yield return null;
     }
 
     public void Move(InputAction.CallbackContext context)
     {
-        if (!_isInAction && context.performed)
+        if (!IsInAction && context.performed)
         {
             if (context.ReadValue<Vector2>().x == 0) return;
 
-            _isInAction = true;
+            IsInAction = true;
             _isRotLeft = context.ReadValue<Vector2>().x > 0;
             _nextCameraStickRot = (_nextCameraStickRot + (_isRotLeft ? -1 : 1) * 90.0f) % 360;
             StartCoroutine(RotateCameraPivot());
@@ -64,12 +63,12 @@ public class Sc_CameraMovement : MonoBehaviour
     [SerializeField] private GameObject _backButton;
     [SerializeField] private Sc_CameraZoomHelper _cameraZoomHelper;
 
-    private Camera _mainCamera; 
+    private Camera _mainCamera;
 
     void Start()
     {
-        _mainCamera = Camera.main; 
-        _normalCameraSize = _mainCamera.orthographicSize; 
+        _mainCamera = Camera.main;
+        _normalCameraSize = _mainCamera.orthographicSize;
     }
 
     private IEnumerator FocusOnTarget(Vector3 focusTarget, float targetCameraZoom)
@@ -94,15 +93,15 @@ public class Sc_CameraMovement : MonoBehaviour
 
         Debug.Log("Zoom Complete");
 
-        _isInAction = false;
+        IsInAction = false;
         yield return null;
     }
 
     public void Focus(Vector3 focusTarget)
     {
-        if (_isInAction) return;
+        if (IsInAction) return;
 
-        _isInAction = true;
+        IsInAction = true;
 
         IsCameraFocused = true;
         _backButton.SetActive(true);
@@ -112,9 +111,9 @@ public class Sc_CameraMovement : MonoBehaviour
 
     public void LoseFocus()
     {
-        if (_isInAction) return;
+        if (IsInAction) return;
 
-        _isInAction = true;
+        IsInAction = true;
 
         IsCameraFocused = false;
         _backButton.SetActive(false);

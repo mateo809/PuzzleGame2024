@@ -2276,7 +2276,7 @@ Transform:
   m_GameObject: {fileID: 184556601}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.7, y: -0.1600011, z: 4.079246}
+  m_LocalPosition: {x: 3.68, y: -0.16, z: 4.08}
   m_LocalScale: {x: 9.5, y: 5, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5602,7 +5602,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: aaab39cca31bfdd48ab77e32e41034bf, type: 3}
       propertyPath: m_TagString
-      value: Faucet
+      value: ZoomTarget
       objectReference: {fileID: 0}
     - target: {fileID: 8164078558771037576, guid: aaab39cca31bfdd48ab77e32e41034bf, type: 3}
       propertyPath: m_Layer
@@ -7665,7 +7665,7 @@ GameObject:
   - component: {fileID: 630615439}
   - component: {fileID: 630615442}
   m_Layer: 0
-  m_Name: Cube (4)
+  m_Name: Paper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8304,7 +8304,7 @@ GameObject:
   m_Component:
   - component: {fileID: 697058964}
   m_Layer: 0
-  m_Name: BoomStick
+  m_Name: CameraPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10576,7 +10576,7 @@ Transform:
   m_GameObject: {fileID: 873576022}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.51, y: 14.270338, z: 14.19}
+  m_LocalPosition: {x: -1.1, y: 14.5, z: 17.5}
   m_LocalScale: {x: 0.05641999, y: 0.056420006, z: 0.056419987}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13217,7 +13217,7 @@ GameObject:
   - component: {fileID: 1150408303}
   - component: {fileID: 1150408304}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: CameraMover
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13236,6 +13236,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cameraPivotTrans: {fileID: 697058964}
+  IsInAction: 0
   _cameraSpeed: 5
   _zoomAnimTimer: 1
   IsCameraFocused: 0
@@ -13265,7 +13266,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1150408300}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
@@ -19917,8 +19918,7 @@ MonoBehaviour:
   interactableMask:
     serializedVersion: 2
     m_Bits: 64
-  cameraControllerObject: {fileID: 105954812}
-  _inspectionCamera: {fileID: 129110828}
+  cameraControllerObject: {fileID: 1150408300}
   movementSpeed: 0.2
 --- !u!4 &1752658017
 Transform:
@@ -20879,6 +20879,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1839841960}
   m_Mesh: {fileID: -2432090755550338912, guid: 691752f5032176a43b54c1879e1777b9, type: 3}
+--- !u!1 &1844218947
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1844218948}
+  m_Layer: 6
+  m_Name: BBQInspector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1844218948
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1844218947}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.31614682, y: 0.63249433, z: -0.31614745, w: 0.6324973}
+  m_LocalPosition: {x: -1.755, y: 5.707, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1948945794518748700}
+  m_LocalEulerAnglesHint: {x: 53.116, y: 90, z: 0}
 --- !u!1 &1875782400
 GameObject:
   m_ObjectHideFlags: 0
@@ -21190,7 +21221,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d265f90ed6fa3043aa63dcf5f0e3530, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _inspectionCamera: {fileID: 129110828}
   _inspectionTarget: {fileID: 833289248}
 --- !u!1 &1955426067
 GameObject:
@@ -25296,7 +25326,7 @@ GameObject:
   - component: {fileID: 8333225090526212804}
   m_Layer: 6
   m_Name: EntranceBase
-  m_TagString: Door
+  m_TagString: ZoomTarget
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26439,6 +26469,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
+  - {fileID: 1844218948}
   - {fileID: 4296017668524761414}
   - {fileID: 8126038903824046203}
   - {fileID: 3595376669444767361}
@@ -26556,9 +26587,10 @@ GameObject:
   - component: {fileID: 3859221055023292818}
   - component: {fileID: 5305360615671734651}
   - component: {fileID: 4199209599073804393}
+  - component: {fileID: 5305360615671734652}
   m_Layer: 6
   m_Name: BBQ
-  m_TagString: ZoomTarget
+  m_TagString: Inspect
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30815,6 +30847,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &5305360615671734652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2012336752485538496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d265f90ed6fa3043aa63dcf5f0e3530, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _inspectionTarget: {fileID: 1844218948}
 --- !u!1 &5342252341201064739
 GameObject:
   m_ObjectHideFlags: 0
@@ -35604,7 +35649,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d265f90ed6fa3043aa63dcf5f0e3530, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _inspectionCamera: {fileID: 129110828}
   _inspectionTarget: {fileID: 873576023}
 --- !u!64 &8893739560373076846
 MeshCollider:

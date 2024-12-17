@@ -3,15 +3,15 @@ using UnityEngine;
 public class InteractionManager : MonoBehaviour
 {
     [SerializeField] private LayerMask interactableMask;
-    [SerializeField] private GameObject cameraControllerObject; // Référence au GameObject contenant Sc_CameraMovement
-    [SerializeField] private Camera _inspectionCamera;
+    [SerializeField] private GameObject cameraControllerObject;
+
     [SerializeField, Tooltip("Speed multiplier for movement interactions.")]
     private float movementSpeed = 0.25f;
 
-    private Sc_CameraMovement _cameraMovementScript;
+    private Sc_CameraMovement _cameraMover;
     private Camera _currentCamera;
 
-    private GameObject inspectedElement = null;
+    private Sc_ObjectInspector inspectedElement = null;
 
     private void Start()
     {
@@ -19,7 +19,7 @@ public class InteractionManager : MonoBehaviour
 
         if (cameraControllerObject != null)
         {
-            _cameraMovementScript = cameraControllerObject.GetComponent<Sc_CameraMovement>();
+            _cameraMover = cameraControllerObject.GetComponent<Sc_CameraMovement>();
         }
         else
         {
@@ -35,17 +35,13 @@ public class InteractionManager : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(1) && inspectedElement != null)
         {
-            //ExitInspectionMode();
-            inspectedElement.GetComponent<Sc_ObjectInspector>().ExitInspectionMode();
-            inspectedElement = null;
+            ExitInspectionMode();
         }
     }
 
     private void Interact()
     {
-        if (_currentCamera == null) return;
-
-        Ray ray = _currentCamera.ScreenPointToRay(Input.mousePosition);
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         Debug.DrawRay(ray.origin, ray.direction.normalized * 1000, Color.red, 10);
         if (Physics.Raycast(ray, out hit, 1000, interactableMask))
@@ -64,9 +60,9 @@ public class InteractionManager : MonoBehaviour
             {
                 string tag = hitObject.tag;
 
-                if (_cameraMovementScript != null && !_cameraMovementScript.IsCameraFocused && tag == "ZoomTarget")
+                if (_cameraMover != null && !_cameraMover.IsCameraFocused && tag == "ZoomTarget")
                 {
-                    _cameraMovementScript.Focus(hit.collider.gameObject.transform.localToWorldMatrix.GetPosition());
+                    _cameraMover.Focus(hit.collider.gameObject.transform.localToWorldMatrix.GetPosition());
                 }
                 else if (hitObject.GetComponent<InteractableObject>() != null)
                 {
@@ -96,28 +92,19 @@ public class InteractionManager : MonoBehaviour
         }
     }
 
-    private void EnterInspectionMode(GameObject hitObject)
+    private void EnterInspectionMode(GameObject inspectedObj)
     {
-        //cameraControllerObject.gameObject.SetActive(false);
-        ////_currentCamera.gameObject.SetActive(false);
-        //_currentCamera = _inspectionCamera;
-        //_currentCamera.gameObject.SetActive(true);
-        inspectedElement = hitObject;
-        inspectedElement.GetComponent<Sc_ObjectInspector>().EnterInspectionMode();
+        _cameraMover.IsInAction = true;
+        inspectedElement = inspectedObj.GetComponent<Sc_ObjectInspector>();
+        inspectedElement.EnterInspectionMode();
     }
 
-    public void ExitInspectionMode()
+    private void ExitInspectionMode()
     {
-        if (_currentCamera != null && _currentCamera != Camera.main)
-        {
-            _currentCamera.gameObject.SetActive(false);
-            if (cameraControllerObject != null)
-            {
-                cameraControllerObject.SetActive(true);
-            }
-        }
+        inspectedElement.ExitInspectionMode();
+        inspectedElement = null;
+        _cameraMover.IsInAction = false;
     }
-
 
     private void HandleMovement(GameObject obj, string tag)
     {
