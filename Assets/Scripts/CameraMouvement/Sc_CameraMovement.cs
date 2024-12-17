@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -52,6 +53,7 @@ public class Sc_CameraMovement : MonoBehaviour
         }
     }
     #endregion
+
     #region Camera Focus
 
     [Header("   Camera Focus")]
@@ -60,15 +62,19 @@ public class Sc_CameraMovement : MonoBehaviour
     private float _normalCameraSize;
     [SerializeField] private float _zoomedCameraSize;
     [SerializeField] private GameObject _backButton;
+    [SerializeField] private Sc_CameraZoomHelper _cameraZoomHelper;
+
+    private Camera _mainCamera; 
 
     void Start()
     {
-        _normalCameraSize = Camera.main.orthographicSize;
+        _mainCamera = Camera.main; 
+        _normalCameraSize = _mainCamera.orthographicSize; 
     }
 
     private IEnumerator FocusOnTarget(Vector3 focusTarget, float targetCameraZoom)
     {
-        float startingCameraSize = Camera.main.orthographicSize;
+        float startingCameraSize = _mainCamera.orthographicSize;
         Vector3 startingCameraPos = _cameraPivotTrans.position;
         float elapsedTime = 0.0f;
 
@@ -76,14 +82,14 @@ public class Sc_CameraMovement : MonoBehaviour
         {
             float zoomProgress = Mathf.SmoothStep(0.0f, 1.0f, elapsedTime / _zoomAnimTimer);
 
-            Camera.main.orthographicSize = Mathf.Lerp(startingCameraSize, targetCameraZoom, zoomProgress);
+            _mainCamera.orthographicSize = Mathf.Lerp(startingCameraSize, targetCameraZoom, zoomProgress);
 
             _cameraPivotTrans.position = Vector3.Lerp(startingCameraPos, focusTarget, zoomProgress);
 
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-        Camera.main.orthographicSize = targetCameraZoom;
+        _mainCamera.orthographicSize = targetCameraZoom;
         _cameraPivotTrans.position = focusTarget;
 
         Debug.Log("Zoom Complete");
@@ -101,6 +107,7 @@ public class Sc_CameraMovement : MonoBehaviour
         IsCameraFocused = true;
         _backButton.SetActive(true);
         StartCoroutine(FocusOnTarget(focusTarget, _zoomedCameraSize));
+        _cameraZoomHelper.SetZoomTargetEnabled(false);
     }
 
     public void LoseFocus()
@@ -112,7 +119,15 @@ public class Sc_CameraMovement : MonoBehaviour
         IsCameraFocused = false;
         _backButton.SetActive(false);
         StartCoroutine(FocusOnTarget(Vector3.zero, _normalCameraSize));
+        _cameraZoomHelper.SetZoomTargetEnabled(true);
     }
 
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(1))
+        {
+            LoseFocus();
+        }
+    }
     #endregion
 }

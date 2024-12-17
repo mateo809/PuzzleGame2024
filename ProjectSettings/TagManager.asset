@@ -26,6 +26,8 @@ TagManager:
   - MovementZPlus
   - ZoomTarget
   - CodeLocker
+  - Inspect
+  - RotateY
   layers:
   - Default
   - TransparentFX
