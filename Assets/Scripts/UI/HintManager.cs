@@ -8,9 +8,15 @@ public class HintManager : MonoBehaviour
     public static HintManager Instance;
     public GameObject hintBox;
     public TextMeshProUGUI hintText;
+    public TextMeshProUGUI introText;
+
+    public bool introIsOver = false;
     public List<string> hintString;
+
     [SerializeField] private float _textSpeed = 0.05f;
     [SerializeField] private float _endMinutes = 30;
+    [SerializeField] private GameObject _introBackground;
+    [SerializeField] private GameObject _startButton;
     [SerializeField] private PhoneManager _phoneManager;
 
     public void Awake()
@@ -19,6 +25,14 @@ public class HintManager : MonoBehaviour
         {
             Instance = this;
         }
+    }
+
+    public void Start()
+    {
+        _introBackground.SetActive(true);
+        _startButton.SetActive(false);
+        StopAllCoroutines();
+        StartCoroutine(PlayHint(IDHints.Intro));
     }
 
     public void ActivateHint(int index)
@@ -39,6 +53,18 @@ public class HintManager : MonoBehaviour
             text = hintString[index] + textTimerCar + " minutes left. ";
         }
 
+        if (index == IDHints.Intro && !introIsOver)
+        {
+            for (int i = 1; i < text.Length; i++)
+            {
+                introText.text = text.Substring(0, i);
+                yield return new WaitForSeconds(_textSpeed);
+            }
+            introIsOver = true;
+            Time.timeScale = 0;
+            _startButton.SetActive(true);
+        }
+
         for (int i = 1; i < text.Length; i++)
         {
             hintText.text = text.Substring(0, i);
@@ -47,6 +73,14 @@ public class HintManager : MonoBehaviour
 
         yield return new WaitForSeconds(3f);
         hintBox.SetActive(false);
+    }
+
+    public void ButtonStart()
+    {
+        _introBackground.SetActive(false);
+        _phoneManager._currentMinute = _phoneManager._startMinute;
+        _phoneManager._currentSecond = _phoneManager._startSecond;
+        Time.timeScale = 1;
     }
 }
 
@@ -57,4 +91,5 @@ public static class IDHints
     static public int HintElectricalBox = 2;
     static public int HintMainEntrance = 3;
     static public int HintCarTimer = 4;
+    static public int Intro = 10;
 }
