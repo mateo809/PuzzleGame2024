@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using static Lever;
 
 public class Door : InteractableObject
 {

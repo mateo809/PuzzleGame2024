@@ -7,6 +7,7 @@ public class CircuitBreaker : InteractableObject
 
     public ElectricityManager electricityManager;
     [SerializeField] private GameObject _electrickParticles;
+    [SerializeField] private GameObject _duck;
 
     [SerializeField] private Animator _animator;
 
@@ -42,6 +43,7 @@ public class CircuitBreaker : InteractableObject
     public void ActiveAllEnergy()
     {
         Debug.Log("Duck is out");
+        _duck.SetActive(true);
         Destroy(this); 
     }
 }
