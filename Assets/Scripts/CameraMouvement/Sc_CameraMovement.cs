@@ -18,8 +18,8 @@ public class Sc_CameraMovement : MonoBehaviour
     [Header("   Camera Rotation")]
     [SerializeField] private float _cameraSpeed = 5;
     private float _speedMultiplier = 20;
-    public float _currCameraStickRot = 0.0f;
-    public float _nextCameraStickRot = 0.0f;
+    private float _currCameraStickRot = 0.0f;
+    private float _nextCameraStickRot = 0.0f;
 
     private bool _isRotLeft = false;
 
@@ -51,12 +51,12 @@ public class Sc_CameraMovement : MonoBehaviour
             if (context.ReadValue<Vector2>().x == 0) return;
 
             _isInAction = true;
-            _isRotLeft = context.ReadValue<Vector2>().x > 0;
-            for (int i = 0; i < _mapMoveWalls.Count; i++)
-            {            
-                _rotateDirection = _isRotLeft ? "Right" : "Left";
-                _mapMoveWalls[i].SetTrigger(_rotateDirection);
-            }
+            _isRotLeft = context.ReadValue<Vector2>().x > 0;     
+            
+            _rotateDirection = _isRotLeft ? "Right" : "Left";
+            _mapMoveWalls[0].SetTrigger(_rotateDirection);
+            _mapMoveWalls[1].SetTrigger(_rotateDirection);
+            
             _nextCameraStickRot = (_nextCameraStickRot + (_isRotLeft ? -1 : 1) * 90.0f) % 360;
             StartCoroutine(RotateCameraPivot());
         }
