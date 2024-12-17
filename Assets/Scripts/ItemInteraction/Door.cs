@@ -9,6 +9,8 @@ public class Door : InteractableObject
     [SerializeField] private UIinteractImage _UIInteractImage;
 
     [SerializeField] private DoorID _id;
+
+    [SerializeField] private Sc_ExitMap _exitMap;
     public enum DoorID
     {
         HouseDoor,
@@ -28,6 +30,10 @@ public class Door : InteractableObject
             if (_id == DoorID.HouseDoor) 
             {
                 Debug.Log("Final Door Unlocked!");
+            }
+            else if(_id == DoorID.ShedDoor)
+            {
+                _exitMap.isUnlocked = true;
             }
             Destroy(this);
         }
