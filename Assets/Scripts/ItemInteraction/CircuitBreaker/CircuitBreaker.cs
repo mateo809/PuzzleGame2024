@@ -10,6 +10,7 @@ public class CircuitBreaker : InteractableObject
     [SerializeField] private GameObject _duck;
 
     [SerializeField] private Animator _animator;
+    [SerializeField] private Sc_AudioSelection _audioSelection;
 
     public override void DoInteraction()
     {
@@ -23,6 +24,7 @@ public class CircuitBreaker : InteractableObject
         {
             // Button up
             Debug.Log("OFF");
+            _audioSelection.PlaySound(Sc_IDSFXManager.switchLightOffID);
             _animator.SetBool("Activate", false);
             _electrickParticles.SetActive(false);
         }
@@ -30,6 +32,7 @@ public class CircuitBreaker : InteractableObject
         {
             // Button down
             Debug.Log("ON");
+            _audioSelection.PlaySound(Sc_IDSFXManager.switchLightOnID);
             _animator.SetBool("Activate", true);
             _electrickParticles.SetActive(true);
             if (powerIsRepare)

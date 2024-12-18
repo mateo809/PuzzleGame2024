@@ -11,7 +11,8 @@ public class CodeLocker : MonoBehaviour
     [SerializeField] private Camera _interactionCamera; 
     private Camera _currentCamera; 
     private Camera _originalCamera;
-    [SerializeField] private Collider _codeLockerCollider; 
+    [SerializeField] private Collider _codeLockerCollider;
+    [SerializeField] private Sc_AudioSelection _audioSelection;
 
     private void Start()
     {
@@ -86,6 +87,7 @@ public class CodeLocker : MonoBehaviour
         if (_currentCode.SequenceEqual(_correctCode)) 
         {
             Debug.Log("Open");
+            _audioSelection.PlaySound(Sc_IDSFXManager.openingPadlockID);
             Destroy(gameObject);
            ExitCameraView();
             _currentCamera = _originalCamera;
