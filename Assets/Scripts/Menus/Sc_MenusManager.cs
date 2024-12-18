@@ -2,11 +2,17 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Sc_MenusManager : MonoBehaviour
-{   
+{
+    [SerializeField] private GameObject _audioPanel;
     //Main Menu
+
+    private void Start()
+    {
+        Time.timeScale = 1.0f;
+    }
     public void ButtonPlay()
     {
-        SceneManager.LoadSceneAsync(1);
+        SceneManager.LoadScene(1);
     }
 
     public void LeaveButton()
@@ -23,6 +29,16 @@ public class Sc_MenusManager : MonoBehaviour
     //Pause Menu
     public void ButtonMainMenu()
     {
-        SceneManager.LoadSceneAsync(0);
+        SceneManager.LoadScene(0);
+    }
+
+    public void ActivateAudioPanel()
+    {
+        _audioPanel.SetActive(true);
+    }
+
+    public void DesactivateAudioPanel()
+    {
+        _audioPanel.SetActive(false);
     }
 }

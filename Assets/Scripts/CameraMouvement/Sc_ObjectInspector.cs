@@ -1,9 +1,11 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Sc_ObjectInspector : MonoBehaviour
 {
     [SerializeField] private Transform _inspectionTarget;
+    [SerializeField] private Button _BackButton;
 
     [Serializable]
     public struct CameraParams
@@ -22,11 +24,11 @@ public class Sc_ObjectInspector : MonoBehaviour
     //     _mainCameraParams.isOrtho = Camera.main.orthographic;
     //     _mainCameraParams.FOV = Camera.main.orthographicSize;
     // }
-
     public void EnterInspectionMode()
     {
         if (_inspectionTarget == null) return;
 
+        _BackButton.gameObject.SetActive(true);
         _mainCameraParams.isOrtho = Camera.main.orthographic;
         _mainCameraParams.FOV = Camera.main.orthographicSize;
         _mainCameraParams.position = Camera.main.transform.position;
@@ -40,6 +42,7 @@ public class Sc_ObjectInspector : MonoBehaviour
 
     public void ExitInspectionMode()
     {
+        _BackButton.gameObject.SetActive(false);
         Camera.main.orthographic = _mainCameraParams.isOrtho;
         Camera.main.orthographicSize = _mainCameraParams.FOV;
         Camera.main.transform.position = _mainCameraParams.position;

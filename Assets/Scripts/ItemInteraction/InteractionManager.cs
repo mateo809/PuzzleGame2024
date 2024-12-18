@@ -37,6 +37,10 @@ public class InteractionManager : MonoBehaviour
         {
             ExitInspectionMode();
         }
+        else if (Input.GetMouseButtonDown(1) && _cameraMover.IsCameraFocused)
+        {
+            _cameraMover.LoseFocus();
+        }
     }
 
     private void Interact()
@@ -60,7 +64,7 @@ public class InteractionManager : MonoBehaviour
             {
                 string tag = hitObject.tag;
 
-                if (_cameraMover != null && !_cameraMover.IsCameraFocused && tag == "ZoomTarget")
+                if (_cameraMover != null && !_cameraMover.IsInAction && !_cameraMover.IsCameraFocused && tag == "ZoomTarget")
                 {
                     _cameraMover.Focus(hit.collider.gameObject.transform.localToWorldMatrix.GetPosition());
                 }
@@ -94,13 +98,17 @@ public class InteractionManager : MonoBehaviour
 
     private void EnterInspectionMode(GameObject inspectedObj)
     {
+        if (_cameraMover.IsInAction) return;
+
         _cameraMover.IsInAction = true;
         inspectedElement = inspectedObj.GetComponent<Sc_ObjectInspector>();
         inspectedElement.EnterInspectionMode();
     }
 
-    private void ExitInspectionMode()
+    public void ExitInspectionMode()
     {
+        if (!_cameraMover.IsInAction) return;
+
         inspectedElement.ExitInspectionMode();
         inspectedElement = null;
         _cameraMover.IsInAction = false;
