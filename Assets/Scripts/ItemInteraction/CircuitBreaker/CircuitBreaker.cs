@@ -6,6 +6,8 @@ public class CircuitBreaker : InteractableObject
     public bool powerIsRepare = false;
 
     public ElectricityManager electricityManager;
+    [SerializeField] private GameObject _electrickParticles;
+    [SerializeField] private GameObject _duck;
 
     [SerializeField] private Animator _animator;
 
@@ -22,22 +24,26 @@ public class CircuitBreaker : InteractableObject
             // Button up
             Debug.Log("OFF");
             _animator.SetBool("Activate", false);
+            _electrickParticles.SetActive(false);
         }
         else
         {
             // Button down
             Debug.Log("ON");
             _animator.SetBool("Activate", true);
+            _electrickParticles.SetActive(true);
             if (powerIsRepare)
             {
                 Debug.Log("The electricity is back!");
-                electricityManager.OnElectricityRestored();  
+                electricityManager.OnElectricityRestored();
+                Destroy(_electrickParticles);
             }
         }
     }
     public void ActiveAllEnergy()
     {
         Debug.Log("Duck is out");
+        _duck.SetActive(true);
         Destroy(this); 
     }
 }

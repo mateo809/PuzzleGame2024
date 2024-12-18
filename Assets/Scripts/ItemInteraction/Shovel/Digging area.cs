@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class DiggingArea : InteractableObject
 {
-    [SerializeField] private itemData _Paper3Data;
     [SerializeField] private Animator _Animator;
+    [SerializeField] private GameObject _paper;
 
     public override void DoInteraction()
     {
@@ -20,7 +20,7 @@ public class DiggingArea : InteractableObject
         yield return new WaitForSeconds(2f);
         _Animator.SetBool("Dig", false);
         InventoryManager.Instance.RemoveItemFromID(IDManager.ShovelID);
-        InventoryManager.Instance.TryAddToInventory(_Paper3Data);
+        _paper.gameObject.SetActive(true);
         Destroy(gameObject);
     }
 }

@@ -15,13 +15,20 @@ public class PhoneManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _clockText;
     private float _timeElapsed = 0f;
 
-    [SerializeField] private int _startHour = 12;
-    [SerializeField] private int _startMinute = 0;
-    [SerializeField] private int _startSecond = 0;
+    public int _startHour = 9;
+    public int _startMinute = 10;
+    public int _startSecond = 0;
 
-    private int _currentHour;
-    private int _currentMinute;
-    private int _currentSecond;
+
+    public int _currentHour;
+    public int _currentMinute;
+    public int _currentSecond;
+
+    [SerializeField] private Sprite _image;
+    [SerializeField] private Sprite _screenSprite;
+    [SerializeField] private GameObject _screen;
+
+
 
     private void Start()
     {
@@ -32,7 +39,7 @@ public class PhoneManager : MonoBehaviour
         if (_clonedImagePrefab != null && _canvasTransform != null)
         {
             _clonedImage = Instantiate(_clonedImagePrefab, _canvasTransform);
-            _clonedImage.SetActive(false);  
+            _clonedImage.SetActive(false);
         }
     }
 
@@ -122,5 +129,15 @@ public class PhoneManager : MonoBehaviour
         }
         string formattedTime = string.Format("{0:D2}:{1:D2}", _currentHour, _currentMinute);
         _clockText.text = formattedTime;
+    }
+
+    public void ChangeScreenUi()
+    {
+        _screen.GetComponent<Image>().sprite = _image;
+    }
+
+    public void RevertScreenUi()
+    {
+        _screen.GetComponent<Image>().sprite = _screenSprite;
     }
 }
