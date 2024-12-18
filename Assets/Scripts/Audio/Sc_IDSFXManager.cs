@@ -37,4 +37,7 @@ public static class Sc_IDSFXManager
     public static int circuitBreakerElectricityID = 31;
     public static int electricityBackID = 32;
     public static int actionValidatedID = 33;
+    public static int keyJingleID = 34;
+    public static int droppingKeyID = 35;
+    public static int lockingDoorID = 36;
 }
