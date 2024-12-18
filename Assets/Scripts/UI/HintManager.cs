@@ -28,8 +28,6 @@ public class HintManager : MonoBehaviour
         }
     }
 
-    
-
     public void ActivateHint(string p_index)
     {
         hintBox.SetActive(true);
