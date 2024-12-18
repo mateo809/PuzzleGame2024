@@ -1919,8 +1919,8 @@ RectTransform:
   - {fileID: 540488488}
   - {fileID: 527530550}
   - {fileID: 621753870}
-  - {fileID: 1610675466}
   - {fileID: 2040258623}
+  - {fileID: 1610675466}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -3765,7 +3765,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Start
+  m_text: 'Skip
 
 '
   m_isRightToLeft: 0
@@ -5444,7 +5444,7 @@ GameObject:
   - component: {fileID: 994414739}
   - component: {fileID: 994414738}
   m_Layer: 5
-  m_Name: Start
+  m_Name: StartButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5467,7 +5467,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -169.63}
+  m_AnchoredPosition: {x: 765, y: -445}
   m_SizeDelta: {x: 280, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &994414738
@@ -7176,6 +7176,7 @@ MonoBehaviour:
   hintText: {fileID: 1253450120}
   introText: {fileID: 1737831753}
   introIsOver: 0
+  introID: 0
   hintString:
   - 
   - 'It''s way too high... I need to find a way to get on the roof. '
@@ -7192,10 +7193,8 @@ MonoBehaviour:
     on the ground. "OH NO MY KEYS !" My cat just stole my keys and went back inside
     the house, the keychain also has my car keys. I really need to get back inside
     the house and get my keys before 9:30 or else i will definetly be late. '
-  _textSpeed: 0.05
+  _textSpeed: 0.025
   _endMinutes: 30
-  _introBackground: {fileID: 2040258622}
-  _startButton: {fileID: 994414736}
   _phoneManager: {fileID: 331012163}
 --- !u!4 &1304656768
 Transform:
@@ -8915,7 +8914,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1610675466
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10451,6 +10450,81 @@ Transform:
   - {fileID: 989405233}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1793409731
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1793409732}
+  - component: {fileID: 1793409734}
+  - component: {fileID: 1793409733}
+  m_Layer: 5
+  m_Name: IntroBackground
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1793409732
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1793409731}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2040258623}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1793409733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1793409731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1793409734
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1793409731}
+  m_CullTransparentMesh: 1
 --- !u!1001 &1805696241
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11627,7 +11701,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2040258623}
   - component: {fileID: 2040258625}
-  - component: {fileID: 2040258624}
+  - component: {fileID: 2040258626}
   m_Layer: 5
   m_Name: Intro
   m_TagString: Untagged
@@ -11647,6 +11721,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1793409732}
   - {fileID: 1737831752}
   - {fileID: 994414737}
   m_Father: {fileID: 331012167}
@@ -11656,36 +11731,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2040258624
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2040258622}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.33962262, g: 0.33962262, b: 0.33962262, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!222 &2040258625
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11694,6 +11739,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2040258622}
   m_CullTransparentMesh: 1
+--- !u!114 &2040258626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2040258622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51d123053d1f5d74588f0d3d0e5f39c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _introTexts:
+  - Today is a big day at work. I really shouldn't be late.
+  - PlayDoorLock
+  - PlayKeyDrop
+  - Oops, my keys!
+  - PlayMeow
+  - PlayJiggleKeys
+  - 'OH NO! The cat got in the house with the house key AND the car key! '
+  - I really need to find a way inside or i will be fired for sure...
+  _hintManager: {fileID: 1304656767}
 --- !u!1 &2041367051
 GameObject:
   m_ObjectHideFlags: 0

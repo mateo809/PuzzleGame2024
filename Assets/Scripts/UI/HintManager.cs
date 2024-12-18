@@ -16,8 +16,6 @@ public class HintManager : MonoBehaviour
 
     [SerializeField] private float _textSpeed = 0.05f;
     [SerializeField] private float _endMinutes = 30;
-    [SerializeField] private GameObject _introBackground;
-    [SerializeField] private GameObject _startButton;
     [SerializeField] private PhoneManager _phoneManager;
 
     public void Awake()
@@ -28,50 +26,50 @@ public class HintManager : MonoBehaviour
         }
     }
 
-    public void ActivateHint(string p_index)
+    public void DisplayTextFromID(int p_index)
     {
         hintBox.SetActive(true);
         StopAllCoroutines();
-        StartCoroutine(DisplayText(p_index));
+        StartCoroutine(DisplayText(hintString[p_index], true));
     }
 
-    public IEnumerator DisplayText(string p_index)
+    public void DisplayTextFromString(string textToDiplay, bool autoDeactivate)
     {
-        string text = p_index;
+        hintBox.SetActive(true);
+        StopAllCoroutines();
+        StartCoroutine(DisplayText(textToDiplay, autoDeactivate));
+    }
 
-        if (p_index == hintString[IDHints.HintCarTimer])
+    private IEnumerator DisplayText(string textToDiplay, bool autoDeactivate)
+    {
+        if (textToDiplay == hintString[IDHints.HintCarTimer])
         {
             float timeRemaining = _endMinutes - _phoneManager._currentMinute;
             string textTimerCar = timeRemaining.ToString();
-            text = hintString[IDHints.HintCarTimer] + textTimerCar + " minutes left. ";
+            textToDiplay = hintString[IDHints.HintCarTimer] + textTimerCar + " minutes left. ";
         }
 
-        if (p_index == hintString[IDHints.Intro] && !introIsOver)
+        for (int i = 1; i <= textToDiplay.Length; i++)
         {
-            for (int i = 1; i < text.Length; i++)
-            {
-                introText.text = text.Substring(0, i);
-                yield return new WaitForSeconds(_textSpeed);
-            }
-            introID = IDHints.Intro;
-            introIsOver = true;
-            Time.timeScale = 0;
-            _startButton.SetActive(true);
-        }
-
-        for (int i = 1; i < text.Length; i++)
-        {
-            hintText.text = text.Substring(0, i);
+            hintText.text = textToDiplay.Substring(0, i);
             yield return new WaitForSeconds(_textSpeed);
         }
 
-        yield return new WaitForSeconds(3f);
+        if (!autoDeactivate)
+            yield return null;
+        else
+        {
+            yield return new WaitForSeconds(3f);
+            hintBox.SetActive(false);
+        }
+    }
+
+    public void DeactivateHintBox()
+    {
         hintBox.SetActive(false);
     }
 
-    
 
-    
 }
 
 public static class IDHints

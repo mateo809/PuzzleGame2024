@@ -13,31 +13,31 @@ public class InteractionManager : MonoBehaviour
 
     private Sc_ObjectInspector inspectedElement = null;
 
-    private void Start()
-    {
-        _currentCamera = Camera.main;
+    // private void Start()
+    // {
+    //     _currentCamera = Camera.main;
 
-        if (cameraControllerObject != null)
-        {
-            _cameraMover = cameraControllerObject.GetComponent<Sc_CameraMovement>();
-        }
-        else
-        {
-            Debug.LogError("Camera Controller Object is not assigned!");
-        }
-    }
+    //     if (cameraControllerObject != null)
+    //     {
+    //         _cameraMover = cameraControllerObject.GetComponent<Sc_CameraMovement>();
+    //     }
+    //     else
+    //     {
+    //         Debug.LogError("Camera Controller Object is not assigned!");
+    //     }
+    // }
 
-    private void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Interact();
-        }
-        if (Input.GetMouseButtonDown(1) && inspectedElement != null)
-        {
-            ExitInspectionMode();
-        }
-    }
+    // private void Update()
+    // {
+    //     if (Input.GetMouseButtonDown(0))
+    //     {
+    //         Interact();
+    //     }
+    //     if (Input.GetMouseButtonDown(1) && inspectedElement != null)
+    //     {
+    //         ExitInspectionMode();
+    //     }
+    // }
 
     private void Interact()
     {
