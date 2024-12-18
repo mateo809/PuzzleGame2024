@@ -11,6 +11,7 @@ public class HintManager : MonoBehaviour
     public TextMeshProUGUI introText;
 
     public bool introIsOver = false;
+    public int introID;
     public List<string> hintString;
 
     [SerializeField] private float _textSpeed = 0.05f;
@@ -27,39 +28,34 @@ public class HintManager : MonoBehaviour
         }
     }
 
-    public void Start()
-    {
-        _introBackground.SetActive(true);
-        _startButton.SetActive(false);
-        StopAllCoroutines();
-        StartCoroutine(PlayHint(IDHints.Intro));
-    }
+    
 
-    public void ActivateHint(int index)
+    public void ActivateHint(string p_index)
     {
         hintBox.SetActive(true);
         StopAllCoroutines();
-        StartCoroutine(PlayHint(index));
+        StartCoroutine(DisplayText(p_index));
     }
 
-    private IEnumerator PlayHint(int index)
+    public IEnumerator DisplayText(string p_index)
     {
-        string text = hintString[index];
+        string text = p_index;
 
-        if (index == IDHints.HintCarTimer)
+        if (p_index == hintString[IDHints.HintCarTimer])
         {
             float timeRemaining = _endMinutes - _phoneManager._currentMinute;
             string textTimerCar = timeRemaining.ToString();
-            text = hintString[index] + textTimerCar + " minutes left. ";
+            text = hintString[IDHints.HintCarTimer] + textTimerCar + " minutes left. ";
         }
 
-        if (index == IDHints.Intro && !introIsOver)
+        if (p_index == hintString[IDHints.Intro] && !introIsOver)
         {
             for (int i = 1; i < text.Length; i++)
             {
                 introText.text = text.Substring(0, i);
                 yield return new WaitForSeconds(_textSpeed);
             }
+            introID = IDHints.Intro;
             introIsOver = true;
             Time.timeScale = 0;
             _startButton.SetActive(true);
@@ -75,21 +71,17 @@ public class HintManager : MonoBehaviour
         hintBox.SetActive(false);
     }
 
-    public void ButtonStart()
-    {
-        _introBackground.SetActive(false);
-        _phoneManager._currentMinute = _phoneManager._startMinute;
-        _phoneManager._currentSecond = _phoneManager._startSecond;
-        Time.timeScale = 1;
-    }
+    
+
+    
 }
 
 public static class IDHints
 {
     static public int NoneHint = 0;
     static public int HintRoofKey = 1;
-    static public int HintElectricalBox = 2;
+    static public int HintCircuitBreaker = 2;
     static public int HintMainEntrance = 3;
     static public int HintCarTimer = 4;
-    static public int Intro = 10;
+    static public int InventoryFull = 5;
 }

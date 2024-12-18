@@ -6594,11 +6594,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cameraPivotTrans: {fileID: 0}
+  IsInAction: 0
+  _mapMoveWalls: []
   _cameraSpeed: 5
   _zoomAnimTimer: 2
   IsCameraFocused: 0
   _zoomedCameraSize: 0
   _backButton: {fileID: 0}
+  _cameraZoomHelper: {fileID: 0}
 --- !u!4 &1150408302
 Transform:
   m_ObjectHideFlags: 0
@@ -10033,7 +10036,7 @@ MonoBehaviour:
   interactableMask:
     serializedVersion: 2
     m_Bits: 64
-  cameraMovement: {fileID: 1150408301}
+  cameraControllerObject: {fileID: 0}
   movementSpeed: 0.25
 --- !u!114 &1752658015
 MonoBehaviour:
