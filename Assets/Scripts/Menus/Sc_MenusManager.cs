@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Sc_MenusManager : MonoBehaviour
-{
+{   
     //Main Menu
     public void ButtonPlay()
     {
@@ -11,7 +11,7 @@ public class Sc_MenusManager : MonoBehaviour
 
     public void LeaveButton()
     {
-        Application.Quit();        
+        Application.Quit();
     }
 
     //Settings Menu
