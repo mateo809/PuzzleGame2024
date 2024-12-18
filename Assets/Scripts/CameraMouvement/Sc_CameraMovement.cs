@@ -54,8 +54,8 @@ public class Sc_CameraMovement : MonoBehaviour
             _isRotLeft = context.ReadValue<Vector2>().x > 0;     
             
             _rotateDirection = _isRotLeft ? "Right" : "Left";
-            _mapMoveWalls[0].SetTrigger(_rotateDirection);
-            _mapMoveWalls[1].SetTrigger(_rotateDirection);
+           _mapMoveWalls[0].SetTrigger(_rotateDirection);
+           _mapMoveWalls[1].SetTrigger(_rotateDirection);
 
             _nextCameraStickRot = (_nextCameraStickRot + (_isRotLeft ? -1 : 1) * 90.0f) % 360;
             StartCoroutine(RotateCameraPivot());
