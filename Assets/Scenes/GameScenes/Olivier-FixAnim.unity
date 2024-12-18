@@ -15167,10 +15167,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainMap
       objectReference: {fileID: 0}
-    - target: {fileID: 2401007838645536051, guid: 4fb761dfd6c27774c911c5c0b1f0df9f, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2458599753846789415, guid: 4fb761dfd6c27774c911c5c0b1f0df9f, type: 3}
       propertyPath: _UIInteractImage
       value: 
