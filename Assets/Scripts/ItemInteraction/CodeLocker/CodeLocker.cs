@@ -13,6 +13,7 @@ public class CodeLocker : MonoBehaviour
     private Camera _originalCamera;
     [SerializeField] private Collider _codeLockerCollider;
     [SerializeField] private Sc_AudioSelection _audioSelection;
+    [SerializeField] private GameObject _PaperBoxCollider;
 
     private void Start()
     {
@@ -92,6 +93,7 @@ public class CodeLocker : MonoBehaviour
            ExitCameraView();
             _currentCamera = _originalCamera;
             _animator.SetBool("Open", true);
+            _PaperBoxCollider.GetComponent<Collider>().enabled = true;
         }
     }
 

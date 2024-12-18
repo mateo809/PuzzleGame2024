@@ -16,31 +16,33 @@ public class Sc_CameraMovement : MonoBehaviour
 
     #region Camera Rotation
     [Header("   Camera Rotation")]
-    [SerializeField] private float _cameraSpeed = 5;
-    private float _speedMultiplier = 20;
+    [SerializeField] private float _rotationTimer = 1f;
     private float _currCameraStickRot = 0.0f;
     private float _nextCameraStickRot = 0.0f;
 
     private bool _isRotLeft = false;
 
+
+
     private IEnumerator RotateCameraPivot()
     {
-        while (Mathf.Abs(_currCameraStickRot - ((360 + _nextCameraStickRot) % 360)) > 1f)
+        float startingCameraRot = _cameraPivotTrans.eulerAngles.y;
+        float elapsedTime = 0.0f;
+
+        while (elapsedTime < _rotationTimer)
         {
-            float rotationStep = _speedMultiplier * _cameraSpeed * Time.deltaTime * (_isRotLeft ? -1 : 1);
+            float rotProgress = Mathf.SmoothStep(0.0f, 1.0f, elapsedTime / _rotationTimer);
+            _currCameraStickRot = Mathf.Lerp(startingCameraRot, _nextCameraStickRot, rotProgress);
+            _cameraPivotTrans.eulerAngles = new Vector3(_cameraPivotTrans.eulerAngles.x, _currCameraStickRot, _cameraPivotTrans.eulerAngles.z);
 
-            _cameraPivotTrans.Rotate(Vector3.up, rotationStep);
-
-            _currCameraStickRot = _cameraPivotTrans.eulerAngles.y;
+            elapsedTime += Time.deltaTime;
             yield return null;
         }
-        _currCameraStickRot = _nextCameraStickRot;
+        _cameraPivotTrans.eulerAngles = new Vector3(_cameraPivotTrans.eulerAngles.x, _nextCameraStickRot, _cameraPivotTrans.eulerAngles.z);
+
         _isRotLeft = false;
-
-        if (Mathf.Abs(_currCameraStickRot) >= 360.0f)
-            _currCameraStickRot %= 360.0f;
-
         IsInAction = false;
+
         yield return null;
     }
 
@@ -51,18 +53,17 @@ public class Sc_CameraMovement : MonoBehaviour
             if (context.ReadValue<Vector2>().x == 0) return;
 
             IsInAction = true;
-            _isRotLeft = context.ReadValue<Vector2>().x > 0;     
-            
-            _rotateDirection = _isRotLeft ? "Right" : "Left";
-           _mapMoveWalls[0].SetTrigger(_rotateDirection);
-           _mapMoveWalls[1].SetTrigger(_rotateDirection);
+            _isRotLeft = context.ReadValue<Vector2>().x > 0;
 
-            _nextCameraStickRot = (_nextCameraStickRot + (_isRotLeft ? -1 : 1) * 90.0f) % 360;
+            _rotateDirection = _isRotLeft ? "Right" : "Left";
+            _mapMoveWalls[0].SetTrigger(_rotateDirection);
+            _mapMoveWalls[1].SetTrigger(_rotateDirection);
+
+            _nextCameraStickRot = _cameraPivotTrans.eulerAngles.y + (_isRotLeft ? -1 : 1) * 90.0f;
             StartCoroutine(RotateCameraPivot());
         }
     }
     #endregion
-
     #region Camera Focus
 
     [Header("   Camera Focus")]
@@ -101,42 +102,31 @@ public class Sc_CameraMovement : MonoBehaviour
         _mainCamera.orthographicSize = targetCameraZoom;
         _cameraPivotTrans.position = focusTarget;
 
-        Debug.Log("Zoom Complete");
-
-        IsInAction = false;
         yield return null;
     }
 
     public void Focus(Vector3 focusTarget)
     {
-        if (IsInAction) return;
+        if (IsInAction || IsCameraFocused) return;
 
         IsInAction = true;
-
         IsCameraFocused = true;
         _backButton.SetActive(true);
+
         StartCoroutine(FocusOnTarget(focusTarget, _zoomedCameraSize));
         _cameraZoomHelper.SetZoomTargetEnabled(false);
     }
 
     public void LoseFocus()
     {
-        if (IsInAction) return;
+        if (!(IsInAction && IsCameraFocused)) return;
 
-        IsInAction = true;
-
+        IsInAction = false;
         IsCameraFocused = false;
         _backButton.SetActive(false);
+
         StartCoroutine(FocusOnTarget(Vector3.zero, _normalCameraSize));
         _cameraZoomHelper.SetZoomTargetEnabled(true);
-    }
-
-    private void Update()
-    {
-        if (Input.GetMouseButtonDown(1))
-        {
-            LoseFocus();
-        }
     }
     #endregion
 }

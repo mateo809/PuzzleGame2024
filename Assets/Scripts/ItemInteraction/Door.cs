@@ -12,6 +12,8 @@ public class Door : InteractableObject
     [SerializeField] private Sc_ExitMap _exitMap;
 
     [SerializeField] private Sc_AudioSelection _audioSelection;
+
+    [SerializeField] private GameObject _endPanel;
     public enum DoorID
     {
         HouseDoor,
@@ -32,6 +34,9 @@ public class Door : InteractableObject
             {
                 Debug.Log("Final Door Unlocked!");
                 _audioSelection.PlaySound(Sc_IDSFXManager.openingDoorID);
+                Time.timeScale = 0f;
+                _endPanel.SetActive(true);
+
             }
             else if(_id == DoorID.ShedDoor)
             {
