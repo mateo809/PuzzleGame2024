@@ -50,7 +50,7 @@ public class Sc_CameraMovement : MonoBehaviour
         {
             if (context.ReadValue<Vector2>().x == 0) return;
 
-            _isInAction = true;
+            IsInAction = true;
             _isRotLeft = context.ReadValue<Vector2>().x > 0;     
             
             _rotateDirection = _isRotLeft ? "Right" : "Left";
