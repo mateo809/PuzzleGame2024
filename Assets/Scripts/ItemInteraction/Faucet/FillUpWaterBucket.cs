@@ -1,9 +1,9 @@
+using System.Collections;
 using UnityEngine;
 
 public class FillUpWaterBucket : InteractableObject
 {
     [SerializeField] private itemData waterBucketData;
-
 
     public override void DoInteraction()
     {

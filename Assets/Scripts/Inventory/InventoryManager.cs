@@ -14,6 +14,7 @@ public class InventoryManager : MonoBehaviour
     [SerializeField]
     public int maxInventorySize = 4;
     public int selectedItemID = -1;
+    [SerializeField] private Sc_AudioSelection _audioSelection;
 
     private void Awake()
     {
@@ -36,6 +37,7 @@ public class InventoryManager : MonoBehaviour
         {
             inventory.Add(item);
             itemUIManager.AddItemUI(item);
+            _audioSelection.PlaySound(Sc_IDSFXManager.pickUpItemID);
             return true;
         }
 

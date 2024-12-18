@@ -5,11 +5,13 @@ public class DiggingArea : InteractableObject
 {
     [SerializeField] private Animator _Animator;
     [SerializeField] private GameObject _paper;
+    [SerializeField] private Sc_AudioSelection _audioSelection;
 
     public override void DoInteraction()
     {
         if (InventoryManager.Instance.selectedItemID == IDManager.ShovelID) 
         {
+            _audioSelection.PlaySound(Sc_IDSFXManager.stepGrassID);
             StartCoroutine(AnimShovel());
         }
     }

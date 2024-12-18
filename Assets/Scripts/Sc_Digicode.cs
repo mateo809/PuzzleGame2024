@@ -9,6 +9,7 @@ public class Sc_Digicode : MonoBehaviour
     private bool _canUserInputing = true;
     [SerializeField] private GameObject _keyGameObject;
     [SerializeField] private Animator _animator;
+    [SerializeField] private Sc_AudioSelection _audioSelection;
 
     public TextMeshPro userInputText;
 
@@ -43,7 +44,8 @@ public class Sc_Digicode : MonoBehaviour
         if (_canUserInputing)
         {
             if (_userInput.Length >= 4 && _userInput == passwordDigicode)
-            { 
+            {
+                _audioSelection.PlaySound(Sc_IDSFXManager.digicodeAcceptedID);
                 _animator.SetBool("Open",true);
                 userInputText.color = Color.green;
                 userInputText.fontSize = 2;
@@ -54,6 +56,7 @@ public class Sc_Digicode : MonoBehaviour
             }
             else
             {
+               _audioSelection.PlaySound(Sc_IDSFXManager.digicodeDeclinedID);
                 userInputText.color = Color.red;
                 userInputText.fontSize = 2;
                 userInputText.text = "Incorrect code";
