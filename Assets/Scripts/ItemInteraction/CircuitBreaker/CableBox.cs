@@ -7,6 +7,7 @@ public class CableBox : InteractableObject
     [SerializeField] private GameObject _yellowFuse;
 
 
+
     private void Start()
     {
         _yellowFuse.SetActive(false);
