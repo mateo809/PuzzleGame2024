@@ -385,7 +385,7 @@ MonoBehaviour:
   data:
     itemID: 13
     itemName: MailboxKey
-    sprite: {fileID: 21300000, guid: 6fbf09e0e69af8f44b69ce97cda01b25, type: 3}
+    sprite: {fileID: 21300000, guid: d43c83ccfe6b27344a5e7face57d16fb, type: 3}
 --- !u!65 &5250685100605786739
 BoxCollider:
   m_ObjectHideFlags: 0

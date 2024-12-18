@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 3978441972304538775}
   - component: {fileID: 2233920592773739709}
   - component: {fileID: 8762097934697705941}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Shovle
-  m_TagString: DiggingArea
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28,8 +28,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.7052718, z: 0, w: 0.7089371}
   m_LocalPosition: {x: 17.985, y: 1.036, z: 17.137745}
-  m_LocalScale: {x: 0.033333335, y: 0.03333333, z: 0.033333335}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 0.1, y: 0.25, z: 0.1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2287788071627462810}
   m_Father: {fileID: 0}
@@ -41,7 +41,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7127927916251935719}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cae26a6e7623de649a2e0d37eeb6c853, type: 3}
   m_Name: 
@@ -49,7 +49,7 @@ MonoBehaviour:
   data:
     itemID: 35
     itemName: Shovel
-    sprite: {fileID: 21300000, guid: c25b9db8be1acce40a7bb4075c2efbda, type: 3}
+    sprite: {fileID: 21300000, guid: 1bda26dad2202574298a50059b907e7d, type: 3}
 --- !u!65 &8762097934697705941
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -67,10 +67,10 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1.0000001, y: 17.596308, z: 4.2357817}
-  m_Center: {x: 5.729969, y: 9.196354, z: 0.05124107}
+  m_Center: {x: 6.3, y: 9.196354, z: 0.05124107}
 --- !u!1 &8690830506370763646
 GameObject:
   m_ObjectHideFlags: 0
@@ -82,9 +82,11 @@ GameObject:
   - component: {fileID: 2287788071627462810}
   - component: {fileID: 6556580155023607475}
   - component: {fileID: 5190792680282314787}
+  - component: {fileID: 4452627403345320512}
+  - component: {fileID: 7377812903266800145}
   m_Layer: 6
   m_Name: default
-  m_TagString: Untagged
+  m_TagString: DiggingArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -157,3 +159,40 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &4452627403345320512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8690830506370763646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cae26a6e7623de649a2e0d37eeb6c853, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data:
+    itemID: 35
+    itemName: Shovel
+    sprite: {fileID: 21300000, guid: 4712cc13606d0444192936120b71f27f, type: 3}
+--- !u!65 &7377812903266800145
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8690830506370763646}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.0000001, y: 17.596308, z: 4.2357817}
+  m_Center: {x: 1.83, y: 9.196354, z: 0.05124107}
