@@ -1,4 +1,6 @@
+using NUnit.Framework;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,6 +10,9 @@ public class Sc_CameraMovement : MonoBehaviour
     [SerializeField] private Transform _cameraPivotTrans;
     private bool _isInAction = false;
 
+    [Header("   Animator Parameters")]
+    [SerializeField] private List<Animator> _mapMoveWalls = new List<Animator>();
+    private string _rotateDirection = string.Empty;
 
     #region Camera Rotation
     [Header("   Camera Rotation")]
@@ -46,7 +51,12 @@ public class Sc_CameraMovement : MonoBehaviour
             if (context.ReadValue<Vector2>().x == 0) return;
 
             _isInAction = true;
-            _isRotLeft = context.ReadValue<Vector2>().x > 0;
+            _isRotLeft = context.ReadValue<Vector2>().x > 0;     
+            
+            _rotateDirection = _isRotLeft ? "Right" : "Left";
+            _mapMoveWalls[0].SetTrigger(_rotateDirection);
+            _mapMoveWalls[1].SetTrigger(_rotateDirection);
+            
             _nextCameraStickRot = (_nextCameraStickRot + (_isRotLeft ? -1 : 1) * 90.0f) % 360;
             StartCoroutine(RotateCameraPivot());
         }

@@ -13,6 +13,8 @@ public class TwoLeversSystemDoor : MonoBehaviour
     [SerializeField] private Animator _lever1Animator;
     [SerializeField] private Animator _lever2Animator;
 
+    [SerializeField] private Sc_ExitMap _exitMap;
+
     public void SetLeverID(int leverID)
     {
         if(_l1ID != leverID && _l2ID != leverID)
@@ -28,6 +30,7 @@ public class TwoLeversSystemDoor : MonoBehaviour
         {
             Debug.Log("Door is open");
             _anim.SetBool("Open" , true);
+            _exitMap.isUnlocked = true;
         }
         else
         {
