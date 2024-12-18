@@ -9,12 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 135014239206298096}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Electric_meter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &135014239206298096
 Transform:
@@ -41,12 +41,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 225252675999276458}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Blue_Cable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &225252675999276458
 Transform:
@@ -75,12 +75,12 @@ GameObject:
   - component: {fileID: 7615010107441495899}
   - component: {fileID: 4718325473190151697}
   - component: {fileID: 8097302968204665477}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &7615010107441495899
 Transform:
@@ -159,12 +159,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1427473476784288335}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Green_Cable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1427473476784288335
 Transform:
@@ -191,12 +191,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3591338218481174076}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Red_Cable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &3591338218481174076
 Transform:
@@ -223,12 +223,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7719790214628985291}
-  m_Layer: 0
+  - component: {fileID: 968977703255604896}
+  - component: {fileID: 929300863530338553}
+  m_Layer: 6
   m_Name: Electric_meter
-  m_TagString: Untagged
+  m_TagString: CableBox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &7719790214628985291
 Transform:
@@ -240,16 +242,52 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 225252675999276458}
   - {fileID: 7052011849772043779}
   - {fileID: 135014239206298096}
   - {fileID: 1427473476784288335}
   - {fileID: 3591338218481174076}
+  - {fileID: 720473350834042167}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &968977703255604896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4502450679981685001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53d2ee61e49973a4d91097d4f0976a8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  circuitBreaker: {fileID: 0}
+  _yellowFuse: {fileID: 194906159611211661}
+--- !u!65 &929300863530338553
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4502450679981685001}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 9.654155, y: 8.678219, z: 1.8611782}
+  m_Center: {x: 0.80973816, y: 3.8391094, z: -0.43058905}
 --- !u!1 &5120843843726074975
 GameObject:
   m_ObjectHideFlags: 0
@@ -261,12 +299,12 @@ GameObject:
   - component: {fileID: 4154231071612335972}
   - component: {fileID: 1257036983943155246}
   - component: {fileID: 2329590652323949242}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &4154231071612335972
 Transform:
@@ -347,12 +385,12 @@ GameObject:
   - component: {fileID: 1999408718324286231}
   - component: {fileID: 3704348126219074141}
   - component: {fileID: 166007424997187273}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1999408718324286231
 Transform:
@@ -433,12 +471,12 @@ GameObject:
   - component: {fileID: 5258093722899057945}
   - component: {fileID: 7533011885329580784}
   - component: {fileID: 7325927376269562187}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5258093722899057945
 Transform:
@@ -517,12 +555,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7052011849772043779}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Defective_cable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &7052011849772043779
 Transform:
@@ -551,12 +589,12 @@ GameObject:
   - component: {fileID: 697950802153562280}
   - component: {fileID: 2411873119618587106}
   - component: {fileID: 1179111819177819510}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &697950802153562280
 Transform:
@@ -626,3 +664,102 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1001 &1041769466761073372
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7719790214628985291}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 76fbb89ee9d2419408f903253e28224d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.3333334
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 76fbb89ee9d2419408f903253e28224d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.98810107
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 76fbb89ee9d2419408f903253e28224d, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.3333334
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 76fbb89ee9d2419408f903253e28224d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 76fbb89ee9d2419408f903253e28224d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.71
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 76fbb89ee9d2419408f903253e28224d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.229
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 76fbb89ee9d2419408f903253e28224d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 76fbb89ee9d2419408f903253e28224d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 76fbb89ee9d2419408f903253e28224d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 76fbb89ee9d2419408f903253e28224d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 76fbb89ee9d2419408f903253e28224d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 76fbb89ee9d2419408f903253e28224d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 76fbb89ee9d2419408f903253e28224d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 76fbb89ee9d2419408f903253e28224d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: d23d7414cda48b3419b159850f67cf55, type: 2}
+    - target: {fileID: 919132149155446097, guid: 76fbb89ee9d2419408f903253e28224d, type: 3}
+      propertyPath: m_Name
+      value: New_cable
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 76fbb89ee9d2419408f903253e28224d, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 76fbb89ee9d2419408f903253e28224d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 76fbb89ee9d2419408f903253e28224d, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 76fbb89ee9d2419408f903253e28224d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 76fbb89ee9d2419408f903253e28224d, type: 3}
+--- !u!1 &194906159611211661 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 76fbb89ee9d2419408f903253e28224d, type: 3}
+  m_PrefabInstance: {fileID: 1041769466761073372}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &720473350834042167 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 76fbb89ee9d2419408f903253e28224d, type: 3}
+  m_PrefabInstance: {fileID: 1041769466761073372}
+  m_PrefabAsset: {fileID: 0}

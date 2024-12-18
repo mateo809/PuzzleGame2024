@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public static class IDManager
 {
     static public int NoneItem = -1;

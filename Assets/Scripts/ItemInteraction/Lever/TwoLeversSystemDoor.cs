@@ -9,6 +9,11 @@ public class TwoLeversSystemDoor : MonoBehaviour
     private int _l1ID = -2;
     private int _l2ID = -2;
 
+    [SerializeField] private Animator _anim;
+    [SerializeField] private Animator _lever1Animator;
+    [SerializeField] private Animator _lever2Animator;
+
+    [SerializeField] private Sc_ExitMap _exitMap;
 
     public void SetLeverID(int leverID)
     {
@@ -24,6 +29,8 @@ public class TwoLeversSystemDoor : MonoBehaviour
         if (_l1isActivated && _l2isActivated)
         {
             Debug.Log("Door is open");
+            _anim.SetBool("Open" , true);
+            _exitMap.isUnlocked = true;
         }
         else
         {
@@ -37,14 +44,28 @@ public class TwoLeversSystemDoor : MonoBehaviour
         {
             _l1isActivated = !_l1isActivated;
             print("L1activated");
+            ToggleLeverAnimation(_lever1Animator, _l1isActivated);
 
         }
         else if (leverID == _l2ID)
         {
             _l2isActivated = !_l2isActivated;
             print("L2activated");
+            ToggleLeverAnimation(_lever2Animator, _l2isActivated);
         }
 
         CheckLever();          
+    }
+
+    private void ToggleLeverAnimation(Animator leverAnimator, bool isActivated)
+    {
+        if (leverAnimator != null)
+        {
+            leverAnimator.SetBool("IsActivated", isActivated);
+        }
+        else
+        {
+            Debug.LogWarning("Animator non assigné pour ce levier.");
+        }
     }
 }
