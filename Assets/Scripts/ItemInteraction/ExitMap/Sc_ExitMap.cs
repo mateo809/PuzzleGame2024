@@ -11,7 +11,7 @@ public class Sc_ExitMap : InteractableObject
       
     public override void DoInteraction()
     {
-        if (isUnlocked == true)
+        if (isUnlocked == true && (!_cameraMover.IsInAction || _cameraMover.IsCameraFocused))
         {
             _mapToDesactivate.SetActive(false);
             _mapToActivate.SetActive(true);            
