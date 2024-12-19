@@ -1,6 +1,3 @@
-using System.Data;
-using Unity.Hierarchy;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ItemPreview : MonoBehaviour

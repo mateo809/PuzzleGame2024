@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public static class Sc_IDSFXManager
 {
     public static int noneSound = -1;

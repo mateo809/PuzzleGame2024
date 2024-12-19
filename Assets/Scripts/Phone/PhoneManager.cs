@@ -132,7 +132,7 @@ public class PhoneManager : MonoBehaviour
         string formattedTime = string.Format("{0:D2}:{1:D2}", _currentHour, _currentMinute);
         _clockText.text = formattedTime;
 
-        if(_currentHour == 8 && _currentMinute == 11)
+        if(_currentHour == 8 && _currentMinute == 30)
         {
             _defeatPanel.SetActive(true);
         }
