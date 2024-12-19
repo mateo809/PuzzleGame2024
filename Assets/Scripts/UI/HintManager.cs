@@ -81,4 +81,5 @@ public static class IDHints
     static public int HintMainEntrance = 3;
     static public int HintCarTimer = 4;
     static public int InventoryFull = 5;
+    static public int FirstPaperHint = 6;
 }

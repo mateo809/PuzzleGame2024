@@ -1377,6 +1377,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _paperCarnet: {fileID: 1176039559}
   _audioSelection: {fileID: 9033951704711069423}
+  _isFirstPaper: 0
 --- !u!65 &98851614
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2435,7 +2436,7 @@ MonoBehaviour:
   data:
     itemID: 34
     itemName: Ladder
-    sprite: {fileID: 21300000, guid: a4054ad6fdd92e342b21ff80e2934239, type: 3}
+    sprite: {fileID: 21300000, guid: ad22cf968bbc95d41ba3c46c04c6752c, type: 3}
 --- !u!65 &166398096
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4388,6 +4389,7 @@ RectTransform:
   - {fileID: 621753870}
   - {fileID: 53061301}
   - {fileID: 523710249}
+  - {fileID: 1583297812}
   - {fileID: 2144363076}
   - {fileID: 1440186430}
   - {fileID: 1176070959}
@@ -9859,6 +9861,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _paperCarnet: {fileID: 1672788758}
   _audioSelection: {fileID: 9033951704711069423}
+  _isFirstPaper: 0
 --- !u!65 &698355197
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10010,6 +10013,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4452627403345320512, guid: 79a01919a9bedb4428e6985e4b7c7851, type: 3}
+      propertyPath: data.sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1bda26dad2202574298a50059b907e7d, type: 3}
     - target: {fileID: 5190792680282314787, guid: 79a01919a9bedb4428e6985e4b7c7851, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -17138,6 +17145,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _paperCarnet: {fileID: 1918811177}
   _audioSelection: {fileID: 9033951704711069423}
+  _isFirstPaper: 1
 --- !u!65 &1256197313
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -19444,7 +19452,6 @@ RectTransform:
   - {fileID: 5291451900304177113}
   - {fileID: 1485988520966378253}
   - {fileID: 1649438970517900056}
-  - {fileID: 1583297812}
   m_Father: {fileID: 331012167}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -21689,11 +21696,11 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1501092440}
-  m_Father: {fileID: 1440186430}
+  m_Father: {fileID: 331012167}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 904, y: -486}
+  m_AnchoredPosition: {x: -6, y: 4}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &1583297813
@@ -23790,6 +23797,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _audioPanel: {fileID: 1440186429}
+  _fullScreenToggle: {fileID: 1880075359042823142}
 --- !u!1 &1760481652
 GameObject:
   m_ObjectHideFlags: 0
@@ -26871,6 +26879,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _paperCarnet: {fileID: 1665030327}
   _audioSelection: {fileID: 9033951704711069423}
+  _isFirstPaper: 0
 --- !u!65 &2079932699
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -51705,6 +51714,8 @@ MonoBehaviour:
   - I need to find a way to get back in and fast.
   - 'I should hurry i only have '
   - My pockets are already full.
+  - 'Now that i remember, the code for the key case on the side of the house was
+    written on a paper under the doormat. What did the kids do... '
   _textSpeed: 0.025
   _endMinutes: 30
   _timerForDeactivateHint: 1
@@ -52068,7 +52079,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f845bc593d0eeda4892602fdf69672f6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0a89c5eb76fc36246b16217a6b23cec6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -53986,6 +53997,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _paperCarnet: {fileID: 1628110727}
   _audioSelection: {fileID: 9033951704711069423}
+  _isFirstPaper: 0
 --- !u!222 &7652388306056028554
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -55963,7 +55975,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f845bc593d0eeda4892602fdf69672f6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0a89c5eb76fc36246b16217a6b23cec6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -56070,7 +56082,7 @@ MonoBehaviour:
   _itemData:
     itemID: 12
     itemName: KeyShed
-    sprite: {fileID: 21300000, guid: f12365af18d7014428de437bed62b9cc, type: 3}
+    sprite: {fileID: 21300000, guid: 1aa967f0aa7dd364f8d1128010a5eb01, type: 3}
 --- !u!114 &8456280593943438181
 MonoBehaviour:
   m_ObjectHideFlags: 0

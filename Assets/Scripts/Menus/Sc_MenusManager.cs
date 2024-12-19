@@ -1,13 +1,16 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Sc_MenusManager : MonoBehaviour
 {
     [SerializeField] private GameObject _audioPanel;
+    [SerializeField] private Toggle _fullScreenToggle;
     //Main Menu
 
     private void Start()
     {
+        _fullScreenToggle.isOn = Screen.fullScreen;
         Time.timeScale = 1.0f;
     }
     public void ButtonPlay()
