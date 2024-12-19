@@ -4296,7 +4296,7 @@ MonoBehaviour:
   _canvasTransform: {fileID: 331012167}
   _clockText: {fileID: 1531153453}
   StartHour: 9
-  StartMinute: 10
+  StartMinute: 0
   StartSecond: 0
   CurrentHour: 0
   CurrentMinute: 0
