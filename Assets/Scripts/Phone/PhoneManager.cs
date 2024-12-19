@@ -15,14 +15,13 @@ public class PhoneManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _clockText;
     private float _timeElapsed = 0f;
 
-    public int _startHour = 9;
-    public int _startMinute = 10;
-    public int _startSecond = 0;
+    public int StartHour = 9;
+    public int StartMinute = 10;
+    public int StartSecond = 0;
 
-
-    public int _currentHour;
-    public int _currentMinute;
-    public int _currentSecond;
+    [HideInInspector] public int CurrentHour;
+    [HideInInspector] public int CurrentMinute;
+    [HideInInspector] public int CurrentSecond;
 
     [SerializeField] private Sprite _image;
     [SerializeField] private Sprite _screenSprite;
@@ -34,9 +33,9 @@ public class PhoneManager : MonoBehaviour
 
     private void Start()
     {
-        _currentHour = _startHour;
-        _currentMinute = _startMinute;
-        _currentSecond = _startSecond;
+        CurrentHour = StartHour;
+        CurrentMinute = StartMinute;
+        CurrentSecond = StartSecond;
 
         if (_clonedImagePrefab != null && _canvasTransform != null)
         {
@@ -114,25 +113,25 @@ public class PhoneManager : MonoBehaviour
 
     private void UpdateClock()
     {
-        _currentSecond++;
-        if (_currentSecond >= 60)
+        CurrentSecond++;
+        if (CurrentSecond >= 60)
         {
-            _currentSecond = 0;
-            _currentMinute++;
+            CurrentSecond = 0;
+            CurrentMinute++;
         }
-        if (_currentMinute >= 60)
+        if (CurrentMinute >= 60)
         {
-            _currentMinute = 0;
-            _currentHour++;
+            CurrentMinute = 0;
+            CurrentHour++;
         }
-        if (_currentHour >= 24)
+        if (CurrentHour >= 24)
         {
-            _currentHour = 0;
+            CurrentHour = 0;
         }
-        string formattedTime = string.Format("{0:D2}:{1:D2}", _currentHour, _currentMinute);
+        string formattedTime = string.Format("{0:D2}:{1:D2}", CurrentHour, CurrentMinute);
         _clockText.text = formattedTime;
 
-        if(_currentHour == 8 && _currentMinute == 30)
+        if(CurrentHour == 9 && CurrentMinute == 30)
         {
             _defeatPanel.SetActive(true);
         }

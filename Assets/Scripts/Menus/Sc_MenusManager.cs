@@ -35,10 +35,16 @@ public class Sc_MenusManager : MonoBehaviour
     public void ActivateAudioPanel()
     {
         _audioPanel.SetActive(true);
+        Time.timeScale = 0f;
     }
 
     public void DesactivateAudioPanel()
     {
         _audioPanel.SetActive(false);
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1f;
     }
 }

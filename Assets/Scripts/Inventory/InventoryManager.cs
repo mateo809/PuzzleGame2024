@@ -30,7 +30,7 @@ public class InventoryManager : MonoBehaviour
 
         if (inventory.Count >= maxInventorySize)
         {
-            print("InventoryFULL");
+            HintManager.Instance.DisplayTextFromID(IDHints.InventoryFull);
             return false;
         }
         else

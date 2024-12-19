@@ -15,25 +15,18 @@ public class CableBox : InteractableObject
 
     public override void DoInteraction()
     {
-        if (circuitBreaker.electricityIsCut)
+        if (circuitBreaker.electricityIsCut && InventoryManager.Instance.selectedItemID == IDManager.ElectrickCableID)
         {
-            if (InventoryManager.Instance.selectedItemID == IDManager.ElectrickCableID) 
-            {
-                circuitBreaker.powerIsRepare = true;
-                _yellowFuse.SetActive(true);
-                InventoryManager.Instance.RemoveItemFromID(IDManager.ElectrickCableID);
-                Debug.Log("The cable is repare !");
-                Destroy(this);
+            circuitBreaker.powerIsRepare = true;
+            _yellowFuse.SetActive(true);
 
-            }
-            else
-            {
-                Debug.Log("Need electrick cable for energy");
-            }
+            InventoryManager.Instance.RemoveItemFromID(IDManager.ElectrickCableID);
+
+            Destroy(this);
         }
         else
         {
-            Debug.Log("I need to cut electricity");
+            HintManager.Instance.DisplayTextFromID(IDHints.HintCircuitBreaker);
         }
 
     }

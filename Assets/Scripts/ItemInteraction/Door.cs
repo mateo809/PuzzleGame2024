@@ -28,12 +28,11 @@ public class Door : InteractableObject
     {
         if (InventoryManager.Instance.selectedItemID == _interactionID)
         {
-            Debug.Log("Open");
+            _audioSelection.PlaySound(Sc_IDSFXManager.openingDoorID);
             InventoryManager.Instance.RemoveItemFromID(_interactionID);
+
             if (_id == DoorID.HouseDoor) 
             {
-                Debug.Log("Final Door Unlocked!");
-                _audioSelection.PlaySound(Sc_IDSFXManager.openingDoorID);
                 Time.timeScale = 0f;
                 _endPanel.SetActive(true);
 
@@ -41,14 +40,14 @@ public class Door : InteractableObject
             else if(_id == DoorID.ShedDoor)
             {
                 _exitMap.isUnlocked = true;
-                _audioSelection.PlaySound(Sc_IDSFXManager.openingDoorID);
             }
             Destroy(this);
         }
         else
         {
-            Debug.Log("Pas la bonne chef");
             _audioSelection.PlaySound(Sc_IDSFXManager.lockedDoorID);
+            if (_id == DoorID.HouseDoor) HintManager.Instance.DisplayTextFromID(IDHints.HintMainEntrance);
+
         }
     }
 }

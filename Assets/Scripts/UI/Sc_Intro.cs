@@ -10,7 +10,7 @@ public class Sc_Intro : MonoBehaviour
     [SerializeField] private HintManager _hintManager;
     private int _currTextIndex = 0;
 
-
+    [SerializeField] private Sc_AudioSelection _selection;
     public void Start()
     {
         DisplayNextIntroText();
@@ -54,19 +54,19 @@ public class Sc_Intro : MonoBehaviour
         {
             case "DoorLock":
                 Debug.Log("Door Locked Sound");
-                // Sc_AudioSelection.PlaySound(Sc_IDSFXManager.DoorLockID);
+               _selection.PlaySound(Sc_IDSFXManager.lockingDoorID);
                 break;
             case "KeyDrop":
                 Debug.Log("Key Drop Sound");
-                // Sc_AudioSelection.PlaySound(Sc_IDSFXManager.KeyDropID);
+               _selection.PlaySound(Sc_IDSFXManager.droppingKeyID);
                 break;
             case "Meow":
                 Debug.Log("Meow Sound");
-                // Sc_AudioSelection.PlaySound(Sc_IDSFXManager.CatMeowID);
+               _selection.PlaySound(Sc_IDSFXManager.catMeowID);
                 break;
             case "JiggleKeys":
                 Debug.Log("Jiggle Keys Sound");
-                // Sc_AudioSelection.PlaySound(Sc_IDSFXManager.JiggleKeysID);
+               _selection.PlaySound(Sc_IDSFXManager.keyJingleID);
                 break;
             default:
                 break;

@@ -13,7 +13,7 @@ public class Sc_Timer : MonoBehaviour
 
     private void TimerIsOver()
     {
-        if(_timer._currentHour == _endHour && _timer._currentMinute == _endMinutes)
+        if(_timer.CurrentHour == _endHour && _timer.CurrentMinute == _endMinutes)
         {
             Debug.Log("timer is Over");
         }

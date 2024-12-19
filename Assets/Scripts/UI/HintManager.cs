@@ -8,7 +8,6 @@ public class HintManager : MonoBehaviour
     public static HintManager Instance;
     public GameObject hintBox;
     public TextMeshProUGUI hintText;
-    public TextMeshProUGUI introText;
 
     public bool introIsOver = false;
     public int introID;
@@ -16,6 +15,8 @@ public class HintManager : MonoBehaviour
 
     [SerializeField] private float _textSpeed = 0.05f;
     [SerializeField] private float _endMinutes = 30;
+    [SerializeField] private float _timerForDeactivateHint = 2.0f;
+
     [SerializeField] private PhoneManager _phoneManager;
 
     public void Awake()
@@ -44,7 +45,7 @@ public class HintManager : MonoBehaviour
     {
         if (textToDiplay == hintString[IDHints.HintCarTimer])
         {
-            float timeRemaining = _endMinutes - _phoneManager._currentMinute;
+            float timeRemaining = _endMinutes - _phoneManager.CurrentMinute;
             string textTimerCar = timeRemaining.ToString();
             textToDiplay = hintString[IDHints.HintCarTimer] + textTimerCar + " minutes left. ";
         }
@@ -59,7 +60,7 @@ public class HintManager : MonoBehaviour
             yield return null;
         else
         {
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(_timerForDeactivateHint);
             hintBox.SetActive(false);
         }
     }
