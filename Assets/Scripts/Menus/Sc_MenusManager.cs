@@ -10,7 +10,7 @@ public class Sc_MenusManager : MonoBehaviour
 
     private void Start()
     {
-        _fullScreenToggle.isOn = Screen.fullScreen;
+        Screen.fullScreen = _fullScreenToggle.isOn;
         Time.timeScale = 1.0f;
     }
     public void ButtonPlay()
@@ -26,7 +26,7 @@ public class Sc_MenusManager : MonoBehaviour
     //Settings Menu
     public void ToggleFullscreen()
     {
-        Screen.fullScreen = !Screen.fullScreen;
+        Screen.fullScreen = _fullScreenToggle.isOn;
     }
 
     //Pause Menu
