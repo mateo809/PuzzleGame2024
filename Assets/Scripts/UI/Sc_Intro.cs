@@ -1,8 +1,13 @@
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 public class Sc_Intro : MonoBehaviour
 {
+    public GameObject OldCamera;
+    public GameObject ActualCamera;
+    public GameObject phone;
+    public GameObject Letter;
     public List<string> _introTexts = new List<string>();
     [SerializeField] private GameObject _map;
     [SerializeField] private Animator _animator;
@@ -11,20 +16,13 @@ public class Sc_Intro : MonoBehaviour
     private int _currTextIndex = 0;
 
     [SerializeField] private Sc_AudioSelection _selection;
-    public void Start()
-    {
-        DisplayNextIntroText();
-    }
 
-    void Update()
+    private void Start()
     {
-        if (Input.anyKeyDown)
-        {
-            DisplayNextIntroText();
-        }
+        phone.SetActive(false);
+        Letter.SetActive(false);
     }
-
-    private void DisplayNextIntroText()
+    public void DisplayNextIntroText()
     {
         _hintManager.DeactivateHintBox();
 
@@ -79,5 +77,9 @@ public class Sc_Intro : MonoBehaviour
         _hintManager.DeactivateHintBox();
         _map.gameObject.SetActive(true);
         gameObject.SetActive(false);
+        OldCamera.SetActive(false );
+        ActualCamera.SetActive(true );
+        phone.SetActive(true);
+        Letter.SetActive(true);
     }
 }
