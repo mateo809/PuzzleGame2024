@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
+    [Header("ParentSpawn")]
+    public Transform ParentSpawn;
     [Header("Liste de prefabs à instancier")]
     public List<GameObject> prefabs;
 
@@ -16,6 +18,7 @@ public class Spawner : MonoBehaviour
     public float maxDelay = 5f;
 
     public float moveSpeed = 3f;
+
 
     private void Start()
     {
@@ -40,6 +43,7 @@ public class Spawner : MonoBehaviour
         GameObject prefab = prefabs[randomIndex];
 
         GameObject instance = Instantiate(prefab, pointA.transform.position, pointA.transform.rotation);
+        instance.transform.SetParent(ParentSpawn);
         StartCoroutine(MoveToPoint(instance, pointB.position));
     }
 

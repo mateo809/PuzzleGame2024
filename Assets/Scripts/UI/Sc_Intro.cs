@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Sc_Intro : MonoBehaviour
 {
+    public GameObject BubbleCharacter;
     public GameObject OldCamera;
     public GameObject ActualCamera;
     public GameObject phone;
@@ -81,5 +82,6 @@ public class Sc_Intro : MonoBehaviour
         ActualCamera.SetActive(true );
         phone.SetActive(true);
         Letter.SetActive(true);
+        BubbleCharacter.SetActive(true);
     }
 }

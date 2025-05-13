@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class PhoneManager : MonoBehaviour
 {
+    [SerializeField] private TextMeshProUGUI _remainingTimeText;
+
     [SerializeField] private Animator _animator;
 
     [SerializeField] private RectTransform _targetTransform;
@@ -114,6 +116,7 @@ public class PhoneManager : MonoBehaviour
     private void UpdateClock()
     {
         CurrentSecond++;
+        UpdateRemainingTime();
         if (CurrentSecond >= 60)
         {
             CurrentSecond = 0;
@@ -146,4 +149,25 @@ public class PhoneManager : MonoBehaviour
     {
         _screen.GetComponent<Image>().sprite = _screenSprite;
     }
+
+    private void UpdateRemainingTime()
+    {
+        int totalCurrentSeconds = CurrentHour * 3600 + CurrentMinute * 60 + CurrentSecond;
+        int targetSeconds = 9 * 3600 + 30 * 60; // 9h30
+
+        int remainingSeconds = targetSeconds - totalCurrentSeconds;
+
+        if (remainingSeconds < 0)
+        {
+            _remainingTimeText.text = "Temps écoulé";
+            return;
+        }
+
+        int hours = remainingSeconds / 3600;
+        int minutes = (remainingSeconds % 3600) / 60;
+        int seconds = remainingSeconds % 60;
+
+        _remainingTimeText.text = $"{hours:D2}:{minutes:D2}:{seconds:D2}";
+    }
+
 }
