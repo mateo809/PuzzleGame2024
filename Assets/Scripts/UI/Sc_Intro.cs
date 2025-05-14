@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using UnityEditor.Rendering;
 using UnityEngine;
 
 public class Sc_Intro : MonoBehaviour
@@ -74,6 +73,7 @@ public class Sc_Intro : MonoBehaviour
 
     public void StartGame()
     {
+        _hintManager.introIsOver = true;
         _animator.SetBool("Finish",true);
         _hintManager.DeactivateHintBox();
         _map.gameObject.SetActive(true);
