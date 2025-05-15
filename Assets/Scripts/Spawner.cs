@@ -6,6 +6,7 @@ public class Spawner : MonoBehaviour
 {
     [Header("ParentSpawn")]
     public Transform ParentSpawn;
+
     [Header("Liste de prefabs à instancier")]
     public List<GameObject> prefabs;
 
@@ -17,8 +18,8 @@ public class Spawner : MonoBehaviour
     public float minDelay = 1f;
     public float maxDelay = 5f;
 
+    [Header("Vitesse de déplacement")]
     public float moveSpeed = 3f;
-
 
     private void Start()
     {
@@ -42,20 +43,14 @@ public class Spawner : MonoBehaviour
         int randomIndex = Random.Range(0, prefabs.Count);
         GameObject prefab = prefabs[randomIndex];
 
-        GameObject instance = Instantiate(prefab, pointA.transform.position, pointA.transform.rotation);
+        GameObject instance = Instantiate(prefab, pointA.position, pointA.rotation);
         instance.transform.SetParent(ParentSpawn);
-        StartCoroutine(MoveToPoint(instance, pointB.position));
-    }
 
-    IEnumerator MoveToPoint(GameObject obj, Vector3 target)
-    {
-        while (obj != null && Vector3.Distance(obj.transform.position, target) > 0.01f)
+        MoveToTarget mover = instance.GetComponent<MoveToTarget>();
+        if (mover != null)
         {
-            obj.transform.position = Vector3.MoveTowards(obj.transform.position, target, moveSpeed * Time.deltaTime);
-            yield return null;
+            mover.targetPosition = pointB.position;
+            mover.moveSpeed = moveSpeed;
         }
-
-        if (obj != null)
-            Destroy(obj);
     }
 }

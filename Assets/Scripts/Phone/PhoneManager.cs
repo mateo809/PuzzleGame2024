@@ -4,7 +4,10 @@ using UnityEngine.UI;
 
 public class PhoneManager : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI _remainingTimeText;
+    [SerializeField] private GameObject leaveButtonPhone;
+   
+
+   [SerializeField] private TextMeshProUGUI _remainingTimeText;
 
     [SerializeField] private Animator _animator;
 
@@ -48,11 +51,13 @@ public class PhoneManager : MonoBehaviour
 
     public void ShowPhone()
     {
+        leaveButtonPhone.gameObject.SetActive(true);
         _animator.SetBool("Show", true);
     }
 
     public void HidePhone()
     {
+        leaveButtonPhone.gameObject.SetActive(false);
         _animator.SetBool("Show", false);
     }
 
