@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class DialogueBubble : MonoBehaviour
 {
+    [SerializeField] private GameObject dialogueLogo;
     [SerializeField] private GameObject dialogueCanvas;
     [SerializeField] private float displayTime = 3f;
 
@@ -26,6 +27,7 @@ public class DialogueBubble : MonoBehaviour
 
     private void ShowDialogue()
     {
+        dialogueLogo.SetActive(false); 
         dialogueCanvas.SetActive(true);
         isShowing = true;
         timer = displayTime;
@@ -38,6 +40,7 @@ public class DialogueBubble : MonoBehaviour
             timer -= Time.deltaTime;
             if (timer <= 0)
             {
+                dialogueLogo.SetActive(true);
                 dialogueCanvas.SetActive(false);
                 isShowing = false;
             }
