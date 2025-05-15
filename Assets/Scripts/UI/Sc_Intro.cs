@@ -11,6 +11,7 @@ public class Sc_Intro : MonoBehaviour
     public List<string> _introTexts = new List<string>();
     [SerializeField] private GameObject _map;
     [SerializeField] private Animator _animator;
+    [SerializeField] private Animator _doorAnimator;
 
     [SerializeField] private HintManager _hintManager;
     private int _currTextIndex = 0;
@@ -83,5 +84,16 @@ public class Sc_Intro : MonoBehaviour
         phone.SetActive(true);
         Letter.SetActive(true);
         BubbleCharacter.SetActive(true);
+    }
+
+
+    public void OpenDoor()
+    { 
+        _doorAnimator.SetBool("Open",true );
+    }
+
+    public void CloseDoor()
+    {
+        _doorAnimator.SetBool("Open", false);
     }
 }

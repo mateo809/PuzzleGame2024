@@ -255,34 +255,34 @@ AnimationClip:
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 2.3833334
-        value: {x: -0, y: 0.18, z: -4.3}
-        inSlope: {x: 0, y: 1.1999998, z: -18.779999}
-        outSlope: {x: 0, y: 1.1999998, z: -18.779999}
+        value: {x: 0.5435693, y: 0.18, z: -4.3}
+        inSlope: {x: 1.653134, y: 1.1999998, z: -18.779999}
+        outSlope: {x: 1.653134, y: 1.1999998, z: -18.779999}
         tangentMode: 0
         weightedMode: 0
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 2.4166667
-        value: {x: -0, y: 0.5, z: -5.149509}
-        inSlope: {x: 0, y: 3.6857178, z: -30.692793}
-        outSlope: {x: 0, y: 3.6857178, z: -30.692793}
+        value: {x: 0.5956285, y: 0.5, z: -5.149509}
+        inSlope: {x: 1.4614753, y: 3.6857178, z: -30.692793}
+        outSlope: {x: 1.4614753, y: 3.6857178, z: -30.692793}
         tangentMode: 0
         weightedMode: 0
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 2.5
-        value: {x: -0, y: 0.61, z: -7.7}
-        inSlope: {x: 0, y: 0, z: -21.1579}
-        outSlope: {x: 0, y: 0, z: -21.1579}
+        value: {x: 0.69, y: 0.61, z: -7.7}
+        inSlope: {x: 0.7475409, y: 0, z: -21.1579}
+        outSlope: {x: 0.7475409, y: 0, z: -21.1579}
         tangentMode: 0
         weightedMode: 0
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 3.0166667
-        value: {x: 0, y: 0.61, z: -17.7}
+        value: {x: 0.88, y: 0.61, z: -17.7}
         inSlope: {x: 0, y: 0, z: -1.5578914}
         outSlope: {x: 0, y: 0, z: -1.5578914}
         tangentMode: 0
@@ -925,8 +925,17 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
+        time: 2.5
+        value: 0.69
+        inSlope: 0.7475409
+        outSlope: 0.7475409
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
         time: 3.0166667
-        value: 0
+        value: 0.88
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1724,6 +1733,13 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 0.6666667
+    functionName: OpenDoor
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 1.2666667
     functionName: StopWalk
     data: 
@@ -1761,6 +1777,13 @@ AnimationClip:
     messageOptions: 0
   - time: 2
     functionName: DisplayNextIntroText
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 2.6666667
+    functionName: CloseDoor
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
